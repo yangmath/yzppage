@@ -89,13 +89,63 @@
     </section>
 
 
-    <section id="APDE Semina">
-      <h2>APDE Semina</h2> 
-      <p>Here are a few friends (in no particular order) who share my interests:
-        <ul>
-         
-      </p >
+<section id="APDE Seminar">
+  <h2>APDE Seminar</h2>
+
+  <style>
+    .talk-table { width: 100%; border-collapse: collapse; margin: 0.8em 0 1.6em; font-size: 15px; }
+    .talk-table th, .talk-table td { border-bottom: 1px solid #ddd; padding: 10px 8px; vertical-align: top; }
+    .talk-table th { background: #faf7e6; text-align: left; }
+    .talk-table tr:hover td { background: #fffdf3; }
+    .title-link { cursor: pointer; text-decoration: underline; }
+    .title-link::after { content: " ▾"; font-size: 12px; }
+    .abstract-row { display: none; background: #fff; }
+    .abstract-cell { padding: 12px 8px 16px; color: #444; }
+    .meta-muted { color: #666; font-size: 90%; }
+  </style>
+
+  <table class="talk-table" id="apde-talks">
+    <thead>
+      <tr>
+        <th style="width: 18%">Date / Time</th>
+        <th style="width: 28%">Speaker</th>
+        <th>Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2025-10-15 · 14:00<br><span class="meta-muted">Room A201</span></td>
+        <td>Dr. Example<br><span class="meta-muted">Sample University</span></td>
+        <td><span class="title-link" data-toggle>On recent progress in nonlinear wave equations</span></td>
+      </tr>
+      <tr class="abstract-row">
+        <td colspan="3" class="abstract-cell">
+          <strong>Abstract.</strong> In this talk, I will discuss global existence results
+          for nonlinear wave equations on curved backgrounds, with emphasis on dispersive
+          estimates and variational methods.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    (function() {
+      function toggleNextAbstract(el) {
+        var row = el.closest('tr');
+        if (!row) return;
+        var next = row.nextElementSibling;
+        if (!next || !next.classList.contains('abstract-row')) return;
+        var show = next.style.display !== 'table-row';
+        next.style.display = show ? 'table-row' : 'none';
+      }
+      document.addEventListener('click', function(e) {
+        var t = e.target;
+        if (t && t.matches('[data-toggle]')) toggleNextAbstract(t);
+      });
+    })();
+  </script>
 </section>
+
 
  <section id="Conferences">
       <h2>Conferences</h2> 
