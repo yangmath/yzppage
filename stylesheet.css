@@ -1,0 +1,106 @@
+@font-face {
+	font-family: "Computer Modern";
+	src: url(cmunrm.ttf);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Computer Modern', 'Times New Roman', serif;
+	font-size: 17px;
+	overflow: none;
+}
+
+p {
+	margin-bottom: 15px;
+}
+
+h2 {
+	margin-bottom: 40px;
+}
+
+/*
+-------------
+   SIDEBAR
+-------------
+*/
+
+.sidebar {
+	height: 100vh;
+	width: 250px;
+	border-right: 1px solid #c0c0c0;
+	position: absolute;
+	left: 0;
+}
+
+.header {
+	padding: 30px;
+}
+
+#mugshot {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.sidebar li {
+	border-top: 1px solid #c0c0c0;
+	height: 50px;
+	text-transform: uppercase;
+	margin: 0px auto; 
+	line-height: 50px;
+	padding-left: 30px;
+}
+
+.sidebar ul:last-child {
+	border-bottom: 1px solid #c0c0c0;
+}
+
+.sidebar li:hover {
+	background-color: #f0f0f0;
+}
+
+.sidebar a {
+	text-decoration: none;
+	color: black;
+}
+
+.sidebar a:visited {
+	color: black;
+}
+
+.selected {
+	color: rgb(078, 042, 132);
+	background-color: #f0f0f0;
+}
+
+/*
+-------------
+    MAIN
+-------------
+*/
+
+.main {
+	height: 100vh;
+	margin-left: 250px;
+	padding: 30px 50px;
+	overflow: auto;
+}
+
+section {
+	display: none;
+}
+
+.active {
+	display: block;
+}
+
+section ul {
+	margin: 15px 15px 15px 30px;
+
+}
