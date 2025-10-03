@@ -113,3 +113,9 @@ section ul {
   -ms-hyphens: auto;          /* 旧版 Edge/IE */
   hyphens: auto;              /* 标准属性：英文更自然断词配合 justify */
 }
+
+/* 加粗且保持为黑色 */
+#about .label {
+  font-weight: 700;
+  color: #000;
+}
