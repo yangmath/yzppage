@@ -104,3 +104,12 @@ section ul {
 	margin: 15px 15px 15px 30px;
 
 }
+/* 让 About 里前两段左右两端对齐 */
+#about p:nth-of-type(1),
+#about p:nth-of-type(2) {
+  text-align: justify;
+  text-justify: inter-word;   /* 主要给旧版 IE/Edge，其他浏览器忽略也没关系 */
+  -webkit-hyphens: auto;      /* Safari/Chrome 支持的断字 */
+  -ms-hyphens: auto;          /* 旧版 Edge/IE */
+  hyphens: auto;              /* 标准属性：英文更自然断词配合 justify */
+}
