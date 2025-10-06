@@ -10,9 +10,25 @@
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.7.0/dist/jsvectormap.min.css">
   <style>
     /* 访客地图样式 */
-    .visitors-section { margin-top: 28px; }
-    #world-map { width: 100%; height: 520px; border: 1px solid #e5e5e5; border-radius: 8px; }
-    .map-note { font-size: 12px; color: #666; margin-top: 8px; text-align: center; }
+    .visitors-section { 
+  margin: 20px auto 0;      /* 居中 */
+  max-width: 720px;         /* 限制最大宽度 */
+}
+#world-map { 
+  width: 100%; 
+  height: 320px;            /* 从 520px 改小到 320px */
+  border: 1px solid #e5e5e5; 
+  border-radius: 8px; 
+}
+.map-note { 
+  font-size: 12px; color: #666; margin-top: 8px; text-align: center; 
+}
+
+/* 小屏再缩小一点高度 */
+@media (max-width: 640px) {
+  #world-map { height: 260px; }
+}
+
   </style>
 </head>
 
