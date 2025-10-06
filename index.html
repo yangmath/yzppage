@@ -5,6 +5,23 @@
   <title>Zhipeng Yang</title>
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  <!-- Site stats widget styles -->
+  <style>
+    .site-stats{
+      margin-top: 24px;
+      padding: 12px 16px;
+      border-top: 1px solid #e5e5e5;
+      color: #555;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .site-stats .flag{ font-size: 16px; margin: 0 4px 0 6px; }
+    .site-stats .sep{ opacity: .6; }
+  </style>
 </head>
 
 <body>
@@ -180,9 +197,69 @@
   </p>
 </section>
 
-
+    <!-- ↓↓↓ Site stats widget block (place near the bottom of .main) ↓↓↓ -->
+    <div id="site-stats" class="site-stats" role="note" aria-label="Site statistics">
+      <span id="visit-count">Visitors: …</span>
+      <span class="sep"> | </span>
+      <span id="visitor-country">Your country: …</span>
+    </div>
+    <!-- ↑↑↑ Site stats widget block ↑↑↑ -->
 
   </div>
+
+  <!-- Site stats widget script -->
+  <script>
+    (function () {
+      // —— Visit counter: countapi (keyed by domain/path) ——
+      var countEl = document.getElementById('visit-count');
+      fetch('https://api.countapi.xyz/hit/yzpmath.com/homepage')
+        .then(function(r){ return r.json(); })
+        .then(function(d){ countEl.textContent = 'Visitors: ' + d.value; })
+        .catch(function(){ countEl.textContent = 'Visitors: —'; });
+
+      // —— Visitor country: ipwho.is with fallbacks ——
+      var countryEl = document.getElementById('visitor-country');
+
+      function toFlag(cc){
+        if(!cc) return '';
+        return cc.toUpperCase().replace(/./g, function(c){ return String.fromCodePoint(127397 + c.charCodeAt(0)); });
+      }
+      function setCountry(code, name){
+        if(!code){
+          countryEl.textContent = 'Your country: Unknown';
+          return;
+        }
+        var flag = toFlag(code);
+        var label = name || code.toUpperCase();
+        countryEl.innerHTML = 'Your country: <span class="flag">' + flag + '</span>' + label + ' (' + code.toUpperCase() + ')';
+      }
+      function fetchCountry(){
+        fetch('https://ipwho.is/?fields=country,country_code')
+          .then(function(r){ return r.json(); })
+          .then(function(j){
+            if(j && (j.country_code || j.country)) { setCountry(j.country_code, j.country); return; }
+            throw new Error('ipwho failed');
+          })
+          .catch(function(){
+            fetch('https://ipapi.co/json/')
+              .then(function(r){ return r.json(); })
+              .then(function(j){ setCountry(j.country, j.country_name); })
+              .catch(function(){
+                fetch('https://ipinfo.io/json')
+                  .then(function(r){ return r.json(); })
+                  .then(function(j){ setCountry(j.country, null); })
+                  .catch(function(){ setCountry(null, null); });
+              });
+          });
+      }
+      if (navigator.doNotTrack === '1' || window.doNotTrack === '1') {
+        countryEl.textContent = 'Your country: (DNT on)';
+      } else {
+        fetchCountry();
+      }
+    })();
+  </script>
+
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="script.js"></script>
 </body>
