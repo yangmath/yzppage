@@ -135,3 +135,18 @@ section ul {
 }
 .site-stats .flag{ font-size: 16px; margin: 0 4px 0 6px; }
 .site-stats .sep{ opacity: .6; }
+
+/* 1) 去掉所有链接的下划线（含各种状态） */
+a, a:visited, a:hover, a:active, a:focus {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+}
+
+/* 2) 如果曾用过 <u> 标签，统一取消下划线（更推荐把 <u> 从 HTML 中删掉） */
+u { text-decoration: none !important; }
+
+/* 3)（可选）确保标题没有“底边线” */
+h1, h2, h3 { border-bottom: 0 !important; }
+
+/* 4)（可选）只想限制在 Seminar 区域： */
+/* #apde-seminar a { text-decoration: none !important; border-bottom: 0 !important; } */
