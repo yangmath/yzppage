@@ -29,13 +29,16 @@
       <div id="mugshot"><img src="photo.png" alt="mugshot"></div>
     </div>
 
-    <ul class="nav">
-  <li class="selected"><a href="#about" class="navlink">About</a></li>
+   <ul class="nav">
+  <ul>
+  <li><a href="#about" class="navlink">About</a></li>
   <li><a href="#cv" class="navlink">Curriculum Vitae</a></li>
   <li><a href="#research" class="navlink">Research</a></li>
   <li><a href="#teaching" class="navlink">Teaching</a></li>
   <li><a href="#apde-seminar" class="navlink">APDE Seminar</a></li>
   <li><a href="#Conferences" class="navlink">Conferences</a></li>
+</ul>
+
 </ul>
 
   </nav>
@@ -411,6 +414,48 @@
         })
         .catch(fail);
     }
+  }
+})();
+</script>
+<script>
+(function(){
+  // 菜单链接
+  const links = Array.from(document.querySelectorAll('nav.sidebar a.navlink'));
+  // 页面中带 id 的 section
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+
+  // 建立 id -> 对应链接 的映射
+  const map = new Map();
+  links.forEach(a => {
+    const id = (a.getAttribute('href')||'').split('#')[1];
+    if (id) map.set(id, a);
+  });
+
+  // 滚动时自动高亮当前所处 section
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.id;
+      const link = map.get(id);
+      if (!link) return;
+      if (entry.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, {
+    root: null,
+    // 视口中间 40%~45% 作为“当前”
+    rootMargin: '-40% 0px -55% 0px',
+    threshold: [0, 1]
+  });
+
+  sections.forEach(sec => obs.observe(sec));
+
+  // 初始高亮（刷新后停留在某个锚点时）
+  const current = location.hash.replace('#','') || 'about';
+  if (map.get(current)) {
+    links.forEach(l => l.classList.remove('active'));
+    map.get(current).classList.add('active');
   }
 })();
 </script>
