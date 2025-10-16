@@ -1,153 +1,81 @@
-@font-face {
-	font-family: "Computer Modern";
-	src: url(cmunrm.ttf);
+@font-face { font-family: "Computer Modern"; src: url(cmunrm.ttf); }
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }           /* 平滑滚动 */
+body{ font-family:'Computer Modern','Times New Roman',serif; font-size:17px; }
+
+p{ margin-bottom:15px; }
+h2{ margin-bottom:40px; }
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position: fixed;        /* 关键：固定在左侧，始终可见 */
+  top:0; left:0;
+  height:100vh;
+  width:250px;
+  border-right:1px solid #c0c0c0;
+  overflow:auto;          /* 菜单过长时侧栏自身可滚动 */
+}
+.header{ padding:30px; }
+#mugshot{ width:150px; height:150px; border-radius:50%; overflow:hidden; }
+
+.sidebar ul{ list-style:none; }            /* 去掉项目符号 */
+.sidebar li{
+  border-top:1px solid #c0c0c0;
+  height:50px;
+  text-transform:uppercase;
+  margin:0 auto;
+  line-height:50px;
+  padding-left:30px;
+}
+.sidebar ul:last-child{ border-bottom:1px solid #c0c0c0; }
+.sidebar li:hover{ background:#f0f0f0; }
+.sidebar a{ display:block; text-decoration:none; color:#000; cursor:pointer; }
+.sidebar a:visited{ color:#000; }
+
+/* 当前条目的高亮（可配合你的 JS 添加 .active 到 <a>） */
+.sidebar a.active,
+.selected{
+  color: rgb(78,42,132);
+  background:#f0f0f0;
 }
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+/* ===== MAIN ===== */
+.main{
+  /* 关键：让页面用“窗口滚动”，而不是 .main 自己滚 */
+  margin-left:250px;
+  padding:30px 50px;
+  min-height:100vh;
+  overflow:visible;
 }
 
-body {
-	font-family: 'Computer Modern', 'Times New Roman', serif;
-	font-size: 17px;
-}
+/* 之前的单页显示开关会挡住锚点，直接移除 */
+/* section{ display:none; }
+.active{ display:block; } */
 
-p {
-	margin-bottom: 15px;
-}
+/* 区块滚动到顶时留一点空（不让标题顶在视口边缘） */
+section[id]{ scroll-margin-top:16px; }
 
-h2 {
-	margin-bottom: 40px;
-}
-
-/*
--------------
-   SIDEBAR
--------------
-*/
-
-.sidebar {
-	height: 100vh;
-	width: 250px;
-	border-right: 1px solid #c0c0c0;
-	position: absolute;
-	left: 0;
-}
-
-.header {
-	padding: 30px;
-}
-
-#mugshot {
-	width: 150px;
-	height: 150px;
-	border-radius: 50%;
-	overflow: hidden;
-}
-
-.sidebar li {
-	border-top: 1px solid #c0c0c0;
-	height: 50px;
-	text-transform: uppercase;
-	margin: 0px auto; 
-	line-height: 50px;
-	padding-left: 30px;
-}
-
-.sidebar ul:last-child {
-	border-bottom: 1px solid #c0c0c0;
-}
-
-.sidebar li:hover {
-	background-color: #f0f0f0;
-}
-
-.sidebar a {
-	text-decoration: none;
-	color: black;
-}
-
-.sidebar a:visited {
-	color: black;
-}
-
-.selected {
-	color: rgb(078, 042, 132);
-	background-color: #f0f0f0;
-}
-
-/*
--------------
-    MAIN
--------------
-*/
-
-.main {
-	height: 100vh;
-	margin-left: 250px;
-	padding: 30px 50px;
-	overflow: auto;
-}
-
-section {
-	display: none;
-}
-
-.active {
-	display: block;
-}
-
-section ul {
-	margin: 15px 15px 15px 30px;
-
-}
-/* 让 About 里前两段左右两端对齐 */
+/* About 区域微调（保留你的原样式） */
 #about p:nth-of-type(1),
-#about p:nth-of-type(2) {
-  text-align: justify;
-  text-justify: inter-word;   /* 主要给旧版 IE/Edge，其他浏览器忽略也没关系 */
-  -webkit-hyphens: auto;      /* Safari/Chrome 支持的断字 */
-  -ms-hyphens: auto;          /* 旧版 Edge/IE */
-  hyphens: auto;              /* 标准属性：英文更自然断词配合 justify */
+#about p:nth-of-type(2){
+  text-align:justify; text-justify:inter-word;
+  -webkit-hyphens:auto; -ms-hyphens:auto; hyphens:auto;
 }
+#about .label{ font-weight:700; color:#000; }
+#about a{ text-decoration:none; }
+#about a:hover{ text-decoration:underline; }
 
-/* 加粗且保持为黑色 */
-#about .label {
-  font-weight: 700;
-  color: #000;
-}
-#about a { text-decoration: none; }
-#about a:hover { text-decoration: underline; } /* 悬停时给个可见的提示 */
-
-
+/* 访客统计条 */
 .site-stats{
-  margin-top: 24px;
-  padding: 12px 16px;
-  border-top: 1px solid #e5e5e5;
-  color: #555;
-  font-size: 14px;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
+  margin-top:24px; padding:12px 16px; border-top:1px solid #e5e5e5;
+  color:#555; font-size:14px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap;
 }
-.site-stats .flag{ font-size: 16px; margin: 0 4px 0 6px; }
-.site-stats .sep{ opacity: .6; }
+.site-stats .flag{ font-size:16px; margin:0 4px 0 6px; }
+.site-stats .sep{ opacity:.6; }
 
-/* 1) 去掉所有链接的下划线（含各种状态） */
-a, a:visited, a:hover, a:active, a:focus {
-  text-decoration: none !important;
-  border-bottom: 0 !important;
-}
-
-/* 2) 如果曾用过 <u> 标签，统一取消下划线（更推荐把 <u> 从 HTML 中删掉） */
-u { text-decoration: none !important; }
-
-/* 3)（可选）确保标题没有“底边线” */
-h1, h2, h3 { border-bottom: 0 !important; }
-
-/* 4)（可选）只想限制在 Seminar 区域： */
-/* #apde-seminar a { text-decoration: none !important; border-bottom: 0 !important; } */
-
+/* 全站：去下划线（保留你的设置） */
+a, a:visited, a:hover, a:active, a:focus{ text-decoration:none !important; border-bottom:0 !important; }
+u{ text-decoration:none !important; }
+h1,h2,h3{ border-bottom:0 !important; }
