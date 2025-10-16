@@ -195,7 +195,7 @@
       </ul>
     </section>
 
-   <section id="apde-seminar">
+  <section id="apde-seminar">
   <h2>APDE Seminar</h2>
 
   <div class="seminar-intro">
@@ -206,53 +206,46 @@
 
   <!-- ===== Styles (scoped to seminar) ===== -->
   <style>
-    /* 更好看的介绍信息块 */
+    /* 更好看的介绍信息块 + 两端对齐 */
     #apde-seminar .seminar-intro{
       background: linear-gradient(180deg,#f6faff 0%, #ffffff 100%);
       border: 1px solid #dbeafe;
-      border-left: 5px solid #3b82f6;        /* 蓝色强调条 */
+      border-left: 5px solid #3b82f6;
       border-radius: 12px;
       padding: 14px 16px;
       margin: 10px 0 18px;
-      color: #26466f;                         /* 深一点的文字颜色，提升对比 */
+      color: #26466f;
+
+      /* 两端对齐（中英文都友好） */
+      text-align: justify;
+      text-justify: inter-ideograph;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+      word-break: break-word;
     }
     #apde-seminar .seminar-intro a{
-      color:#1d4ed8;                          /* 链接用品牌蓝 */
+      color:#1d4ed8;
       font-weight:600;
       text-decoration:none;
       border-bottom: 1px dotted rgba(29,78,216,.35);
     }
-    #apde-seminar .seminar-intro a:hover{
-      text-decoration:underline;
-    }
+    #apde-seminar .seminar-intro a:hover{ text-decoration:underline; }
 
-    /* 列表与卡片保留原结构，微调视觉 */
+    /* 列表与卡片 */
     #apde-seminar .talks-wrap{display:grid;grid-template-columns:1fr;gap:14px}
     #apde-seminar .talk-card{
       border:1px solid #e6e6e6;border-radius:10px;padding:14px 16px;background:#fff;
       box-shadow:0 1px 2px rgba(0,0,0,.03)
     }
     #apde-seminar .talk-card.upcoming{border-color:#d7e8ff;background:#fbfdff}
-
     #apde-seminar .talk-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
 
-    /* 基础 tag 略增大 */
+    /* “Next talk” 更醒目 */
     #apde-seminar .tag{
-      font-size:14px;                         /* 原来是 12px -> 稍大 */
-      line-height:1;
-      border:1px solid #cfe0ff;
-      background:#eef5ff;
-      color:#1d4ed8;
-      border-radius:999px;
-      padding:6px 10px;
-      font-weight:700;
-      letter-spacing:.2px;
+      font-size:14px; line-height:1; border:1px solid #cfe0ff; background:#eef5ff; color:#1d4ed8;
+      border-radius:999px; padding:6px 10px; font-weight:700; letter-spacing:.2px;
     }
-    /* “Next talk” 再大一点（仅限即将举行卡片） */
-    #apde-seminar .talk-card.upcoming .tag{
-      font-size:16px;
-      padding:7px 12px;
-    }
+    #apde-seminar .talk-card.upcoming .tag{ font-size:16px; padding:7px 12px; }
 
     #apde-seminar .talk-title{font-weight:700}
     #apde-seminar .talk-meta{color:#555;font-size:14px;margin:6px 0 8px}
@@ -265,6 +258,16 @@
       font-size:13px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;padding:6px 10px;cursor:pointer;text-decoration:none;color:inherit
     }
     #apde-seminar .btn:hover{background:#f1f1f1}
+
+    /* 让摘要与主讲人简介的文字也两端对齐 */
+    #apde-seminar details.abstract > div,
+    #apde-seminar details.speaker > div{
+      text-align: justify;
+      text-justify: inter-ideograph;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+      word-break: break-word;
+    }
 
     #apde-seminar details.abstract, #apde-seminar details.speaker{margin-top:8px}
     #apde-seminar details.abstract summary, #apde-seminar details.speaker summary{cursor:pointer;color:#2b5fb0}
