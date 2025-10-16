@@ -250,10 +250,14 @@
 
         const meta = document.createElement('div');
         meta.className = 'talk-meta';
+        const spkHTML = talk.speakerUrl
+  ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
+  : escapeHTML(talk.speaker);
         meta.innerHTML =
-         `<span>${fmtRange(talk.datetime, talk.durationMin /*, 'Asia/Shanghai'*/)}</span>` +
-          (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
-          (talk.speaker ? ` <span class="sep">•</span><span>${escapeHTML(talk.speaker)}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
+        meta.innerHTML =
+  `<span>${fmtRange(talk.datetime, talk.durationMin)}</span>` +
+  (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
+  (talk.speaker ? ` <span class="sep">•</span><span>${spkHTML}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
         wrap.appendChild(meta);
 
         if (talk.join){
@@ -283,6 +287,7 @@
           durationMin: d.duration ? parseInt(d.duration,10) : (d.durationMin? parseInt(d.durationMin,10):60),
           title: d.title || '',
           speaker: d.speaker || '',
+          speakerUrl: d.speakerUrl || d['speaker-url'] || '',   // ← 就加这一行
           affil: d.affil || '',
           room: d.room || '',
           location: d.location || '',
