@@ -4,16 +4,113 @@
   <meta charset="utf-8" />
   <title>Zhipeng Yang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- 仅保留你自己的样式表；没用到的 Google Fonts 已移除 -->
   <link rel="stylesheet" href="stylesheet.css" />
+
+  <!-- 覆盖/补充：移动端适配与抽屉侧栏 -->
+  <style>
+    /* 通用小优化 */
+    img { max-width: 100%; height: auto; display: block; }
+
+    /* 让主区在桌面端仍旧留出侧栏宽度；移动端会在下面覆盖掉 */
+    .main { min-height: 100vh; }
+
+    /* 顶部栏（仅移动端显示） */
+    .topbar {
+      display: none;
+    }
+
+    /* ====== 移动端：抽屉式侧栏 + 允许页面滚动/缩放 ====== */
+    @media (max-width: 860px) {
+      /* 显示顶部栏 */
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 900;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        background: #fff;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      .menu-btn {
+        font-size: 16px;
+        padding: 8px 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #f8f8f8;
+      }
+      .site-title {
+        font-weight: 700;
+      }
+
+      /* 把左侧栏做成抽屉（默认收起） */
+      #sidebar {
+        position: fixed;
+        top: 0; left: 0; bottom: 0;
+        width: 82vw; max-width: 320px;
+        background: #fff;
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+        z-index: 1000;
+        box-shadow: 2px 0 8px rgba(0,0,0,.08);
+      }
+      #sidebar.open { transform: translateX(0); }
+
+      /* 背景遮罩 */
+      #backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,.35);
+        z-index: 950;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .2s ease;
+      }
+      #backdrop.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      /* 主区不再为侧栏让位，且允许正常滚动（修复“不能放大缩小”的感觉） */
+      .main {
+        margin-left: 0 !important;   /* 覆盖原样式 */
+        height: auto !important;     /* 取消 100vh */
+        overflow: visible !important;/* 取消内部滚动 */
+        padding: 16px;
+      }
+
+      /* 侧栏内元素留白适配小屏 */
+      .sidebar { width: auto !important; border-right: 1px solid #e5e5e5; }
+      .header { padding: 20px; }
+      .sidebar li { padding-left: 20px; }
+
+      /* 打开抽屉时阻止底层滚动（更顺手） */
+      body.menu-open { overflow: hidden; touch-action: none; }
+    }
+
+    /* 访客计数的行内小分隔符样式（兼容你原 CSS） */
+    .site-stats{ display:flex; justify-content:center; gap:8px; padding:12px 16px; color:#555; border-top:1px solid #e5e5e5; }
+    .site-stats .sep{ opacity:.6; }
+  </style>
 </head>
+
 <body>
-  <nav class="sidebar">
+  <!-- 顶部栏（仅在移动端显示） -->
+  <div class="topbar">
+    <button id="menu-btn" class="menu-btn" aria-controls="sidebar" aria-expanded="false">☰ Menu</button>
+    <div class="site-title">Zhipeng Yang</div>
+  </div>
+  <div id="backdrop" aria-hidden="true"></div>
+
+  <!-- 左侧抽屉/桌面侧栏 -->
+  <nav id="sidebar" class="sidebar" aria-label="Site">
     <div class="header">
       <h1>Zhipeng Yang</h1>
       <p>Associate Professor</p>
       <div id="mugshot"><img src="photo.png" alt="mugshot" /></div>
     </div>
+
     <ul>
       <a href=" " class="navlink"><li class="selected">About</li></a>
       <a href="#cv" class="navlink"><li>Curriculum Vitae</li></a>
@@ -45,9 +142,7 @@
         under the supervision of Professor
         <a href="https://www.uni-math.gwdg.de/iwitt/" target="_blank" rel="noopener noreferrer">Ingo Witt</a>.
       </p>
-      <p>
-        My research is mainly focused on：
-      </p>
+      <p>My research is mainly focused on：</p>
       <ul>
         <li>Geometric Analysiss and PDEs;</li>
         <li>Variational Methods;</li>
@@ -65,13 +160,12 @@
           Wuzhi Building, 650500 Kunming, China.
         </li>
       </ul>
-
       <p><strong class="label">Email:</strong> zhipengyangmath[AT]gmail.com / yangzhipeng326[AT]163.com.</p>
     </section>
 
     <section id="cv">
       <h2>Curriculum Vitae</h2>
-      <p><a class="link" href="/~zhipeng/CV.pdf" target="_blank">PDF</a></p>
+      <p><a class="link" href="/~zhipeng/CV.pdf" target="_blank" rel="noopener">PDF</a></p>
       <p>Last updated: Fall 2025</p>
     </section>
 
@@ -106,7 +200,7 @@
         added to the mailing list, please email either organizer. This seminar is supported by the National Natural Science Foundation of China (NSFC:12301145).
       </div>
 
-      <!-- 仅保留必要的样式与逻辑 -->
+      <!-- 保留你现有的 Seminar 样式/逻辑（略） -->
       <style>
         .seminar-intro{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px 14px;margin:10px 0 18px;color:#444}
         .talks-wrap{display:grid;grid-template-columns:1fr;gap:14px}
@@ -155,80 +249,56 @@
       <script>
         (function(){
           const now = new Date();
-
-          function parseISO(iso){
-            let d = new Date(iso);
-            if (!isNaN(d)) return d;
-            return new Date(String(iso).replace(' ', 'T').replace(/([+-]\d{2}):?(\d{2})$/, '$1$2'));
-          }
-          const tz = undefined; // 如需强制北京时间：'Asia/Shanghai'
+          function parseISO(iso){ let d=new Date(iso); if(!isNaN(d)) return d; return new Date(String(iso).replace(' ','T').replace(/([+-]\d{2}):?(\d{2})$/,'$1$2')); }
+          const tz = undefined; // 固定北京时间可设为 'Asia/Shanghai'
 
           function fmtRange(startISO, durationMin, timeZone){
             const start = parseISO(startISO);
-            const end = new Date(start.getTime() + (Number(durationMin)||90) * 60000);
+            const end = new Date(start.getTime() + (Number(durationMin)||90)*60000);
             const dopt = {year:'numeric', month:'short', day:'numeric'};
             const topt = {hour:'2-digit', minute:'2-digit', hour12:false, hourCycle:'h23'};
-            if (timeZone){ dopt.timeZone = timeZone; topt.timeZone = timeZone; }
-            return new Intl.DateTimeFormat(undefined, dopt).format(start)
-                   + ' · ' + new Intl.DateTimeFormat(undefined, topt).format(start)
-                   + '–' + new Intl.DateTimeFormat(undefined, topt).format(end);
+            if (timeZone){ dopt.timeZone=timeZone; topt.timeZone=timeZone; }
+            return new Intl.DateTimeFormat(undefined,dopt).format(start) + ' · ' +
+                   new Intl.DateTimeFormat(undefined,topt).format(start) + '–' +
+                   new Intl.DateTimeFormat(undefined,topt).format(end);
           }
-
           function escapeHTML(s){return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-
           function card(talk, highlight){
-            const wrap = document.createElement('div');
-            wrap.className = 'talk-card' + (highlight ? ' upcoming wide' : '');
-            const head = document.createElement('div'); head.className='talk-head';
-            if (highlight){ const tag=document.createElement('span'); tag.className='tag'; tag.textContent='Next talk'; head.appendChild(tag); }
-            const title = document.createElement('div'); title.className='talk-title'; title.textContent=talk.title; head.appendChild(title);
+            const wrap=document.createElement('div'); wrap.className='talk-card'+(highlight?' upcoming wide':'');
+            const head=document.createElement('div'); head.className='talk-head';
+            if(highlight){ const tag=document.createElement('span'); tag.className='tag'; tag.textContent='Next talk'; head.appendChild(tag); }
+            const title=document.createElement('div'); title.className='talk-title'; title.textContent=talk.title; head.appendChild(title);
             wrap.appendChild(head);
-
-            const meta = document.createElement('div'); meta.className='talk-meta';
-            const speakerHTML = talk.speakerUrl ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>` : escapeHTML(talk.speaker);
+            const meta=document.createElement('div'); meta.className='talk-meta';
+            const speakerHTML=talk.speakerUrl?`<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`:escapeHTML(talk.speaker);
             meta.innerHTML =
               `<span>${fmtRange(talk.datetime, talk.durationMin, tz)}</span>` +
-              (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
-              (talk.speaker ? ` <span class="sep">•</span><span>${speakerHTML}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
+              (talk.room?` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>`:'') +
+              (talk.speaker?` <span class="sep">•</span><span>${speakerHTML}${talk.affil?' <span class="muted">('+escapeHTML(talk.affil)+')</span>':''}</span>`:'');
             wrap.appendChild(meta);
-
-            if (talk.speakerBio){
-              const det = document.createElement('details');
-              const sum = document.createElement('summary'); sum.textContent='Speaker';
-              const body = document.createElement('div'); body.style.marginTop='6px'; body.textContent=talk.speakerBio;
-              det.appendChild(sum); det.appendChild(body); wrap.appendChild(det);
-            }
-            if (talk.abstract){
-              const det = document.createElement('details');
-              const sum = document.createElement('summary'); sum.textContent='Abstract';
-              const body = document.createElement('div'); body.style.marginTop='6px'; body.textContent=talk.abstract;
-              det.appendChild(sum); det.appendChild(body); wrap.appendChild(det);
-            }
+            if (talk.speakerBio){ const det=document.createElement('details'), sum=document.createElement('summary'); sum.textContent='Speaker';
+              const body=document.createElement('div'); body.style.marginTop='6px'; body.textContent=talk.speakerBio;
+              det.appendChild(sum); det.appendChild(body); wrap.appendChild(det); }
+            if (talk.abstract){ const det=document.createElement('details'), sum=document.createElement('summary'); sum.textContent='Abstract';
+              const body=document.createElement('div'); body.style.marginTop='6px'; body.textContent=talk.abstract;
+              det.appendChild(sum); det.appendChild(body); wrap.appendChild(det); }
             return wrap;
           }
 
-          const dataItems = Array.from(document.querySelectorAll('#apde-data .talk'));
-          const talks = dataItems.map(li=>{
-            const d = li.dataset || {};
-            return {
-              datetime:d.datetime, durationMin:parseInt(d.duration||d.durationMin,10)||60,
+          const talks = Array.from(document.querySelectorAll('#apde-data .talk')).map(li=>{
+            const d=li.dataset||{};
+            return { datetime:d.datetime, durationMin:parseInt(d.duration||d.durationMin,10)||60,
               title:d.title||'', speaker:d.speaker||'', speakerUrl:d.speakerUrl||d['speaker-url']||'',
               speakerBio:d.speakerBio||d['speaker-bio']||'', affil:d.affil||'', room:d.room||'',
-              location:d.location||'', join:d.join||'', abstract:d.abstract||''
-            };
+              location:d.location||'', join:d.join||'', abstract:d.abstract||'' };
           }).filter(t=>t.datetime).sort((a,b)=>parseISO(a.datetime)-parseISO(b.datetime));
+          const nowISO = now;
+          const upcoming = talks.filter(t=>parseISO(t.datetime) >= nowISO);
+          const past = talks.filter(t=>parseISO(t.datetime) < nowISO).reverse();
+          const nextWrap=document.getElementById('next-talk'), pastWrap=document.getElementById('past-talks');
 
-          const nextWrap = document.getElementById('next-talk');
-          const pastWrap = document.getElementById('past-talks');
-          const upcoming = talks.filter(t=>parseISO(t.datetime) >= now);
-          const past = talks.filter(t=>parseISO(t.datetime) < now).reverse();
-
-          if (upcoming.length){
-            nextWrap.appendChild(card(upcoming[0], true));
-            upcoming.slice(1).forEach(t=>nextWrap.appendChild(card(t,false)));
-          }else{
-            const msg=document.createElement('div'); msg.className='muted'; msg.textContent='No upcoming talks yet. Please check back soon.'; nextWrap.appendChild(msg);
-          }
+          if (upcoming.length){ nextWrap.appendChild(card(upcoming[0], true)); upcoming.slice(1).forEach(t=>nextWrap.appendChild(card(t,false))); }
+          else { const msg=document.createElement('div'); msg.className='muted'; msg.textContent='No upcoming talks yet. Please check back soon.'; nextWrap.appendChild(msg); }
           past.forEach(t=>pastWrap.appendChild(card(t,false)));
         })();
       </script>
@@ -237,22 +307,48 @@
     <section id="Conferences">
       <h2>Conferences</h2>
       <p>Please visit the dedicated page for conferences:
-        <a href="https://ynnumath.com/" target="_blank" rel="noopener noreferrer">https://ynnumath.com/</a>
+        <a href="https://ynnumath.com/" target="_blank" rel="noopener">https://ynnumath.com/</a>
       </p>
     </section>
 
-    <!-- 计数器（精简版）：仅 value，不用 container，脚本会填充数字；脚本用 defer 不阻塞 -->
+    <!-- 访客计数（不蒜子） -->
     <div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
-      Visitors: <span id="busuanzi_value_site_uv">0</span> ｜ Views:
-      <span id="busuanzi_value_site_pv">0</span>
+      Visitors: <span id="busuanzi_value_site_uv">0</span>
+      <span class="sep">｜</span>
+      Views: <span id="busuanzi_value_site_pv">0</span>
     </div>
   </div>
 
-  <!-- Busuanzi（不阻塞页面；若站点有 CSP，请允许此域名或改为本地托管） -->
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <!-- 抽屉开关脚本（无依赖） -->
+  <script>
+    (function(){
+      const btn = document.getElementById('menu-btn');
+      const sidebar = document.getElementById('sidebar');
+      const backdrop = document.getElementById('backdrop');
 
-  <!-- 若你的 script.js 依赖 jQuery 才保留；否则都可以删掉 jQuery 和 script.js -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script defer src="script.js"></script>
+      function openMenu(){
+        sidebar.classList.add('open');
+        backdrop.classList.add('show');
+        document.body.classList.add('menu-open');
+        btn && btn.setAttribute('aria-expanded','true');
+      }
+      function closeMenu(){
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('show');
+        document.body.classList.remove('menu-open');
+        btn && btn.setAttribute('aria-expanded','false');
+      }
+      btn && btn.addEventListener('click', () => {
+        if (sidebar.classList.contains('open')) closeMenu(); else openMenu();
+      });
+      backdrop.addEventListener('click', closeMenu);
+      window.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+      // 点击导航后自动关闭
+      document.querySelectorAll('#sidebar a.navlink').forEach(a => a.addEventListener('click', closeMenu));
+    })();
+  </script>
+
+  <!-- 不蒜子（建议保留 https:// 协议 & defer，避免阻塞） -->
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>
