@@ -3,108 +3,110 @@
 <head>
   <meta charset="utf-8" />
   <title>Zhipeng Yang</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="stylesheet.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" type="text/css" href="stylesheet.css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
 
-  <!-- 覆盖/补充：移动端适配与抽屉侧栏 -->
+  <!-- 移动端增强样式（不改你原有 stylesheet.css，只做补充覆盖） -->
   <style>
-    /* 通用小优化 */
-    img { max-width: 100%; height: auto; display: block; }
+    /* 顶部栏（移动端显示） */
+    .topbar{
+      display:none;
+    }
+    #menu-btn{
+      display:none;
+      border:0;
+      background:transparent;
+      font-size:22px;
+      line-height:1;
+      padding:8px 10px;
+      cursor:pointer;
+    }
+    .site-title{ font-weight:700; }
 
-    /* 让主区在桌面端仍旧留出侧栏宽度；移动端会在下面覆盖掉 */
-    .main { min-height: 100vh; }
+    /* 访客统计区少量样式（不影响外部样式） */
+    .site-stats{
+      margin-top: 24px;
+      padding: 12px 16px;
+      border-top: 1px solid #e5e5e5;
+      color: #555;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .site-stats .sep{ opacity: .6; }
 
-    /* 顶部栏（仅移动端显示） */
-    .topbar {
-      display: none;
+    /* 桌面端：保持你原布局（sidebar 固定左侧，main 有 margin-left） */
+    @media (min-width: 861px){
+      /* 保留原有 .sidebar/.main 行为，无需改 */
     }
 
-    /* ====== 移动端：抽屉式侧栏 + 允许页面滚动/缩放 ====== */
-    @media (max-width: 860px) {
-      /* 显示顶部栏 */
-      .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 900;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px 12px;
-        background: #fff;
-        border-bottom: 1px solid #e5e5e5;
+    /* 移动端：侧栏变抽屉，主区域顶上留位置给 topbar */
+    @media (max-width: 860px){
+      .topbar{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        position:fixed; inset:0 auto auto 0;
+        width:100%;
+        height:56px;
+        padding:0 12px;
+        background:#fff;
+        border-bottom:1px solid #e5e5e5;
+        z-index:1100;
       }
-      .menu-btn {
-        font-size: 16px;
-        padding: 8px 10px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background: #f8f8f8;
-      }
-      .site-title {
-        font-weight: 700;
-      }
+      #menu-btn{ display:inline-flex; }
 
-      /* 把左侧栏做成抽屉（默认收起） */
-      #sidebar {
-        position: fixed;
-        top: 0; left: 0; bottom: 0;
-        width: 82vw; max-width: 320px;
-        background: #fff;
+      /* 抽屉侧栏 */
+      #sidebar{
+        position:fixed !important;
+        top:0; left:0;
+        height:100vh; width:260px;
         transform: translateX(-100%);
         transition: transform .25s ease;
-        z-index: 1000;
-        box-shadow: 2px 0 8px rgba(0,0,0,.08);
+        z-index:1000;
+        background:#fff;
+        box-shadow: 0 6px 24px rgba(0,0,0,.12);
       }
-      #sidebar.open { transform: translateX(0); }
+      #sidebar.open{ transform: translateX(0); }
 
-      /* 背景遮罩 */
-      #backdrop {
-        position: fixed;
-        inset: 0;
+      /* 遮罩 */
+      #backdrop{
+        position:fixed; inset:0;
         background: rgba(0,0,0,.35);
-        z-index: 950;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .2s ease;
+        display:none;
+        z-index:900;
       }
-      #backdrop.show {
-        opacity: 1;
-        pointer-events: auto;
-      }
+      #backdrop.show{ display:block; }
 
-      /* 主区不再为侧栏让位，且允许正常滚动（修复“不能放大缩小”的感觉） */
-      .main {
-        margin-left: 0 !important;   /* 覆盖原样式 */
-        height: auto !important;     /* 取消 100vh */
-        overflow: visible !important;/* 取消内部滚动 */
-        padding: 16px;
+      /* 主区域不再留出左侧空白，顶上留出 topbar 高度 */
+      .main{
+        margin-left: 0 !important;
+        padding-top: 64px; /* 顶部栏高度 */
       }
 
-      /* 侧栏内元素留白适配小屏 */
-      .sidebar { width: auto !important; border-right: 1px solid #e5e5e5; }
-      .header { padding: 20px; }
-      .sidebar li { padding-left: 20px; }
-
-      /* 打开抽屉时阻止底层滚动（更顺手） */
-      body.menu-open { overflow: hidden; touch-action: none; }
+      /* 让侧栏里的链接更易点 */
+      .sidebar a.navlink li{
+        padding-left: 18px !important;
+      }
     }
-
-    /* 访客计数的行内小分隔符样式（兼容你原 CSS） */
-    .site-stats{ display:flex; justify-content:center; gap:8px; padding:12px 16px; color:#555; border-top:1px solid #e5e5e5; }
-    .site-stats .sep{ opacity:.6; }
   </style>
 </head>
 
 <body>
-  <!-- 顶部栏（仅在移动端显示） -->
-  <div class="topbar">
-    <button id="menu-btn" class="menu-btn" aria-controls="sidebar" aria-expanded="false">☰ Menu</button>
-    <div class="site-title">Zhipeng Yang</div>
-  </div>
+  <!-- 顶部栏（移动端可见） -->
+  <header class="topbar" aria-label="Mobile Header">
+    <button id="menu-btn" aria-controls="sidebar" aria-expanded="false" aria-label="Open menu">☰</button>
+    <span class="site-title">Zhipeng Yang</span>
+  </header>
+
+  <!-- 半透明遮罩（移动端抽屉用） -->
   <div id="backdrop" aria-hidden="true"></div>
 
-  <!-- 左侧抽屉/桌面侧栏 -->
-  <nav id="sidebar" class="sidebar" aria-label="Site">
+  <!-- 侧边栏 -->
+  <nav id="sidebar" class="sidebar" aria-label="Sidebar">
     <div class="header">
       <h1>Zhipeng Yang</h1>
       <p>Associate Professor</p>
@@ -112,7 +114,7 @@
     </div>
 
     <ul>
-      <a href=" " class="navlink"><li class="selected">About</li></a>
+      <a href="#about" class="navlink"><li class="selected">About</li></a>
       <a href="#cv" class="navlink"><li>Curriculum Vitae</li></a>
       <a href="#research" class="navlink"><li>Research</li></a>
       <a href="#teaching" class="navlink"><li>Teaching</li></a>
@@ -121,32 +123,31 @@
     </ul>
   </nav>
 
+  <!-- 主内容 -->
   <div class="main">
     <section id="about" class="active">
       <h2>About</h2>
       <p>
         I am an Associate Professor of
         <a href="https://math.ynnu.edu.cn/" target="_blank" rel="noopener noreferrer">School of Mathematics</a>
-        at
-        <a href="https://www.ynnu.edu.cn/" target="_blank" rel="noopener noreferrer">Yunnan Normal University</a>.
+        at <a href="https://www.ynnu.edu.cn/" target="_blank" rel="noopener noreferrer">Yunnan Normal University</a>.
         And I am also a visiting Professor in the research group
         <a href="https://analysis-pde.org/" target="_blank" rel="noopener noreferrer">Ghent Analysis &amp; PDE Center</a>
-        at Ghent University headed by Prof.
-        <a href="https://ruzhansky.org/" target="_blank" rel="noopener noreferrer">Michael Ruzhansky</a>.
+        at Ghent University headed by Prof. <a href="https://ruzhansky.org/" target="_blank" rel="noopener noreferrer">Michael Ruzhansky</a>.
       </p>
       <p>
         I completed my Ph.D. in 2022 from
         <a href="https://www.uni-goettingen.de/en/20693.html" target="_blank" rel="noopener noreferrer">Mathematisches Institut</a>
-        at
-        <a href="https://www.uni-goettingen.de/en/" target="_blank" rel="noopener noreferrer">University of Göttingen</a>,
+        at <a href="https://www.uni-goettingen.de/en/" target="_blank" rel="noopener noreferrer">University of Göttingen</a>,
         under the supervision of Professor
         <a href="https://www.uni-math.gwdg.de/iwitt/" target="_blank" rel="noopener noreferrer">Ingo Witt</a>.
       </p>
-      <p>My research is mainly focused on：</p>
+
+      <p><strong class="label">Research interests:</strong></p>
       <ul>
-        <li>Geometric Analysiss and PDEs;</li>
-        <li>Variational Methods;</li>
-        <li>Noncommutative Analysis.</li>
+        <li>Geometric Analysis and PDEs</li>
+        <li>Variational Methods</li>
+        <li>Noncommutative Analysis</li>
       </ul>
 
       <p><strong class="label">Address:</strong></p>
@@ -160,12 +161,13 @@
           Wuzhi Building, 650500 Kunming, China.
         </li>
       </ul>
-      <p><strong class="label">Email:</strong> zhipengyangmath[AT]gmail.com / yangzhipeng326[AT]163.com.</p>
+
+      <p><strong class="label">Email:</strong> zhipengyangmath[AT]gmail.com / yangzhipeng326[AT]163.com</p>
     </section>
 
     <section id="cv">
       <h2>Curriculum Vitae</h2>
-      <p><a class="link" href="/~zhipeng/CV.pdf" target="_blank" rel="noopener">PDF</a></p>
+      <p><a class="link" href="/~zhipeng/CV.pdf" target="_blank">PDF</a></p>
       <p>Last updated: Fall 2025</p>
     </section>
 
@@ -173,22 +175,24 @@
       <h2>Research</h2>
       <ul>
         <li>
-          <u>Mu, Changyang; Yang, Zhipeng; Zhang, Wei Existence and concentration of solutions for a fractional Schrödinger-Poisson system with discontinuous nonlinearity. Adv. Nonlinear Stud. 24 (2024), no. 4, 992–1011.</u>
+          <u>Mu, Changyang; Yang, Zhipeng; Zhang, Wei — Existence and concentration of solutions for a fractional
+          Schrödinger–Poisson system with discontinuous nonlinearity. Adv. Nonlinear Stud. 24 (2024), no. 4, 992–1011.</u>
           (In preparation.)
         </li>
       </ul>
       <p>Here are a few projects that have gotten temporarily put on the back burner.</p>
       <ul>
-        <li><u>2024.01—2026.12，二步分层李群上的Hardy不等式及相关问题研究，国家自然科学基金青年项目（12301145），30万，主持</u></li>
-        <li><u>A new proof of the Waldspurger formaula II</u> (In preparation.)</li>
-        <li>I explain how to regularize the relative trace formulas in "A new proof of the Waldspurger formula I," and deduce a global character identity equivalent to Waldspurger's formula.</li>
+        <li><u>2024.01—2026.12，二步分层李群上的 Hardy 不等式及相关问题研究，国家自然科学基金青年项目（12301145），30万，主持</u></li>
+        <li><u>A new proof of the Waldspurger formula II</u> (In preparation.)</li>
       </ul>
     </section>
 
     <section id="teaching">
       <h2>Teaching</h2>
       <b>Past classes (at YNNU):</b>
-      <ul><li>Fall 2025, Integral single variable calculus</li></ul>
+      <ul>
+        <li>Fall 2025, Integral single variable calculus</li>
+      </ul>
     </section>
 
     <section id="apde-seminar">
@@ -200,25 +204,47 @@
         added to the mailing list, please email either organizer. This seminar is supported by the National Natural Science Foundation of China (NSFC:12301145).
       </div>
 
-      <!-- 保留你现有的 Seminar 样式/逻辑（略） -->
+      <!-- ===== Styles (scoped to seminar) ===== -->
       <style>
-        .seminar-intro{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px 14px;margin:10px 0 18px;color:#444}
-        .talks-wrap{display:grid;grid-template-columns:1fr;gap:14px}
-        .talk-card{border:1px solid #e6e6e6;border-radius:10px;padding:14px 16px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.03)}
-        .talk-card.upcoming{border-color:#d7e8ff;background:#fbfdff}
-        .talk-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
-        .tag{font-size:12px;line-height:1;border:1px solid #cfe3ff;background:#eef6ff;color:#295ea8;border-radius:999px;padding:4px 8px}
-        .talk-title{font-weight:700}
-        .talk-meta{color:#555;font-size:14px;margin:6px 0 8px}
-        .talk-meta .sep{opacity:.5;margin:0 6px}
-        .muted{color:#777}
-        @media (min-width:860px){.talks-wrap{grid-template-columns:1fr 1fr}.talk-card.wide{grid-column:1 / -1}}
+        #apde-seminar .seminar-intro{
+          background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px 14px;margin:10px 0 18px;color:#444;
+        }
+        #apde-seminar .talks-wrap{display:grid;grid-template-columns:1fr;gap:14px}
+        #apde-seminar .talk-card{
+          border:1px solid #e6e6e6;border-radius:10px;padding:14px 16px;background:#fff;
+          box-shadow:0 1px 2px rgba(0,0,0,.03)
+        }
+        #apde-seminar .talk-card.upcoming{border-color:#d7e8ff;background:#fbfdff}
+        #apde-seminar .talk-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
+        #apde-seminar .tag{font-size:12px;line-height:1;border:1px solid #cfe3ff;background:#eef6ff;color:#295ea8;border-radius:999px;padding:4px 8px}
+        #apde-seminar .talk-title{font-weight:700}
+        #apde-seminar .talk-meta{color:#555;font-size:14px;margin:6px 0 8px}
+        #apde-seminar .talk-meta .sep{opacity:.5;margin:0 6px}
+        #apde-seminar .talk-meta a{ text-decoration:none; border-bottom:none; color:#2b5fb0; }
+        #apde-seminar .talk-meta a:hover{ text-decoration:underline; }
+        #apde-seminar .btns{display:flex;gap:8px;flex-wrap:wrap}
+        #apde-seminar .btn{
+          font-size:13px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;padding:6px 10px;cursor:pointer;text-decoration:none;color:inherit
+        }
+        #apde-seminar .btn:hover{background:#f1f1f1}
+        #apde-seminar details.abstract, #apde-seminar details.speaker{margin-top:8px}
+        #apde-seminar details.abstract summary, #apde-seminar details.speaker summary{cursor:pointer;color:#2b5fb0}
+        #apde-seminar .muted{color:#777}
+        #apde-seminar .subsec-title{margin:18px 0 8px;font-size:18px}
+        @media (min-width: 860px){
+          #apde-seminar .talks-wrap{grid-template-columns:1fr 1fr}
+          #apde-seminar .talk-card.wide{grid-column:1 / -1}
+        }
       </style>
 
+      <!-- Upcoming -->
       <div id="next-talk" class="talks-wrap"></div>
+
+      <!-- Past list -->
       <h3 class="subsec-title">Past talks</h3>
       <div id="past-talks" class="talks-wrap"></div>
 
+      <!-- ===== Data (edit here to add talks) ===== -->
       <ul id="apde-data" style="display:none">
         <li class="talk"
           data-datetime="2025-10-28T16:00:00+08:00"
@@ -242,113 +268,248 @@
           data-room="939-7737-2516"
           data-location="腾讯会议"
           data-join=""
-          data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
+          data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product. We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
         </li>
       </ul>
 
+      <!-- ===== Logic (timezone-safe + speaker bio) ===== -->
       <script>
         (function(){
           const now = new Date();
-          function parseISO(iso){ let d=new Date(iso); if(!isNaN(d)) return d; return new Date(String(iso).replace(' ','T').replace(/([+-]\d{2}):?(\d{2})$/,'$1$2')); }
-          const tz = undefined; // 固定北京时间可设为 'Asia/Shanghai'
 
+          // 解析 ISO 到 Date（兼容 Safari：去掉时区冒号）
+          function parseISO(iso){
+            let d = new Date(iso);
+            if (!isNaN(d)) return d;
+            const fixed = String(iso).replace(' ', 'T').replace(/([+-]\d{2}):?(\d{2})$/, '$1$2');
+            return new Date(fixed);
+          }
+
+          // 格式化区间：默认按访客本地时区；若想固定北京时区，第三个参数传 'Asia/Shanghai'
           function fmtRange(startISO, durationMin, timeZone){
             const start = parseISO(startISO);
-            const end = new Date(start.getTime() + (Number(durationMin)||90)*60000);
-            const dopt = {year:'numeric', month:'short', day:'numeric'};
-            const topt = {hour:'2-digit', minute:'2-digit', hour12:false, hourCycle:'h23'};
-            if (timeZone){ dopt.timeZone=timeZone; topt.timeZone=timeZone; }
-            return new Intl.DateTimeFormat(undefined,dopt).format(start) + ' · ' +
-                   new Intl.DateTimeFormat(undefined,topt).format(start) + '–' +
-                   new Intl.DateTimeFormat(undefined,topt).format(end);
+            const dur = Number.isFinite(+durationMin) ? +durationMin : 90;
+            const end = new Date(start.getTime() + dur * 60000);
+
+            const dateOpts = { year:'numeric', month:'short', day:'numeric' };
+            const timeOpts = { hour:'2-digit', minute:'2-digit', hour12:false, hourCycle:'h23' };
+            if (timeZone){ dateOpts.timeZone = timeZone; timeOpts.timeZone = timeZone; }
+
+            const df = new Intl.DateTimeFormat(undefined, dateOpts);
+            const tf = new Intl.DateTimeFormat(undefined, timeOpts);
+            return df.format(start) + ' · ' + tf.format(start) + '–' + tf.format(end);
           }
-          function escapeHTML(s){return String(s||'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-          function card(talk, highlight){
-            const wrap=document.createElement('div'); wrap.className='talk-card'+(highlight?' upcoming wide':'');
-            const head=document.createElement('div'); head.className='talk-head';
-            if(highlight){ const tag=document.createElement('span'); tag.className='tag'; tag.textContent='Next talk'; head.appendChild(tag); }
-            const title=document.createElement('div'); title.className='talk-title'; title.textContent=talk.title; head.appendChild(title);
+
+          function escapeHTML(s){
+            return String(s||'').replace(/[&<>"']/g, c => (
+              {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
+            ));
+          }
+
+          function renderCard(talk, {highlight=false}={}){
+            const wrap = document.createElement('div');
+            wrap.className = 'talk-card' + (highlight ? ' upcoming wide' : '');
+
+            const head = document.createElement('div');
+            head.className = 'talk-head';
+            if (highlight){
+              const tag = document.createElement('span');
+              tag.className = 'tag';
+              tag.textContent = 'Next talk';
+              head.appendChild(tag);
+            }
+            const title = document.createElement('div');
+            title.className = 'talk-title';
+            title.textContent = talk.title;
+            head.appendChild(title);
             wrap.appendChild(head);
-            const meta=document.createElement('div'); meta.className='talk-meta';
-            const speakerHTML=talk.speakerUrl?`<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`:escapeHTML(talk.speaker);
+
+            const meta = document.createElement('div');
+            meta.className = 'talk-meta';
+            const spkHTML = talk.speakerUrl
+              ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
+              : escapeHTML(talk.speaker);
+
+            // 想固定显示北京时间：把下面的 fmtRange 第三个参数改为 'Asia/Shanghai'
             meta.innerHTML =
-              `<span>${fmtRange(talk.datetime, talk.durationMin, tz)}</span>` +
-              (talk.room?` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>`:'') +
-              (talk.speaker?` <span class="sep">•</span><span>${speakerHTML}${talk.affil?' <span class="muted">('+escapeHTML(talk.affil)+')</span>':''}</span>`:'');
+              `<span>${fmtRange(talk.datetime, talk.durationMin)}</span>` +
+              (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
+              (talk.speaker ? ` <span class="sep">•</span><span>${spkHTML}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
             wrap.appendChild(meta);
-            if (talk.speakerBio){ const det=document.createElement('details'), sum=document.createElement('summary'); sum.textContent='Speaker';
-              const body=document.createElement('div'); body.style.marginTop='6px'; body.textContent=talk.speakerBio;
-              det.appendChild(sum); det.appendChild(body); wrap.appendChild(det); }
-            if (talk.abstract){ const det=document.createElement('details'), sum=document.createElement('summary'); sum.textContent='Abstract';
-              const body=document.createElement('div'); body.style.marginTop='6px'; body.textContent=talk.abstract;
-              det.appendChild(sum); det.appendChild(body); wrap.appendChild(det); }
+
+            if (talk.join){
+              const btns = document.createElement('div'); btns.className = 'btns';
+              const joinBtn = document.createElement('a');
+              joinBtn.className = 'btn'; joinBtn.textContent = 'Join link';
+              joinBtn.href = talk.join; joinBtn.target = '_blank'; joinBtn.rel = 'noopener noreferrer';
+              btns.appendChild(joinBtn);
+              wrap.appendChild(btns);
+            }
+
+            // ===== Speaker bio（可选）=====
+            if (talk.speakerBio){
+              const detBio = document.createElement('details'); detBio.className = 'speaker';
+              const sumBio = document.createElement('summary'); sumBio.textContent = 'Speaker';
+              const pBio = document.createElement('div'); pBio.style.marginTop='6px'; pBio.textContent = talk.speakerBio;
+              detBio.appendChild(sumBio); detBio.appendChild(pBio);
+              wrap.appendChild(detBio);
+            }
+
+            // ===== Abstract（可选）=====
+            if (talk.abstract){
+              const det = document.createElement('details'); det.className = 'abstract';
+              const sum = document.createElement('summary'); sum.textContent = 'Abstract';
+              const p = document.createElement('div'); p.style.marginTop='6px'; p.textContent = talk.abstract;
+              det.appendChild(sum); det.appendChild(p);
+              wrap.appendChild(det);
+            }
             return wrap;
           }
 
-          const talks = Array.from(document.querySelectorAll('#apde-data .talk')).map(li=>{
-            const d=li.dataset||{};
-            return { datetime:d.datetime, durationMin:parseInt(d.duration||d.durationMin,10)||60,
-              title:d.title||'', speaker:d.speaker||'', speakerUrl:d.speakerUrl||d['speaker-url']||'',
-              speakerBio:d.speakerBio||d['speaker-bio']||'', affil:d.affil||'', room:d.room||'',
-              location:d.location||'', join:d.join||'', abstract:d.abstract||'' };
-          }).filter(t=>t.datetime).sort((a,b)=>parseISO(a.datetime)-parseISO(b.datetime));
-          const nowISO = now;
-          const upcoming = talks.filter(t=>parseISO(t.datetime) >= nowISO);
-          const past = talks.filter(t=>parseISO(t.datetime) < nowISO).reverse();
-          const nextWrap=document.getElementById('next-talk'), pastWrap=document.getElementById('past-talks');
+          const dataItems = Array.from(document.querySelectorAll('#apde-data .talk'));
+          const talks = dataItems.map(li => {
+            const d = li.dataset || {};
+            return {
+              datetime: d.datetime,
+              durationMin: d.duration ? parseInt(d.duration,10) : (d.durationMin? parseInt(d.durationMin,10):60),
+              title: d.title || '',
+              speaker: d.speaker || '',
+              speakerUrl: d.speakerUrl || d['speaker-url'] || '',
+              speakerBio: d.speakerBio || d['speaker-bio'] || '',
+              affil: d.affil || '',
+              room: d.room || '',
+              location: d.location || '',
+              join: d.join || '',
+              abstract: d.abstract || ''
+            };
+          }).filter(t => t.datetime);
 
-          if (upcoming.length){ nextWrap.appendChild(card(upcoming[0], true)); upcoming.slice(1).forEach(t=>nextWrap.appendChild(card(t,false))); }
-          else { const msg=document.createElement('div'); msg.className='muted'; msg.textContent='No upcoming talks yet. Please check back soon.'; nextWrap.appendChild(msg); }
-          past.forEach(t=>pastWrap.appendChild(card(t,false)));
+          // 用 parseISO 排序/分组
+          talks.sort((a,b) => parseISO(a.datetime) - parseISO(b.datetime));
+
+          const nextWrap = document.getElementById('next-talk');
+          const pastWrap = document.getElementById('past-talks');
+
+          const upcoming = talks.filter(t => parseISO(t.datetime) >= now);
+          const past = talks.filter(t => parseISO(t.datetime) < now).reverse();
+
+          if (upcoming.length){
+            nextWrap.appendChild( renderCard(upcoming[0], {highlight:true}) );
+            upcoming.slice(1).forEach(t => nextWrap.appendChild( renderCard(t) ));
+          } else {
+            const msg = document.createElement('div');
+            msg.className = 'muted';
+            msg.textContent = 'No upcoming talks yet. Please check back soon.';
+            nextWrap.appendChild(msg);
+          }
+
+          past.forEach(t => pastWrap.appendChild( renderCard(t) ));
         })();
       </script>
     </section>
 
     <section id="Conferences">
       <h2>Conferences</h2>
-      <p>Please visit the dedicated page for conferences:
-        <a href="https://ynnumath.com/" target="_blank" rel="noopener">https://ynnumath.com/</a>
+      <p>
+        Please visit the dedicated page for conferences:
+        <a href="https://ynnumath.com/" target="_blank" rel="noopener noreferrer">https://ynnumath.com/</a>
       </p>
     </section>
 
-    <!-- 访客计数（不蒜子） -->
+    <!-- Visitors counter (Busuanzi) —— 仅此一处容器 -->
     <div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
-      Visitors: <span id="busuanzi_value_site_uv">0</span>
+      <span id="busuanzi_container_site_uv" style="display:none">
+        Visitors: <span id="busuanzi_value_site_uv">0</span>
+      </span>
       <span class="sep">｜</span>
-      Views: <span id="busuanzi_value_site_pv">0</span>
+      <span id="busuanzi_container_site_pv" style="display:none">
+        Views: <span id="busuanzi_value_site_pv">0</span>
+      </span>
     </div>
   </div>
 
-  <!-- 抽屉开关脚本（无依赖） -->
+  <!-- Busuanzi 官方脚本（只保留一条；协议自适应；不要加 defer/async） -->
+  <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- 抽屉 + 单页路由脚本：移动端开关侧栏 + 根据 #hash 切换 section 与高亮 -->
   <script>
     (function(){
+      // ===== 抽屉（移动端） =====
       const btn = document.getElementById('menu-btn');
       const sidebar = document.getElementById('sidebar');
       const backdrop = document.getElementById('backdrop');
 
       function openMenu(){
+        if (!sidebar) return;
         sidebar.classList.add('open');
-        backdrop.classList.add('show');
+        backdrop && backdrop.classList.add('show');
         document.body.classList.add('menu-open');
         btn && btn.setAttribute('aria-expanded','true');
       }
       function closeMenu(){
+        if (!sidebar) return;
         sidebar.classList.remove('open');
-        backdrop.classList.remove('show');
+        backdrop && backdrop.classList.remove('show');
         document.body.classList.remove('menu-open');
         btn && btn.setAttribute('aria-expanded','false');
       }
+
       btn && btn.addEventListener('click', () => {
         if (sidebar.classList.contains('open')) closeMenu(); else openMenu();
       });
-      backdrop.addEventListener('click', closeMenu);
+      backdrop && backdrop.addEventListener('click', closeMenu);
       window.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-      // 点击导航后自动关闭
-      document.querySelectorAll('#sidebar a.navlink').forEach(a => a.addEventListener('click', closeMenu));
+
+      // ===== 简易路由：根据 #hash 显示 section，并同步侧栏高亮 =====
+      const sections = Array.from(document.querySelectorAll('section'));
+      const links = Array.from(document.querySelectorAll('#sidebar a.navlink'));
+
+      function idFromHash(hash){
+        const h = (hash || '').trim();
+        return h && h.startsWith('#') ? h.slice(1) : (h ? h : 'about');
+      }
+
+      function activate(hash){
+        const id = idFromHash(hash);
+        // 显示对应 section
+        sections.forEach(sec => {
+          sec.classList.toggle('active', sec.id === id);
+        });
+        // 导航高亮（你的 HTML 是 a 包 li，这里兼容那种结构）
+        links.forEach(a => {
+          const li = a.querySelector('li') || a;
+          const on = a.getAttribute('href') === '#' + id;
+          li.classList.toggle('selected', !!on);
+        });
+        // 切换后关闭抽屉（移动端）
+        closeMenu();
+        // 回到顶部（避免上次滚动位置残留）
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+
+      // 拦截侧栏点击，使用单页切换而不是默认锚点跳转
+      links.forEach(a => {
+        a.addEventListener('click', (e) => {
+          const href = a.getAttribute('href') || '';
+          if (href.startsWith('#')) {
+            e.preventDefault();
+            if (location.hash !== href) {
+              history.pushState(null, '', href);
+            }
+            activate(href);
+          }
+        });
+      });
+
+      // 处理浏览器前进/后退
+      window.addEventListener('hashchange', () => activate(location.hash));
+
+      // 首次进入：没有 hash 就默认到 #about
+      if (!location.hash) {
+        history.replaceState(null, '', '#about');
+      }
+      activate(location.hash);
     })();
   </script>
-
-  <!-- 不蒜子（建议保留 https:// 协议 & defer，避免阻塞） -->
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>
