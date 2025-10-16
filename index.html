@@ -1,442 +1,367 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>Zhipeng Yang</title>
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="stylesheet.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
 </head>
-
-  <!-- 放在 </body> 前即可 -->
-<div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
-  <span id="busuanzi_container_site_uv" style="display:none">
-    Visitors: <span id="busuanzi_value_site_uv">0</span>
-  </span>
-  <span class="sep">｜</span>
-  <span id="busuanzi_container_site_pv" style="display:none">
-    Views: <span id="busuanzi_value_site_pv">0</span>
-  </span>
-  <span id="stats-fallback" class="muted" style="display:none">Loading…</span>
-</div>
-
-<script>
-(function(){
-  var UV_C = document.getElementById('busuanzi_container_site_uv');
-  var PV_C = document.getElementById('busuanzi_container_site_pv');
-  var FB   = document.getElementById('stats-fallback');
-
-  // 显示“加载中…”，以便知道脚本是否被拦了
-  FB.style.display = 'inline';
-
-  // 1) 动态加载不蒜子（协议自适应）
-  var s = document.createElement('script');
-  s.src = (location.protocol === 'http:' ? 'http:' : 'https:') + '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
-  s.async = false; // 不要 defer/async，避免某些环境不执行
-  s.onload = function(){
-    // 给它一点时间填充
-    setTimeout(checkOrFallback, 1500);
-  };
-  s.onerror = function(){
-    // 被 CSP / 广告拦截 或加载失败 => 兜底
-    fallbackHits();
-  };
-  document.body.appendChild(s);
-
-  function hasNumber(elId){
-    var el = document.getElementById(elId);
-    if (!el) return false;
-    var txt = (el.textContent || '').trim();
-    return /^\d+$/.test(txt) && parseInt(txt,10) > 0;
-  }
-
-  function checkOrFallback(){
-    // 不蒜子会把 container 的 display:none 变可见，并把 value 填成数字
-    var ok = (UV_C && UV_C.style.display !== 'none') ||
-             (PV_C && PV_C.style.display !== 'none') ||
-             hasNumber('busuanzi_value_site_uv') ||
-             hasNumber('busuanzi_value_site_pv');
-
-    if (ok){
-      FB.style.display = 'none';
-      return;
-    }
-    // 还没填上数 -> 兜底
-    fallbackHits();
-  }
-
-  function fallbackHits(){
-    // 2) hits.sh 兜底（只能拿到 PV，总比空着强）
-    var domain = location.hostname || 'yzpmath.com'; // 若你域名固定，可直接写死 'yzpmath.com'
-    fetch('https://hits.sh/' + domain + '.json', { cache: 'reload' })
-      .then(function(r){ return r.json(); })
-      .then(function(j){
-        if (j && typeof j.hits === 'number'){
-          // 显示 PV；UV 暂无数据就隐藏
-          if (PV_C){
-            PV_C.style.display = 'inline';
-            document.getElementById('busuanzi_value_site_pv').textContent = j.hits;
-          }
-          if (UV_C) UV_C.style.display = 'none';
-          FB.style.display = 'none';
-        }else{
-          // 失败就保持 Loading…
-          FB.textContent = 'Visitors counter unavailable';
-        }
-      })
-      .catch(function(){
-        FB.textContent = 'Visitors counter unavailable';
-      });
-  }
-})();
-</script>
-
 <body>
   <nav class="sidebar">
-  
     <div class="header">
       <h1>Zhipeng Yang</h1>
-      <p>Associate Professor</p >
-      <div id="mugshot"><img src="photo.png" alt="mugshot"></div>
+      <p>Associate Professor</p>
+      <div id="mugshot"><img src="photo.png" alt="mugshot" /></div>
     </div>
 
     <ul>
-      <a href=" " class="navlink">
-        <li class="selected">About</li>
-      </a >
-      <a href="#cv" class="navlink">
-        <li>Curriculum Vitae</li>
-      </a >
-      <a href="#research" class="navlink">
-        <li>Research</li>
-      </a >
-      <a href="#teaching" class="navlink">
-        <li>Teaching</li>
-      </a >
-      <a href="#apde-seminar" class="navlink">
-        <li>APDE Seminar</li>
-      </a>
-      <a href="#Conferences" class="navlink">
-      	<li> Conferences</li>
-      </a >
+      <a href=" " class="navlink"><li class="selected">About</li></a>
+      <a href="#cv" class="navlink"><li>Curriculum Vitae</li></a>
+      <a href="#research" class="navlink"><li>Research</li></a>
+      <a href="#teaching" class="navlink"><li>Teaching</li></a>
+      <a href="#apde-seminar" class="navlink"><li>APDE Seminar</li></a>
+      <a href="#Conferences" class="navlink"><li>Conferences</li></a>
     </ul>
   </nav>
 
-
   <div class="main">
-
     <section id="about" class="active">
       <h2>About</h2>
       <p>
-  I am an Associate Professor of <a href="https://math.ynnu.edu.cn/" target="_blank" rel="noopener noreferrer">School of Mathematics</a> at <a href="https://www.ynnu.edu.cn/" target="_blank" rel="noopener noreferrer">Yunnan Normal University</a>. And I am also a visiting Professor in the research group
-  <a href="https://analysis-pde.org/" target="_blank" rel="noopener noreferrer">Ghent Analysis &amp; PDE Center</a>
-  at Ghent University headed by Prof. <a href="https://ruzhansky.org/" target="_blank" rel="noopener noreferrer">Michael Ruzhansky</a>.
-</p>
-     <p>
-  I completed my Ph.D. in 2022 from
-  <a href="https://www.uni-goettingen.de/en/20693.html" target="_blank" rel="noopener noreferrer">Mathematisches Institut</a>
-  at <a href="https://www.uni-goettingen.de/en/" target="_blank" rel="noopener noreferrer">University of Göttingen</a>,
-  under the supervision of Professor
-  <a href="https://www.uni-math.gwdg.de/iwitt/" target="_blank" rel="noopener noreferrer">Ingo Witt</a>.
-</p>
-      <p> 
-     My research is mainly focused on：   
-      <ul>
-        <li> Geometric Analysiss and PDEs;</li>
-        <li> Variational Methods; </li>
-        <li> Noncommutative Analysis.</li>
-      </ul>
-      </p >
+        I am an Associate Professor of
+        <a href="https://math.ynnu.edu.cn/" target="_blank" rel="noopener noreferrer">School of Mathematics</a>
+        at
+        <a href="https://www.ynnu.edu.cn/" target="_blank" rel="noopener noreferrer">Yunnan Normal University</a>.
+        And I am also a visiting Professor in the research group
+        <a href="https://analysis-pde.org/" target="_blank" rel="noopener noreferrer">Ghent Analysis &amp; PDE Center</a>
+        at Ghent University headed by Prof.
+        <a href="https://ruzhansky.org/" target="_blank" rel="noopener noreferrer">Michael Ruzhansky</a>.
+      </p>
+      <p>
+        I completed my Ph.D. in 2022 from
+        <a href="https://www.uni-goettingen.de/en/20693.html" target="_blank" rel="noopener noreferrer">Mathematisches Institut</a>
+        at
+        <a href="https://www.uni-goettingen.de/en/" target="_blank" rel="noopener noreferrer">University of Göttingen</a>,
+        under the supervision of Professor
+        <a href="https://www.uni-math.gwdg.de/iwitt/" target="_blank" rel="noopener noreferrer">Ingo Witt</a>.
+      </p>
+      <p>
+        My research is mainly focused on：
+        <ul>
+          <li>Geometric Analysiss and PDEs;</li>
+          <li>Variational Methods;</li>
+          <li>Noncommutative Analysis.</li>
+        </ul>
+      </p>
 
-     <p>
-  <strong class="label">Address:</strong>
-       <ul>
-        <li> Department of Mathematics: Analysis, Logic and Discrete Mathematics, Ghent University
-  <br>S8 Building, 9000 Ghent, Belgium. </li>
-        <li> School of Mathematics, Yunnan Normal University
-  <br>Wuzhi Building, 650500 Kunming, China. </li>
-      </ul>
-</p>
-  <p>
-  <strong class="label">Email:</strong> zhipengyangmath[AT]gmail.com/yangzhipeng326[AT]163.com.
-</p>
-     
+      <p>
+        <strong class="label">Address:</strong>
+        <ul>
+          <li>
+            Department of Mathematics: Analysis, Logic and Discrete Mathematics, Ghent University
+            <br />S8 Building, 9000 Ghent, Belgium.
+          </li>
+          <li>
+            School of Mathematics, Yunnan Normal University
+            <br />Wuzhi Building, 650500 Kunming, China.
+          </li>
+        </ul>
+      </p>
+      <p>
+        <strong class="label">Email:</strong> zhipengyangmath[AT]gmail.com / yangzhipeng326[AT]163.com.
+      </p>
     </section>
-
 
     <section id="cv">
-      <h2>Curriculum Vitae</h2> 
-      <p><a class="link" href="/~zhipeng/CV.pdf" target="_blank">PDF</a ></p >
-      <p>Last updated: Fall 2025</p >
+      <h2>Curriculum Vitae</h2>
+      <p><a class="link" href="/~zhipeng/CV.pdf" target="_blank">PDF</a></p>
+      <p>Last updated: Fall 2025</p>
     </section>
-
 
     <section id="research">
       <h2>Research</h2>
       <ul>
-        <li> <u> Mu, Changyang;Yang, Zhipeng;Zhang, WeiExistence and concentration of solutions for a fractional Schrödinger-Poisson system with discontinuous nonlinearity.Adv. Nonlinear Stud.24(2024),no. 4,992–1011.
- </u> (In preparation.) </li>
-
-      Here are a few projects that have gotten temporarily put on the back burner.
-      <ul>
-        <li> <u> 2024.01—2026.12，二步分层李群上的Hardy不等式及相关问题研究，国家自然科学基金青年项目（12301145），30万，主持 </li>
-        <li> <u> A new proof of the Waldspurger formaula II </u> (In preparation.) </li>
-        I explain how to regularize the relative trace formulas in "A new proof of the Waldspurger formula I," and deduce a global character identity equivalent to Waldspurger's formula.
+        <li>
+          <u>Mu, Changyang; Yang, Zhipeng; Zhang, Wei Existence and concentration of solutions for a fractional Schrödinger-Poisson system with discontinuous nonlinearity. Adv. Nonlinear Stud. 24 (2024), no. 4, 992–1011.</u> (In preparation.)
+        </li>
+        Here are a few projects that have gotten temporarily put on the back burner.
+        <ul>
+          <li><u>2024.01—2026.12，二步分层李群上的Hardy不等式及相关问题研究，国家自然科学基金青年项目（12301145），30万，主持</u></li>
+          <li><u>A new proof of the Waldspurger formaula II</u> (In preparation.)</li>
+          I explain how to regularize the relative trace formulas in "A new proof of the Waldspurger formula I," and deduce a global character identity equivalent to Waldspurger's formula.
+        </ul>
       </ul>
     </section>
-
 
     <section id="teaching">
       <h2>Teaching</h2>
-      <br>
-      <br>
-      <b> Past classes (at YNNU): </b>
+      <br /><br />
+      <b>Past classes (at YNNU):</b>
       <ul>
-      	  <li> Fall 2025, Integral single variable calculus</li>
+        <li>Fall 2025, Integral single variable calculus</li>
       </ul>
-      
     </section>
 
+    <section id="apde-seminar">
+      <h2>APDE Seminar</h2>
 
-<section id="apde-seminar">
-  <h2>APDE Seminar</h2>
+      <div class="seminar-intro">
+        Starting in Fall 2025, <a href="https://math.ynnu.edu.cn/info/1027/2054.htm" target="_blank" rel="noopener noreferrer">Dr. Guangze Gu</a> and I start organizing a hybrid seminar on Analysis of Partial Differential Equations, we want to
+        bring together as many researchers as possible to share recent results, learn from each another, and foster new collaborations. Seminar will be held via VooV Meeting; if you would like to receive the link or be
+        added to the mailing list, please email either organizer. This seminar is supported by the National Natural Science Foundation of China (NSFC:12301145).
+      </div>
 
-  <div class="seminar-intro">
-    Starting in Fall 2025, <a href="https://math.ynnu.edu.cn/info/1027/2054.htm" target="_blank" rel="noopener noreferrer">Dr. Guangze Gu</a> and I start organizing a hybrid seminar on Analysis of Partial Differential Equations, we want to
-    bring together as many researchers as possible to share recent results, learn from each another, and foster new collaborations. Seminar will be held via VooV Meeting; if you would like to receive the link or be
-    added to the mailing list, please email either organizer. This seminar is supported by the National Natural Science Foundation of China (NSFC:12301145).
+      <!-- ===== Styles (scoped for seminar) ===== -->
+      <style>
+        .seminar-intro{background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px 14px;margin:10px 0 18px;color:#444}
+        .talks-wrap{display:grid;grid-template-columns:1fr;gap:14px}
+        .talk-card{border:1px solid #e6e6e6;border-radius:10px;padding:14px 16px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+        .talk-card.upcoming{border-color:#d7e8ff;background:#fbfdff}
+        .talk-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
+        .tag{font-size:12px;line-height:1;border:1px solid #cfe3ff;background:#eef6ff;color:#295ea8;border-radius:999px;padding:4px 8px}
+        .talk-title{font-weight:700}
+        .talk-meta{color:#555;font-size:14px;margin:6px 0 8px}
+        .talk-meta .sep{opacity:.5;margin:0 6px}
+        .talk-meta a{ text-decoration:none; border-bottom:none; color:#2b5fb0; }
+        .talk-meta a:hover{ text-decoration:underline; }
+        .btns{display:flex;gap:8px;flex-wrap:wrap}
+        .btn{font-size:13px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;padding:6px 10px;cursor:pointer;text-decoration:none;color:inherit}
+        .btn:hover{background:#f1f1f1}
+        details.abstract,details.speaker{margin-top:8px}
+        details.abstract summary,details.speaker summary{cursor:pointer;color:#2b5fb0}
+        .muted{color:#777}
+        .subsec-title{margin:18px 0 8px;font-size:18px}
+        @media (min-width:860px){.talks-wrap{grid-template-columns:1fr 1fr}.talk-card.wide{grid-column:1 / -1}}
+      </style>
+
+      <!-- Upcoming -->
+      <div id="next-talk" class="talks-wrap"></div>
+
+      <!-- Past list -->
+      <h3 class="subsec-title">Past talks</h3>
+      <div id="past-talks" class="talks-wrap"></div>
+
+      <!-- ===== Data (edit here to add talks) ===== -->
+      <ul id="apde-data" style="display:none">
+        <li class="talk"
+          data-datetime="2025-10-28T16:00:00+08:00"
+          data-duration="90"
+          data-title="非线性Dirac方程非相对论极限的新进展"
+          data-speaker="王华阳"
+          data-speaker-bio="王华阳，博士毕业于中国科学院数学与系统科学研究院，目前在北京师范大学担任励耘博士后，研究方向为非线性分析与偏微分方程，特别关注非线性Dirac方程、伪相对论方程、Hartree方程等非线性方程解的存在性、正则性、渐近行为等性质，在CVPDE、JDE、Nonlineaity、JGA等国际期刊上发表多篇学术论文。"
+          data-affil="北京师范大学"
+          data-room="939-7737-2516"
+          data-location="腾讯会议"
+          data-join=""
+          data-abstract="Dirac方程是电子运动的基本方程。非相对论极限是连接量子力学与相对论量子力学的桥梁。本次报告主要介绍关于非线性Dirac方程解的非相对论极限的若干研究进展。">
+        </li>
+
+        <li class="talk"
+          data-datetime="2025-10-20T16:00:00+08:00"
+          data-duration="90"
+          data-title="Schatten properties of commutators on twisted crossed products"
+          data-speaker="Kai Zeng"
+          data-speaker-url="https://analysis-pde.org/kai-zeng/"
+          data-affil="Ghent University"
+          data-room="939-7737-2516"
+          data-location="腾讯会议"
+          data-join=""
+          data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
+        </li>
+      </ul>
+
+      <!-- ===== Logic (timezone-safe + speaker bio) ===== -->
+      <script>
+        (function(){
+          const now = new Date();
+
+          function parseISO(iso){
+            let d = new Date(iso);
+            if (!isNaN(d)) return d;
+            const fixed = String(iso).replace(' ', 'T').replace(/([+-]\d{2}):?(\d{2})$/, '$1$2');
+            return new Date(fixed);
+          }
+
+          // 默认按访客本地时区；若想固定北京时间，把 tz 改成 'Asia/Shanghai'
+          const tz = undefined;
+
+          function fmtRange(startISO, durationMin, timeZone){
+            const start = parseISO(startISO);
+            const dur = Number.isFinite(+durationMin) ? +durationMin : 90;
+            const end = new Date(start.getTime() + dur * 60000);
+
+            const dateOpts = { year:'numeric', month:'short', day:'numeric' };
+            const timeOpts = { hour:'2-digit', minute:'2-digit', hour12:false, hourCycle:'h23' };
+            if (timeZone){ dateOpts.timeZone = timeZone; timeOpts.timeZone = timeZone; }
+
+            const df = new Intl.DateTimeFormat(undefined, dateOpts);
+            const tf = new Intl.DateTimeFormat(undefined, timeOpts);
+            return df.format(start) + ' · ' + tf.format(start) + '–' + tf.format(end);
+          }
+
+          function escapeHTML(s){
+            return String(s||'').replace(/[&<>"']/g, c => (
+              {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
+            ));
+          }
+
+          function renderCard(talk, {highlight=false}={}){
+            const wrap = document.createElement('div');
+            wrap.className = 'talk-card' + (highlight ? ' upcoming wide' : '');
+
+            const head = document.createElement('div');
+            head.className = 'talk-head';
+            if (highlight){
+              const tag = document.createElement('span');
+              tag.className = 'tag';
+              tag.textContent = 'Next talk';
+              head.appendChild(tag);
+            }
+            const title = document.createElement('div');
+            title.className = 'talk-title';
+            title.textContent = talk.title;
+            head.appendChild(title);
+            wrap.appendChild(head);
+
+            const meta = document.createElement('div');
+            meta.className = 'talk-meta';
+            const spkHTML = talk.speakerUrl
+              ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
+              : escapeHTML(talk.speaker);
+
+            meta.innerHTML =
+              `<span>${fmtRange(talk.datetime, talk.durationMin, tz)}</span>` +
+              (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
+              (talk.speaker ? ` <span class="sep">•</span><span>${spkHTML}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
+            wrap.appendChild(meta);
+
+            if (talk.join){
+              const btns = document.createElement('div'); btns.className = 'btns';
+              const joinBtn = document.createElement('a');
+              joinBtn.className = 'btn'; joinBtn.textContent = 'Join link';
+              joinBtn.href = talk.join; joinBtn.target = '_blank'; joinBtn.rel = 'noopener noreferrer';
+              btns.appendChild(joinBtn);
+              wrap.appendChild(btns);
+            }
+
+            if (talk.speakerBio){
+              const detBio = document.createElement('details'); detBio.className = 'speaker';
+              const sumBio = document.createElement('summary'); sumBio.textContent = 'Speaker';
+              const pBio = document.createElement('div'); pBio.style.marginTop='6px'; pBio.textContent = talk.speakerBio;
+              detBio.appendChild(sumBio); detBio.appendChild(pBio);
+              wrap.appendChild(detBio);
+            }
+
+            if (talk.abstract){
+              const det = document.createElement('details'); det.className = 'abstract';
+              const sum = document.createElement('summary'); sum.textContent = 'Abstract';
+              const p = document.createElement('div'); p.style.marginTop='6px'; p.textContent = talk.abstract;
+              det.appendChild(sum); det.appendChild(p);
+              wrap.appendChild(det);
+            }
+            return wrap;
+          }
+
+          const dataItems = Array.from(document.querySelectorAll('#apde-data .talk'));
+          const talks = dataItems.map(li => {
+            const d = li.dataset || {};
+            return {
+              datetime: d.datetime,
+              durationMin: d.duration ? parseInt(d.duration,10) : (d.durationMin? parseInt(d.durationMin,10):60),
+              title: d.title || '',
+              speaker: d.speaker || '',
+              speakerUrl: d.speakerUrl || d['speaker-url'] || '',
+              speakerBio: d.speakerBio || d['speaker-bio'] || '',
+              affil: d.affil || '',
+              room: d.room || '',
+              location: d.location || '',
+              join: d.join || '',
+              abstract: d.abstract || ''
+            };
+          }).filter(t => t.datetime);
+
+          talks.sort((a,b) => parseISO(a.datetime) - parseISO(b.datetime));
+
+          const nextWrap = document.getElementById('next-talk');
+          const pastWrap = document.getElementById('past-talks');
+
+          const upcoming = talks.filter(t => parseISO(t.datetime) >= now);
+          const past = talks.filter(t => parseISO(t.datetime) < now).reverse();
+
+          if (upcoming.length){
+            nextWrap.appendChild( renderCard(upcoming[0], {highlight:true}) );
+            upcoming.slice(1).forEach(t => nextWrap.appendChild( renderCard(t) ));
+          } else {
+            const msg = document.createElement('div');
+            msg.className = 'muted';
+            msg.textContent = 'No upcoming talks yet. Please check back soon.';
+            nextWrap.appendChild(msg);
+          }
+
+          past.forEach(t => pastWrap.appendChild( renderCard(t) ));
+        })();
+      </script>
+    </section>
+
+    <section id="Conferences">
+      <h2>Conferences</h2>
+      <p>
+        Please visit the dedicated page for conferences:
+        <a href="https://ynnumath.com/" target="_blank" rel="noopener noreferrer">https://ynnumath.com/</a>
+      </p>
+    </section>
+
+    <!-- Visitors counter (Busuanzi, single instance) -->
+    <div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
+      <span id="busuanzi_container_site_uv" style="display:none">
+        Visitors: <span id="busuanzi_value_site_uv">0</span>
+      </span>
+      <span class="sep">｜</span>
+      <span id="busuanzi_container_site_pv" style="display:none">
+        Views: <span id="busuanzi_value_site_pv">0</span>
+      </span>
+      <noscript>Enable JavaScript to see visitor stats.</noscript>
+    </div>
   </div>
 
-  <!-- ===== Styles (scoped) ===== -->
-  <style>
-    .seminar-intro{
-      background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px 14px;margin:10px 0 18px;color:#444
-    }
-    .talks-wrap{display:grid;grid-template-columns:1fr;gap:14px}
-    .talk-card{
-      border:1px solid #e6e6e6;border-radius:10px;padding:14px 16px;background:#fff;
-      box-shadow:0 1px 2px rgba(0,0,0,.03)
-    }
-    .talk-card.upcoming{border-color:#d7e8ff;background:#fbfdff}
-    .talk-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
-    .tag{font-size:12px;line-height:1;border:1px solid #cfe3ff;background:#eef6ff;color:#295ea8;border-radius:999px;padding:4px 8px}
-    .talk-title{font-weight:700}
-    .talk-meta{color:#555;font-size:14px;margin:6px 0 8px}
-    .talk-meta .sep{opacity:.5;margin:0 6px}
-    .talk-meta a{ text-decoration:none; border-bottom:none; color:#2b5fb0; }
-    .talk-meta a:hover{ text-decoration:underline; }
-    .btns{display:flex;gap:8px;flex-wrap:wrap}
-    .btn{
-      font-size:13px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;padding:6px 10px;cursor:pointer;text-decoration:none;color:inherit
-    }
-    .btn:hover{background:#f1f1f1}
-    details.abstract, details.speaker{margin-top:8px}
-    details.abstract summary, details.speaker summary{cursor:pointer;color:#2b5fb0}
-    .muted{color:#777}
-    .subsec-title{margin:18px 0 8px;font-size:18px}
-    @media (min-width: 860px){
-      .talks-wrap{grid-template-columns:1fr 1fr}
-      .talk-card.wide{grid-column:1 / -1}
-    }
-  </style>
+  <!-- Busuanzi (use https, no defer/async) -->
+  <script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  <!-- Upcoming -->
-  <div id="next-talk" class="talks-wrap"></div>
-
-  <!-- Past list -->
-  <h3 class="subsec-title">Past talks</h3>
-  <div id="past-talks" class="talks-wrap"></div>
-
-  <!-- ===== Data (edit here to add talks) ===== -->
-  <ul id="apde-data" style="display:none">
-     <li class="talk"
-      data-datetime="2025-10-28T16:00:00+08:00"
-      data-duration="90"
-      data-title="非线性Dirac方程非相对论极限的新进展"
-      data-speaker="王华阳"
-      data-speaker-bio="王华阳，博士毕业于中国科学院数学与系统科学研究院，目前在北京师范大学担任励耘博士后，研究方向为非线性分析与偏微分方程，特别关注非线性Dirac方程、伪相对论方程、Hartree方程等非线性方程解的存在性、正则性、渐近行为等性质，在CVPDE、JDE、Nonlineaity、JGA等国际期刊上发表多篇学术论文。"
-      data-affil="北京师范大学"
-      data-room="939-7737-2516"
-      data-location="腾讯会议"
-      data-join=""
-      data-abstract="Dirac方程是电子运动的基本方程。非相对论极限是连接量子力学与相对论量子力学的桥梁。本次报告主要介绍关于非线性Dirac方程解的非相对论极限的若干研究进展。">
-    </li>
-    <li class="talk"
-      data-datetime="2025-10-20T16:00:00+08:00"
-      data-duration="90"
-      data-title="Schatten properties of commutators on twisted crossed products"
-      data-speaker="Kai Zeng"
-      data-speaker-url="https://analysis-pde.org/kai-zeng/"
-      data-affil="Ghent University"
-      data-room="939-7737-2516"
-      data-location="腾讯会议"
-      data-join=""
-      data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
-    </li>
-  </ul>
-
-  <!-- ===== Logic (timezone-safe + speaker bio) ===== -->
+  <!-- Fallback: if Busuanzi blocked, show PV via hits.sh after 3s -->
   <script>
     (function(){
-      const now = new Date();
-
-      // 解析 ISO 到 Date（兼容 Safari：去掉时区冒号）
-      function parseISO(iso){
-        let d = new Date(iso);
-        if (!isNaN(d)) return d;
-        const fixed = String(iso).replace(' ', 'T').replace(/([+-]\d{2}):?(\d{2})$/, '$1$2');
-        return new Date(fixed);
+      function hasNum(id){
+        var el = document.getElementById(id);
+        return el && /\d/.test((el.textContent||''));
       }
+      function show(el, on){ if (el) el.style.display = on ? 'inline' : 'none'; }
 
-      // 格式化区间：默认按访客本地时区；若想固定北京时区，第三个参数传 'Asia/Shanghai'
-      function fmtRange(startISO, durationMin, timeZone){
-        const start = parseISO(startISO);
-        const dur = Number.isFinite(+durationMin) ? +durationMin : 90;
-        const end = new Date(start.getTime() + dur * 60000);
+      setTimeout(function(){
+        var uvC = document.getElementById('busuanzi_container_site_uv');
+        var pvC = document.getElementById('busuanzi_container_site_pv');
 
-        const dateOpts = { year:'numeric', month:'short', day:'numeric' };
-        const timeOpts = { hour:'2-digit', minute:'2-digit', hour12:false, hourCycle:'h23' };
-        if (timeZone){ dateOpts.timeZone = timeZone; timeOpts.timeZone = timeZone; }
-
-        const df = new Intl.DateTimeFormat(undefined, dateOpts);
-        const tf = new Intl.DateTimeFormat(undefined, timeOpts);
-        return df.format(start) + ' · ' + tf.format(start) + '–' + tf.format(end);
-      }
-
-      function escapeHTML(s){
-        return String(s||'').replace(/[&<>"']/g, c => (
-          {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
-        ));
-      }
-
-      function renderCard(talk, {highlight=false}={}){
-        const wrap = document.createElement('div');
-        wrap.className = 'talk-card' + (highlight ? ' upcoming wide' : '');
-
-        const head = document.createElement('div');
-        head.className = 'talk-head';
-        if (highlight){
-          const tag = document.createElement('span');
-          tag.className = 'tag';
-          tag.textContent = 'Next talk';
-          head.appendChild(tag);
+        if (hasNum('busuanzi_value_site_uv') || hasNum('busuanzi_value_site_pv')){
+          show(uvC, true); show(pvC, true);
+          return;
         }
-        const title = document.createElement('div');
-        title.className = 'talk-title';
-        title.textContent = talk.title;
-        head.appendChild(title);
-        wrap.appendChild(head);
-
-        const meta = document.createElement('div');
-        meta.className = 'talk-meta';
-        const spkHTML = talk.speakerUrl
-          ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
-          : escapeHTML(talk.speaker);
-
-        // 想固定显示北京时间：把下面的 fmtRange 第三个参数改为 'Asia/Shanghai'
-        meta.innerHTML =
-          `<span>${fmtRange(talk.datetime, talk.durationMin)}</span>` +
-          (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
-          (talk.speaker ? ` <span class="sep">•</span><span>${spkHTML}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
-        wrap.appendChild(meta);
-
-        if (talk.join){
-          const btns = document.createElement('div'); btns.className = 'btns';
-          const joinBtn = document.createElement('a');
-          joinBtn.className = 'btn'; joinBtn.textContent = 'Join link';
-          joinBtn.href = talk.join; joinBtn.target = '_blank'; joinBtn.rel = 'noopener noreferrer';
-          btns.appendChild(joinBtn);
-          wrap.appendChild(btns);
-        }
-
-        // ===== Speaker bio（可选）=====
-        if (talk.speakerBio){
-          const detBio = document.createElement('details'); detBio.className = 'speaker';
-          const sumBio = document.createElement('summary'); sumBio.textContent = 'Speaker';
-          const pBio = document.createElement('div'); pBio.style.marginTop='6px'; pBio.textContent = talk.speakerBio;
-          detBio.appendChild(sumBio); detBio.appendChild(pBio);
-          wrap.appendChild(detBio);
-        }
-
-        // ===== Abstract（可选）=====
-        if (talk.abstract){
-          const det = document.createElement('details'); det.className = 'abstract';
-          const sum = document.createElement('summary'); sum.textContent = 'Abstract';
-          const p = document.createElement('div'); p.style.marginTop='6px'; p.textContent = talk.abstract;
-          det.appendChild(sum); det.appendChild(p);
-          wrap.appendChild(det);
-        }
-        return wrap;
-      }
-
-      const dataItems = Array.from(document.querySelectorAll('#apde-data .talk'));
-      const talks = dataItems.map(li => {
-        const d = li.dataset || {};
-        return {
-          datetime: d.datetime,
-          durationMin: d.duration ? parseInt(d.duration,10) : (d.durationMin? parseInt(d.durationMin,10):60),
-          title: d.title || '',
-          speaker: d.speaker || '',
-          speakerUrl: d.speakerUrl || d['speaker-url'] || '',
-          speakerBio: d.speakerBio || d['speaker-bio'] || '',   // ← 新增字段
-          affil: d.affil || '',
-          room: d.room || '',
-          location: d.location || '',
-          join: d.join || '',
-          abstract: d.abstract || ''
-        };
-      }).filter(t => t.datetime);
-
-      // 统一用 parseISO 排序/分组
-      talks.sort((a,b) => parseISO(a.datetime) - parseISO(b.datetime));
-
-      const nextWrap = document.getElementById('next-talk');
-      const pastWrap = document.getElementById('past-talks');
-
-      const upcoming = talks.filter(t => parseISO(t.datetime) >= now);
-      const past = talks.filter(t => parseISO(t.datetime) < now).reverse();
-
-      if (upcoming.length){
-        nextWrap.appendChild( renderCard(upcoming[0], {highlight:true}) );
-        upcoming.slice(1).forEach(t => nextWrap.appendChild( renderCard(t) ));
-      } else {
-        const msg = document.createElement('div');
-        msg.className = 'muted';
-        msg.textContent = 'No upcoming talks yet. Please check back soon.';
-        nextWrap.appendChild(msg);
-      }
-
-      past.forEach(t => pastWrap.appendChild( renderCard(t) ));
+        var domain = location.hostname || 'yzpmath.com';
+        fetch('https://hits.sh/' + domain + '.json', { cache: 'reload' })
+          .then(function(r){ return r.json(); })
+          .then(function(j){
+            if (j && typeof j.hits === 'number'){
+              document.getElementById('busuanzi_value_site_pv').textContent = j.hits;
+              show(pvC, true);
+              show(uvC, false);
+            }
+          })
+          .catch(function(){});
+      }, 3000);
     })();
   </script>
-</section>
 
-
-
-<section id="Conferences">
-  <h2>Conferences</h2>
-  <p>
-    Please visit the dedicated page for conferences:  
-    <a href="https://ynnumath.com/" target="_blank">https://ynnumath.com/</a>
-  </p>
-</section>
-
-  <!-- Visitors counter (Busuanzi) -->
-<div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
-  <span id="busuanzi_container_site_uv" style="display:none">
-    Visitors: <span id="busuanzi_value_site_uv"></span>
-  </span>
-  <span>｜</span>
-  <span id="busuanzi_container_site_pv" style="display:none">
-    Views: <span id="busuanzi_value_site_pv"></span>
-  </span>
-</div>
-
-<!-- 官方脚本：协议自适应，别加 defer/async 以免被拦 -->
-<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script type="text/javascript" src="script.js"></script>
+  <!-- Your existing scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
