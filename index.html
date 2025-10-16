@@ -130,13 +130,11 @@
 <section id="apde-seminar">
   <h2>APDE Seminar</h2>
 
- <div class="seminar-intro">
-  Starting in Fall 2025, <a href="https://math.ynnu.edu.cn/info/1027/2054.htm" target="_blank" rel="noopener noreferrer">Dr. Guangze Gu</a> and I start organizing a hybrid seminar on Analysis of Partial Differential Equations, we want to
-  bring together as many researchers as possible to share recent results, learn from each another, and foster new collaborations. Seminar will be held via VooV Meeting; if you would like to receive the link or be
-  added to the mailing list, please email either organizer. This seminar is supported by the National Natural Science Foundation of China (NSFC:12301145).
-</div>
-
-
+  <div class="seminar-intro">
+    Starting in Fall 2025, <a href="https://math.ynnu.edu.cn/info/1027/2054.htm" target="_blank" rel="noopener noreferrer">Dr. Guangze Gu</a> and I start organizing a hybrid seminar on Analysis of Partial Differential Equations, we want to
+    bring together as many researchers as possible to share recent results, learn from each another, and foster new collaborations. Seminar will be held via VooV Meeting; if you would like to receive the link or be
+    added to the mailing list, please email either organizer. This seminar is supported by the National Natural Science Foundation of China (NSFC:12301145).
+  </div>
 
   <!-- ===== Styles (scoped) ===== -->
   <style>
@@ -181,71 +179,64 @@
   <!-- ===== Data (edit here to add talks) ===== -->
   <ul id="apde-data" style="display:none">
     <li class="talk"
-    data-datetime="2025-10-20T16:00:00+08:00"
-    data-duration="90"
-    data-title="Schatten properties of commutators on twisted crossed products"
-    data-speaker="Kai Zeng"
-    data-speaker-url="https://analysis-pde.org/kai-zeng/"
-    data-affil="Ghent University"
-    data-room="939-7737-2516"
-    data-location="腾讯会议"
-    data-join=""
-    data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
-</li>
+      data-datetime="2025-10-20T16:00:00+08:00"
+      data-duration="90"
+      data-title="Schatten properties of commutators on twisted crossed products"
+      data-speaker="Kai Zeng"
+      data-speaker-url="https://analysis-pde.org/kai-zeng/"
+      data-affil="Ghent University"
+      data-room="939-7737-2516"
+      data-location="腾讯会议"
+      data-join=""
+      data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
+    </li>
 
     <li class="talk"
-        data-datetime="2025-10-05T16:00:00+08:00"
-        data-duration="90"
-        data-title="Schatten properties of commutators on twisted crossed products"
-        data-speaker="Kai Zeng"
-        data-affil="Ghent University"
-        data-room="939-7737-2516"
-        data-location="腾讯会议"
-        data-join=""
-        data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
+      data-datetime="2025-10-05T16:00:00+08:00"
+      data-duration="90"
+      data-title="Schatten properties of commutators on twisted crossed products"
+      data-speaker="Kai Zeng"
+      data-affil="Ghent University"
+      data-room="939-7737-2516"
+      data-location="腾讯会议"
+      data-join=""
+      data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
     </li>
-    
   </ul>
-  
-  <!-- ===== Logic (no .ics button) ===== -->
+
+  <!-- ===== Logic (timezone-safe) ===== -->
   <script>
     (function(){
       const now = new Date();
 
-      function toDate(s){ return new Date(s); }
-      // 更稳健的解析：兼容 Safari（把 +08:00 变成 +0800）
-function parseISOToDate(iso) {
-  let d = new Date(iso);
-  if (!isNaN(d)) return d;
-  // 补齐 T，并去掉时区冒号
-  const fixed = String(iso).replace(' ', 'T').replace(/([+-]\d{2}):?(\d{2})$/, '$1$2');
-  d = new Date(fixed);
-  return d;
-}
-
-function fmtRange(startISO, durationMin, timeZone) {
-  const start = parseISOToDate(startISO);
-  const durMin = Number.isFinite(+durationMin) ? +durationMin : 90;
-  const end = new Date(start.getTime() + durMin * 60000);
-
-  // 基础格式（不主动指定 timeZone = 本地时区）
-  const dateOpts = { year: 'numeric', month: 'short', day: 'numeric' };
-  const timeOpts = { hour: '2-digit', minute: '2-digit', hour12: false };
-
-  // 若你想强制固定某个时区（例如始终显示北京时间），给第三个参数传 'Asia/Shanghai'
-  if (timeZone) { dateOpts.timeZone = timeZone; timeOpts.timeZone = timeZone; }
-
-  const dateFmt = new Intl.DateTimeFormat(undefined, dateOpts);
-  const timeFmt = new Intl.DateTimeFormat(undefined, timeOpts);
-
-  return `${dateFmt.format(start)} · ${timeFmt.format(start)}–${timeFmt.format(end)}`;
-}
-
-
-        return `${dateFmt.format(start)} · ${timeFmt.format(start)}–${timeFmt.format(end)}`;
+      // 解析 ISO 到 Date（兼容 Safari：去掉时区冒号）
+      function parseISO(iso){
+        let d = new Date(iso);
+        if (!isNaN(d)) return d;
+        const fixed = String(iso).replace(' ', 'T').replace(/([+-]\d{2}):?(\d{2})$/, '$1$2');
+        return new Date(fixed);
       }
 
-      function escapeHTML(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+      // 格式化区间：默认按访客本地时区；若想固定北京时区，第三个参数传 'Asia/Shanghai'
+      function fmtRange(startISO, durationMin, timeZone){
+        const start = parseISO(startISO);
+        const dur = Number.isFinite(+durationMin) ? +durationMin : 90;
+        const end = new Date(start.getTime() + dur * 60000);
+
+        const dateOpts = { year:'numeric', month:'short', day:'numeric' };
+        const timeOpts = { hour:'2-digit', minute:'2-digit', hour12:false, hourCycle:'h23' };
+        if (timeZone){ dateOpts.timeZone = timeZone; timeOpts.timeZone = timeZone; }
+
+        const df = new Intl.DateTimeFormat(undefined, dateOpts);
+        const tf = new Intl.DateTimeFormat(undefined, timeOpts);
+        return df.format(start) + ' · ' + tf.format(start) + '–' + tf.format(end);
+      }
+
+      function escapeHTML(s){
+        return String(s||'').replace(/[&<>"']/g, c => (
+          {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
+        ));
+      }
 
       function renderCard(talk, {highlight=false}={}){
         const wrap = document.createElement('div');
@@ -270,6 +261,8 @@ function fmtRange(startISO, durationMin, timeZone) {
         const spkHTML = talk.speakerUrl
           ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
           : escapeHTML(talk.speaker);
+
+        // 想固定显示北京时间：把下面的 fmtRange 第三个参数改为 'Asia/Shanghai'
         meta.innerHTML =
           `<span>${fmtRange(talk.datetime, talk.durationMin)}</span>` +
           (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
@@ -312,13 +305,14 @@ function fmtRange(startISO, durationMin, timeZone) {
         };
       }).filter(t => t.datetime);
 
-      talks.sort((a,b) => new Date(a.datetime) - new Date(b.datetime));
+      // 统一用 parseISO 排序/分组
+      talks.sort((a,b) => parseISO(a.datetime) - parseISO(b.datetime));
 
       const nextWrap = document.getElementById('next-talk');
       const pastWrap = document.getElementById('past-talks');
 
-      const upcoming = talks.filter(t => new Date(t.datetime) >= now);
-      const past = talks.filter(t => new Date(t.datetime) < now).reverse();
+      const upcoming = talks.filter(t => parseISO(t.datetime) >= now);
+      const past = talks.filter(t => parseISO(t.datetime) < now).reverse();
 
       if (upcoming.length){
         nextWrap.appendChild( renderCard(upcoming[0], {highlight:true}) );
