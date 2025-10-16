@@ -165,4 +165,26 @@
         next.style.display = show ? 'table-row' : 'none';
       }
       document.addEventListener('click', function(e) {
-        v
+        var t = e.target;
+        if (t && t.matches('[data-toggle]')) toggleNextAbstract(t);
+      });
+    })();
+  </script>
+</section>
+
+
+<section id="Conferences">
+  <h2>Conferences</h2>
+  <p>
+    Please visit the dedicated page for conferences:  
+    <a href="https://ynnumath.com/" target="_blank">https://ynnumath.com/</a>
+  </p>
+</section>
+
+  </div>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
