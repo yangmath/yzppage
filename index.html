@@ -195,7 +195,7 @@
         data-datetime="2025-10-5T16:00:00+08:00"
         data-duration="90"
         data-title="Schatten properties of commutators on twisted crossed products"
-        data-speaker="<a href="https://analysis-pde.org/kai-zeng/" target="_blank" rel="noopener noreferrer">Kai Zeng</a>"
+        data-speaker="Kai Zeng"
         data-affil="Ghent University"
         data-room="939-7737-2516"
         data-location="腾讯会议"
@@ -211,12 +211,23 @@
       const now = new Date();
 
       function toDate(s){ return new Date(s); }
-      function fmtDT(s){
-        const d = toDate(s);
-        const optDate = { year:'numeric', month:'short', day:'numeric' };
-        const optTime = { hour:'2-digit', minute:'2-digit' };
-        return d.toLocaleDateString(undefined, optDate) + ' · ' + d.toLocaleTimeString(undefined, optTime);
-      }
+      function fmtRange(startISO, durationMin, timeZone) {
+  const start = new Date(startISO);
+  const durMin = Number.isFinite(+durationMin) ? +durationMin : 90; // 默认90分钟
+  const end = new Date(start.getTime() + durMin * 60000);
+
+  const dateFmt = new Intl.DateTimeFormat(undefined, {
+    year: 'numeric', month: 'short', day: 'numeric',
+    timeZone  // 传 undefined 则使用访客本地时区
+  });
+  const timeFmt = new Intl.DateTimeFormat(undefined, {
+    hour: '2-digit', minute: '2-digit',
+    timeZone
+  });
+
+  return `${dateFmt.format(start)} · ${timeFmt.format(start)}–${timeFmt.format(end)}`;
+}
+
       function escapeHTML(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
       function renderCard(talk, {highlight=false}={}){
@@ -240,7 +251,7 @@
         const meta = document.createElement('div');
         meta.className = 'talk-meta';
         meta.innerHTML =
-          `<span>${fmtDT(talk.datetime)}</span>` +
+         `<span>${fmtRange(talk.datetime, talk.durationMin /*, 'Asia/Shanghai'*/)}</span>` +
           (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
           (talk.speaker ? ` <span class="sep">•</span><span>${escapeHTML(talk.speaker)}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
         wrap.appendChild(meta);
