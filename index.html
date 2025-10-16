@@ -5,6 +5,19 @@
   <title>Zhipeng Yang</title>
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+  <!-- Visitors counter styles -->
+  <style>
+    .site-stats{
+      margin-top: 24px;
+      padding: 12px 16px;
+      border-top: 1px solid #e5e5e5;
+      color: #555;
+      font-size: 14px;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -181,7 +194,34 @@
   </p>
 </section>
 
+    <!-- Visitors counter -->
+    <div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
+      <span id="visit-count">Visitors: …</span>
+    </div>
+
   </div>
+
+  <!-- Visitors counter script -->
+  <script>
+    (function () {
+      var el = document.getElementById('visit-count');
+      var namespace = 'yzpmath.com';   // 你的域名
+      var key = 'homepage';            // 页面键名，可按页面更换
+
+      // “每天同一浏览器只计一次”
+      var today = new Date().toISOString().slice(0,10); // YYYY-MM-DD
+      var onceKey = 'counted_' + key + '_' + today;
+      var endpoint = localStorage.getItem(onceKey) ? 'get' : 'hit';
+
+      fetch('https://api.countapi.xyz/' + endpoint + '/' + namespace + '/' + key)
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          el.textContent = 'Visitors: ' + (d && typeof d.value === 'number' ? d.value : '—');
+          if (endpoint === 'hit') { try { localStorage.setItem(onceKey, '1'); } catch (e) {} }
+        })
+        .catch(function(){ el.textContent = 'Visitors: —'; });
+    })();
+  </script>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="script.js"></script>
