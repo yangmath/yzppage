@@ -26,7 +26,7 @@
     <div class="header">
       <h1>Zhipeng Yang</h1>
       <p>Associate Professor</p >
-      <div id="mugshot"><img src="photo.png"></div>
+      <div id="mugshot"><img src="photo.png" alt="mugshot"></div>
     </div>
 
     <ul>
@@ -154,6 +154,8 @@
     .talk-title{font-weight:700}
     .talk-meta{color:#555;font-size:14px;margin:6px 0 8px}
     .talk-meta .sep{opacity:.5;margin:0 6px}
+    .talk-meta a{ text-decoration:none; border-bottom:none; color:#2b5fb0; }
+    .talk-meta a:hover{ text-decoration:underline; }
     .btns{display:flex;gap:8px;flex-wrap:wrap}
     .btn{
       font-size:13px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;padding:6px 10px;cursor:pointer;text-decoration:none;color:inherit
@@ -200,7 +202,7 @@
         data-room="939-7737-2516"
         data-location="腾讯会议"
         data-join=""
-        data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
+        data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
     </li>
     
   </ul>
@@ -212,21 +214,21 @@
 
       function toDate(s){ return new Date(s); }
       function fmtRange(startISO, durationMin, timeZone) {
-  const start = new Date(startISO);
-  const durMin = Number.isFinite(+durationMin) ? +durationMin : 90; // 默认90分钟
-  const end = new Date(start.getTime() + durMin * 60000);
+        const start = new Date(startISO);
+        const durMin = Number.isFinite(+durationMin) ? +durationMin : 90; // 默认90分钟
+        const end = new Date(start.getTime() + durMin * 60000);
 
-  const dateFmt = new Intl.DateTimeFormat(undefined, {
-    year: 'numeric', month: 'short', day: 'numeric',
-    timeZone  // 传 undefined 则使用访客本地时区
-  });
-  const timeFmt = new Intl.DateTimeFormat(undefined, {
-    hour: '2-digit', minute: '2-digit',
-    timeZone
-  });
+        const dateFmt = new Intl.DateTimeFormat(undefined, {
+          year: 'numeric', month: 'short', day: 'numeric',
+          timeZone  // undefined => 用户本地时区
+        });
+        const timeFmt = new Intl.DateTimeFormat(undefined, {
+          hour: '2-digit', minute: '2-digit',
+          timeZone
+        });
 
-  return `${dateFmt.format(start)} · ${timeFmt.format(start)}–${timeFmt.format(end)}`;
-}
+        return `${dateFmt.format(start)} · ${timeFmt.format(start)}–${timeFmt.format(end)}`;
+      }
 
       function escapeHTML(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 
@@ -251,13 +253,12 @@
         const meta = document.createElement('div');
         meta.className = 'talk-meta';
         const spkHTML = talk.speakerUrl
-  ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
-  : escapeHTML(talk.speaker);
+          ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
+          : escapeHTML(talk.speaker);
         meta.innerHTML =
-        meta.innerHTML =
-  `<span>${fmtRange(talk.datetime, talk.durationMin)}</span>` +
-  (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
-  (talk.speaker ? ` <span class="sep">•</span><span>${spkHTML}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
+          `<span>${fmtRange(talk.datetime, talk.durationMin)}</span>` +
+          (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
+          (talk.speaker ? ` <span class="sep">•</span><span>${spkHTML}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
         wrap.appendChild(meta);
 
         if (talk.join){
@@ -287,7 +288,7 @@
           durationMin: d.duration ? parseInt(d.duration,10) : (d.durationMin? parseInt(d.durationMin,10):60),
           title: d.title || '',
           speaker: d.speaker || '',
-          speakerUrl: d.speakerUrl || d['speaker-url'] || '',   // ← 就加这一行
+          speakerUrl: d.speakerUrl || d['speaker-url'] || '',
           affil: d.affil || '',
           room: d.room || '',
           location: d.location || '',
@@ -378,7 +379,7 @@
       fallbackHitsSh();
     });
 
-  // 2) 回退到 hits.sh（免脚本也能用的服务）
+  // 2) 回退到 hits.sh
   function fallbackHitsSh(){
     if (done) return;
     fetch('https://hits.sh/yzpmath.com.json', { cache: 'reload' })
