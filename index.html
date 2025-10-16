@@ -6,21 +6,90 @@
   <title>Zhipeng Yang</title>
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-  <!-- Visitors counter styles -->
-  <style>
-    .site-stats{
-      margin-top: 24px;
-      padding: 12px 16px;
-      border-top: 1px solid #e5e5e5;
-      color: #555;
-      font-size: 14px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-  </style>
 </head>
+
+  <!-- 放在 </body> 前即可 -->
+<div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
+  <span id="busuanzi_container_site_uv" style="display:none">
+    Visitors: <span id="busuanzi_value_site_uv">0</span>
+  </span>
+  <span class="sep">｜</span>
+  <span id="busuanzi_container_site_pv" style="display:none">
+    Views: <span id="busuanzi_value_site_pv">0</span>
+  </span>
+  <span id="stats-fallback" class="muted" style="display:none">Loading…</span>
+</div>
+
+<script>
+(function(){
+  var UV_C = document.getElementById('busuanzi_container_site_uv');
+  var PV_C = document.getElementById('busuanzi_container_site_pv');
+  var FB   = document.getElementById('stats-fallback');
+
+  // 显示“加载中…”，以便知道脚本是否被拦了
+  FB.style.display = 'inline';
+
+  // 1) 动态加载不蒜子（协议自适应）
+  var s = document.createElement('script');
+  s.src = (location.protocol === 'http:' ? 'http:' : 'https:') + '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+  s.async = false; // 不要 defer/async，避免某些环境不执行
+  s.onload = function(){
+    // 给它一点时间填充
+    setTimeout(checkOrFallback, 1500);
+  };
+  s.onerror = function(){
+    // 被 CSP / 广告拦截 或加载失败 => 兜底
+    fallbackHits();
+  };
+  document.body.appendChild(s);
+
+  function hasNumber(elId){
+    var el = document.getElementById(elId);
+    if (!el) return false;
+    var txt = (el.textContent || '').trim();
+    return /^\d+$/.test(txt) && parseInt(txt,10) > 0;
+  }
+
+  function checkOrFallback(){
+    // 不蒜子会把 container 的 display:none 变可见，并把 value 填成数字
+    var ok = (UV_C && UV_C.style.display !== 'none') ||
+             (PV_C && PV_C.style.display !== 'none') ||
+             hasNumber('busuanzi_value_site_uv') ||
+             hasNumber('busuanzi_value_site_pv');
+
+    if (ok){
+      FB.style.display = 'none';
+      return;
+    }
+    // 还没填上数 -> 兜底
+    fallbackHits();
+  }
+
+  function fallbackHits(){
+    // 2) hits.sh 兜底（只能拿到 PV，总比空着强）
+    var domain = location.hostname || 'yzpmath.com'; // 若你域名固定，可直接写死 'yzpmath.com'
+    fetch('https://hits.sh/' + domain + '.json', { cache: 'reload' })
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if (j && typeof j.hits === 'number'){
+          // 显示 PV；UV 暂无数据就隐藏
+          if (PV_C){
+            PV_C.style.display = 'inline';
+            document.getElementById('busuanzi_value_site_pv').textContent = j.hits;
+          }
+          if (UV_C) UV_C.style.display = 'none';
+          FB.style.display = 'none';
+        }else{
+          // 失败就保持 Loading…
+          FB.textContent = 'Visitors counter unavailable';
+        }
+      })
+      .catch(function(){
+        FB.textContent = 'Visitors counter unavailable';
+      });
+  }
+})();
+</script>
 
 <body>
   <nav class="sidebar">
