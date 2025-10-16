@@ -18,6 +18,15 @@
       justify-content: center;
     }
   </style>
+  <style>
+  /* 让链接一定可点（覆盖任何意外样式） */
+  nav.sidebar a.navlink{ display:block; pointer-events:auto; cursor:pointer; }
+
+  /* 平滑滚动 + 避免标题被顶住 */
+  html{ scroll-behavior:smooth; }
+  section[id]{ scroll-margin-top: 16px; }
+</style>
+
 </head>
 
 <body>
@@ -29,8 +38,7 @@
       <div id="mugshot"><img src="photo.png" alt="mugshot"></div>
     </div>
 
-   <ul class="nav">
-  <ul>
+ <ul class="nav">
   <li><a href="#about" class="navlink">About</a></li>
   <li><a href="#cv" class="navlink">Curriculum Vitae</a></li>
   <li><a href="#research" class="navlink">Research</a></li>
@@ -38,10 +46,6 @@
   <li><a href="#apde-seminar" class="navlink">APDE Seminar</a></li>
   <li><a href="#Conferences" class="navlink">Conferences</a></li>
 </ul>
-
-</ul>
-
-  </nav>
 
 
   <div class="main">
@@ -417,49 +421,49 @@
   }
 })();
 </script>
-<script>
+
+    <script>
 (function(){
-  // 菜单链接
-  const links = Array.from(document.querySelectorAll('nav.sidebar a.navlink'));
-  // 页面中带 id 的 section
-  const sections = Array.from(document.querySelectorAll('section[id]'));
+  // 找到真正的滚动容器（可能是 body，也可能是 .main）
+  function getScrollContainer(el){
+    let p = el.parentElement;
+    while (p){
+      const oy = getComputedStyle(p).overflowY;
+      if (/(auto|scroll)/i.test(oy)) return p;
+      p = p.parentElement;
+    }
+    return document.scrollingElement || document.documentElement;
+  }
 
-  // 建立 id -> 对应链接 的映射
-  const map = new Map();
-  links.forEach(a => {
-    const id = (a.getAttribute('href')||'').split('#')[1];
-    if (id) map.set(id, a);
-  });
+  const links = document.querySelectorAll('nav.sidebar a.navlink');
+  const OFFSET = 10; // 如果有固定头部可调这个数
 
-  // 滚动时自动高亮当前所处 section
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      const id = entry.target.id;
-      const link = map.get(id);
-      if (!link) return;
-      if (entry.isIntersecting){
-        links.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
+  links.forEach(a=>{
+    a.addEventListener('click', function(e){
+      const hash = this.getAttribute('href') || '';
+      if (!hash.startsWith('#')) return;
+      const target = document.querySelector(hash);
+      if (!target) return;
+
+      e.preventDefault();               // 阻止默认 hash 跳转
+      history.pushState(null, '', hash); // 仍然更新地址栏 hash
+
+      const scroller = getScrollContainer(target);
+      const rect = target.getBoundingClientRect();
+
+      // 如果滚动容器是窗口：
+      if (scroller === (document.scrollingElement || document.documentElement)) {
+        const y = rect.top + window.pageYOffset - OFFSET;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      } else {
+        // 容器内部滚动
+        const y = rect.top + scroller.scrollTop - OFFSET;
+        scroller.scrollTo({ top: y, behavior: 'smooth' });
       }
     });
-  }, {
-    root: null,
-    // 视口中间 40%~45% 作为“当前”
-    rootMargin: '-40% 0px -55% 0px',
-    threshold: [0, 1]
   });
-
-  sections.forEach(sec => obs.observe(sec));
-
-  // 初始高亮（刷新后停留在某个锚点时）
-  const current = location.hash.replace('#','') || 'about';
-  if (map.get(current)) {
-    links.forEach(l => l.classList.remove('active'));
-    map.get(current).classList.add('active');
-  }
 })();
 </script>
-
 
 </body>
 
