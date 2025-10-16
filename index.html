@@ -202,18 +202,6 @@
       data-join=""
       data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
     </li>
-
-    <li class="talk"
-      data-datetime="2025-10-05T16:00:00+08:00"
-      data-duration="90"
-      data-title="Schatten properties of commutators on twisted crossed products"
-      data-speaker="Kai Zeng"
-      data-affil="Ghent University"
-      data-room="939-7737-2516"
-      data-location="腾讯会议"
-      data-join=""
-      data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product . We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
-    </li>
   </ul>
 
   <!-- ===== Logic (timezone-safe + speaker bio) ===== -->
@@ -362,71 +350,82 @@
   </p>
 </section>
 
-    <!-- Visitors counter -->
-    <div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
-      <span id="visit-count">Visitors: …</span>
-    </div>
+ <!-- Visitors counter (Busuanzi primary + CountAPI/hits.sh fallback) -->
+<div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
+  <!-- 主计数（不蒜子）：UV=独立访客，PV=浏览量 -->
+  <span id="busuanzi_container_site_uv" style="display:none">
+    Visitors: <span id="busuanzi_value_site_uv"></span>
+  </span>
+  <span id="busuanzi_container_site_pv" style="display:none">
+     · Views: <span id="busuanzi_value_site_pv"></span>
+  </span>
 
-  </div>
+  <!-- 兜底占位符：如果主计数加载不到，会由下面脚本改写成数字 -->
+  <span id="visit-count-fallback" style="display:inline">Visitors: …</span>
+</div>
 
-<!-- Visitors counter script (countapi -> hits.sh fallback) -->
+<!-- 不蒜子（国内可用，自动填充上面两个 span） -->
+<script async defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
 <script>
 (function () {
-  var el = document.getElementById('visit-count');
-  if (!el) return;
+  var fallbackEl = document.getElementById('visit-count-fallback');
+  var uvBox = document.getElementById('busuanzi_container_site_uv');
 
-  var namespace = 'yzpmath.com';
-  var key = 'homepage'; // 该页键名（多页面可改成各自唯一名）
+  // 如果不蒜子成功，隐藏兜底占位
+  var chk = setInterval(function(){
+    if (uvBox && uvBox.style.display !== 'none') {
+      fallbackEl.style.display = 'none';
+      clearInterval(chk);
+    }
+  }, 400);
 
-  // 每天同一浏览器只计一次（避免刷新狂增）
-  var today = new Date().toISOString().slice(0,10); // YYYY-MM-DD
-  var onceKey = 'counted_' + key + '_' + today;
-  var endpoint = localStorage.getItem(onceKey) ? 'get' : 'hit';
+  // 2.5 秒后还没成功，就用 CountAPI → hits.sh 兜底
+  setTimeout(function(){
+    if (uvBox && uvBox.style.display !== 'none') return; // 已成功，无需兜底
+    tryCountAPIThenHits();
+  }, 2500);
 
-  function show(n){ el.textContent = 'Visitors: ' + n; }
-  function fail(){ el.textContent = 'Visitors: —'; }
+  function tryCountAPIThenHits(){
+    var namespace = 'yzpmath.com';
+    var key = 'homepage';
+    // 为避免刷新狂增：每日同一浏览器只计一次
+    var today = new Date().toISOString().slice(0,10);
+    var onceKey = 'counted_' + key + '_' + today;
+    var endpoint = localStorage.getItem(onceKey) ? 'get' : 'hit';
 
-  var done = false;
-  function safeShow(n){ if (done) return; done = true; show(n); }
+    function show(n){ fallbackEl.textContent = 'Visitors: ' + n; }
+    function fail(){ fallbackEl.textContent = 'Visitors: —'; }
 
-  // 1) 优先用 countapi（加超时）
-  var timer = setTimeout(function(){
-    if (!done) fallbackHitsSh();   // 超时自动回退
-  }, 1500);
-
-  fetch('https://api.countapi.xyz/' + endpoint + '/' + namespace + '/' + key, { cache: 'no-store' })
-    .then(function(r){ return r.json(); })
-    .then(function(d){
-      clearTimeout(timer);
-      if (d && typeof d.value === 'number') {
-        safeShow(d.value);
-        if (endpoint === 'hit') { try { localStorage.setItem(onceKey, '1'); } catch(e){} }
-      } else {
-        fallbackHitsSh();
-      }
-    })
-    .catch(function(){
-      clearTimeout(timer);
-      fallbackHitsSh();
-    });
-
-  // 2) 回退到 hits.sh
-  function fallbackHitsSh(){
-    if (done) return;
-    fetch('https://hits.sh/yzpmath.com.json', { cache: 'reload' })
+    // CountAPI
+    var timer = setTimeout(function(){ tryHitsSh(); }, 1500);
+    fetch('https://api.countapi.xyz/' + endpoint + '/' + namespace + '/' + key, { cache: 'no-store' })
       .then(function(r){ return r.json(); })
-      .then(function(j){
-        if (j && typeof j.hits === 'number') safeShow(j.hits);
-        else fail();
+      .then(function(d){
+        clearTimeout(timer);
+        if (d && typeof d.value === 'number') {
+          show(d.value);
+          if (endpoint === 'hit') { try { localStorage.setItem(onceKey,'1'); } catch(e){} }
+        } else {
+          tryHitsSh();
+        }
       })
-      .catch(fail);
+      .catch(function(){ clearTimeout(timer); tryHitsSh(); });
+
+    // hits.sh 兜底（只读显示总量）
+    function tryHitsSh(){
+      fetch('https://hits.sh/yzpmath.com.json', { cache: 'reload' })
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          if (j && typeof j.hits === 'number') show(j.hits);
+          else fail();
+        })
+        .catch(fail);
+    }
   }
 })();
 </script>
 
-
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script type="text/javascript" src="script.js"></script>
 </body>
 
 </html>
