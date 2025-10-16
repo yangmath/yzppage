@@ -201,27 +201,61 @@
 
   </div>
 
-  <!-- Visitors counter script -->
-  <script>
-    (function () {
-      var el = document.getElementById('visit-count');
-      var namespace = 'yzpmath.com';   // 你的域名
-      var key = 'homepage';            // 页面键名，可按页面更换
+<!-- Visitors counter script (countapi -> hits.sh fallback) -->
+<script>
+(function () {
+  var el = document.getElementById('visit-count');
+  if (!el) return;
 
-      // “每天同一浏览器只计一次”
-      var today = new Date().toISOString().slice(0,10); // YYYY-MM-DD
-      var onceKey = 'counted_' + key + '_' + today;
-      var endpoint = localStorage.getItem(onceKey) ? 'get' : 'hit';
+  var namespace = 'yzpmath.com';
+  var key = 'homepage'; // 该页键名（多页面可改成各自唯一名）
 
-      fetch('https://api.countapi.xyz/' + endpoint + '/' + namespace + '/' + key)
-        .then(function(r){ return r.json(); })
-        .then(function(d){
-          el.textContent = 'Visitors: ' + (d && typeof d.value === 'number' ? d.value : '—');
-          if (endpoint === 'hit') { try { localStorage.setItem(onceKey, '1'); } catch (e) {} }
-        })
-        .catch(function(){ el.textContent = 'Visitors: —'; });
-    })();
-  </script>
+  // 每天同一浏览器只计一次（避免刷新狂增）
+  var today = new Date().toISOString().slice(0,10); // YYYY-MM-DD
+  var onceKey = 'counted_' + key + '_' + today;
+  var endpoint = localStorage.getItem(onceKey) ? 'get' : 'hit';
+
+  function show(n){ el.textContent = 'Visitors: ' + n; }
+  function fail(){ el.textContent = 'Visitors: —'; }
+
+  var done = false;
+  function safeShow(n){ if (done) return; done = true; show(n); }
+
+  // 1) 优先用 countapi（加超时）
+  var timer = setTimeout(function(){
+    if (!done) fallbackHitsSh();   // 超时自动回退
+  }, 1500);
+
+  fetch('https://api.countapi.xyz/' + endpoint + '/' + namespace + '/' + key, { cache: 'no-store' })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      clearTimeout(timer);
+      if (d && typeof d.value === 'number') {
+        safeShow(d.value);
+        if (endpoint === 'hit') { try { localStorage.setItem(onceKey, '1'); } catch(e){} }
+      } else {
+        fallbackHitsSh();
+      }
+    })
+    .catch(function(){
+      clearTimeout(timer);
+      fallbackHitsSh();
+    });
+
+  // 2) 回退到 hits.sh（免脚本也能用的服务）
+  function fallbackHitsSh(){
+    if (done) return;
+    fetch('https://hits.sh/yzpmath.com.json', { cache: 'reload' })
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if (j && typeof j.hits === 'number') safeShow(j.hits);
+        else fail();
+      })
+      .catch(fail);
+  }
+})();
+</script>
+
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="script.js"></script>
