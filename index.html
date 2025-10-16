@@ -129,61 +129,238 @@
 
 <section id="apde-seminar">
   <h2>APDE Seminar</h2>
- Starting from the fall of 2025, Dr. Gu Guangze and I will organize a hybrid seminar on Analysis of Partial Differential Equations. This leads to exchange of ideas, effective learning, and facilitates the collaborations. We always use VooV Meeting, if you would like to receive a link or be added to the seminar mailing list, just send an email to any of the organisers.
- If you have any other questions or comments, please email one of the organizers.
+
+  <div class="seminar-intro">
+    Starting from the fall of 2025, Dr. Gu Guangze and I organize a hybrid seminar on Analysis of Partial Differential Equations.
+    We use VooV Meeting. If you’d like to receive a link or be added to the mailing list, email one of the organizers.
+  </div>
+
+  <!-- ===== Styles (scoped) ===== -->
   <style>
-    .talk-table { width: 100%; border-collapse: collapse; margin: 0.8em 0 1.6em; font-size: 15px; }
-    .talk-table th, .talk-table td { border-bottom: 1px solid #ddd; padding: 10px 8px; vertical-align: top; }
-    .talk-table th { background: #faf7e6; text-align: left; }
-    .talk-table tr:hover td { background: #fffdf3; }
-    .title-link { cursor: pointer; text-decoration: underline; }
-    .title-link::after { content: " ▾"; font-size: 12px; }
-    .abstract-row { display: none; background: #fff; }
-    .abstract-cell { padding: 12px 8px 16px; color: #444; }
-    .meta-muted { color: #666; font-size: 90%; }
+    .seminar-intro{
+      background:#fafafa;border:1px solid #eee;border-radius:8px;padding:12px 14px;margin:10px 0 18px;color:#444
+    }
+    .talks-wrap{display:grid;grid-template-columns:1fr;gap:14px}
+    .talk-card{
+      border:1px solid #e6e6e6;border-radius:10px;padding:14px 16px;background:#fff;
+      box-shadow:0 1px 2px rgba(0,0,0,.03)
+    }
+    .talk-card.upcoming{border-color:#d7e8ff;background:#fbfdff}
+    .talk-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
+    .tag{font-size:12px;line-height:1;border:1px solid #cfe3ff;background:#eef6ff;color:#295ea8;border-radius:999px;padding:4px 8px}
+    .talk-title{font-weight:700}
+    .talk-meta{color:#555;font-size:14px;margin:6px 0 8px}
+    .talk-meta .sep{opacity:.5;margin:0 6px}
+    .btns{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{
+      font-size:13px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;padding:6px 10px;cursor:pointer
+    }
+    .btn:hover{background:#f1f1f1}
+    details.abstract{margin-top:8px}
+    details.abstract summary{cursor:pointer;color:#2b5fb0}
+    .muted{color:#777}
+    .subsec-title{margin:18px 0 8px;font-size:18px}
+    /* narrow screens */
+    @media (min-width: 860px){
+      .talks-wrap{grid-template-columns:1fr 1fr}
+      .talk-card.wide{grid-column:1 / -1}
+    }
   </style>
 
-  <table class="talk-table" id="apde-talks">
-    <thead>
-      <tr>
-        <th style="width: 18%">Date / Time</th>
-        <th style="width: 28%">Speaker</th>
-        <th>Title</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>2025-10-15 · 14:00<br><span class="meta-muted">Room A201</span></td>
-        <td>Dr. Example<br><span class="meta-muted">Sample University</span></td>
-        <td><span class="title-link" data-toggle>On recent progress in nonlinear wave equations</span></td>
-      </tr>
-      <tr class="abstract-row">
-        <td colspan="3" class="abstract-cell">
-          <strong>Abstract.</strong> In this talk, I will discuss global existence results
-          for nonlinear wave equations on curved backgrounds, with emphasis on dispersive
-          estimates and variational methods.
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- ===== Upcoming (auto-render) ===== -->
+  <div id="next-talk" class="talks-wrap"></div>
 
+  <!-- ===== Past list (auto-render) ===== -->
+  <h3 class="subsec-title">Past talks</h3>
+  <div id="past-talks" class="talks-wrap"></div>
+
+  <!-- ===== Data (edit here to add talks) =====
+       说明：按下面的 <li> 复制一条并修改 data-* 属性即可新增一场报告。
+       必填：data-datetime (ISO, 含时区) · data-title · data-speaker
+       可选：data-affil · data-room · data-location · data-join · data-duration(分钟, 默认60) · data-abstract
+  -->
+  <ul id="apde-data" style="display:none">
+    <li class="talk"
+        data-datetime="2025-10-15T14:00:00+02:00"
+        data-duration="90"
+        data-title="On recent progress in nonlinear wave equations"
+        data-speaker="Dr. Example"
+        data-affil="Sample University"
+        data-room="Room A201"
+        data-location="Building A, Campus"
+        data-join=""
+        data-abstract="In this talk, I will discuss global existence results for nonlinear wave equations on curved backgrounds, with emphasis on dispersive estimates and variational methods.">
+    </li>
+
+    <!-- 示例：新增一场（把日期时间改成未来） -->
+    <!--
+    <li class="talk"
+        data-datetime="2025-11-12T10:30:00+01:00"
+        data-duration="60"
+        data-title="Variational methods for fractional PDEs"
+        data-speaker="Prof. Alice Smith"
+        data-affil="University of Somewhere"
+        data-room="Room A201"
+        data-location="Main Campus"
+        data-join="https://voov.example/meeting-link"
+        data-abstract="We survey recent progress on mountain-pass geometry and compactness in nonlocal problems.">
+    </li>
+    -->
+  </ul>
+
+  <!-- ===== Logic ===== -->
   <script>
-    (function() {
-      function toggleNextAbstract(el) {
-        var row = el.closest('tr');
-        if (!row) return;
-        var next = row.nextElementSibling;
-        if (!next || !next.classList.contains('abstract-row')) return;
-        var show = next.style.display !== 'table-row';
-        next.style.display = show ? 'table-row' : 'none';
+    (function(){
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Brussels';
+      const now = new Date();
+
+      function toDate(s){ return new Date(s); }
+      function fmtDT(s){
+        const d = toDate(s);
+        const optDate = { year:'numeric', month:'short', day:'numeric' };
+        const optTime = { hour:'2-digit', minute:'2-digit' };
+        return d.toLocaleDateString(undefined, optDate) + ' · ' + d.toLocaleTimeString(undefined, optTime);
       }
-      document.addEventListener('click', function(e) {
-        var t = e.target;
-        if (t && t.matches('[data-toggle]')) toggleNextAbstract(t);
-      });
+      function icsDateUTC(d){
+        // YYYYMMDDTHHMMSSZ
+        return d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z');
+      }
+      function makeICS(t){
+        const start = new Date(t.datetime);
+        const dur = (t.durationMin || 60) * 60000;
+        const end = new Date(start.getTime() + dur);
+        const uid = (start.getTime()) + '@yzpmath.com';
+
+        const lines = [
+          'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//YZP//APDE Seminar//EN',
+          'BEGIN:VEVENT',
+          'UID:'+uid,
+          'DTSTAMP:'+icsDateUTC(new Date()),
+          'DTSTART:'+icsDateUTC(start),
+          'DTEND:'+icsDateUTC(end),
+          'SUMMARY:'+escapeICS(t.title),
+          'LOCATION:'+escapeICS(t.location || t.room || ''),
+          'DESCRIPTION:'+escapeICS(descText(t)),
+          'END:VEVENT','END:VCALENDAR'
+        ];
+        return lines.join('\r\n');
+      }
+      function escapeICS(s){ return String(s||'').replace(/[,\n]/g, m => m === ',' ? '\\,' : '\\n'); }
+      function descText(t){
+        const bits = [];
+        bits.push(t.speaker + (t.affil ? ' ('+t.affil+')' : ''));
+        if (t.room || t.location) bits.push((t.room? t.room : '') + (t.location? (t.room? ', ' : '')+t.location : ''));
+        if (t.join) bits.push('Online: ' + t.join);
+        if (t.abstract) bits.push('', t.abstract);
+        return bits.join('\n');
+      }
+
+      function renderCard(talk, {highlight=false}={}){
+        const wrap = document.createElement('div');
+        wrap.className = 'talk-card' + (highlight ? ' upcoming wide' : '');
+
+        const head = document.createElement('div');
+        head.className = 'talk-head';
+        if (highlight){
+          const tag = document.createElement('span');
+          tag.className = 'tag';
+          tag.textContent = 'Next talk';
+          head.appendChild(tag);
+        }
+        const title = document.createElement('div');
+        title.className = 'talk-title';
+        title.textContent = talk.title;
+        head.appendChild(title);
+        wrap.appendChild(head);
+
+        const meta = document.createElement('div');
+        meta.className = 'talk-meta';
+        meta.innerHTML =
+          `<span>${fmtDT(talk.datetime)}</span>` +
+          (talk.room ? ` <span class="sep">•</span><span>${talk.room}</span>` : '') +
+          (talk.speaker ? ` <span class="sep">•</span><span>${talk.speaker}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
+        wrap.appendChild(meta);
+
+        const btns = document.createElement('div'); btns.className = 'btns';
+        const addBtn = document.createElement('button'); addBtn.className='btn'; addBtn.textContent='Add to Calendar (.ics)';
+        addBtn.addEventListener('click', function(){
+          const ics = makeICS(talk);
+          const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          const dt = new Date(talk.datetime);
+          const y = dt.getFullYear(), m = String(dt.getMonth()+1).padStart(2,'0'), d = String(dt.getDate()).padStart(2,'0');
+          a.download = `APDE_${y}${m}${d}.ics`;
+          document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        });
+        btns.appendChild(addBtn);
+
+        if (talk.join){
+          const joinBtn = document.createElement('a');
+          joinBtn.className = 'btn'; joinBtn.textContent = 'Join link';
+          joinBtn.href = talk.join; joinBtn.target = '_blank'; joinBtn.rel = 'noopener noreferrer';
+          btns.appendChild(joinBtn);
+        }
+        wrap.appendChild(btns);
+
+        if (talk.abstract){
+          const det = document.createElement('details'); det.className = 'abstract';
+          const sum = document.createElement('summary'); sum.textContent = 'Abstract';
+          const p = document.createElement('div'); p.style.marginTop='6px'; p.textContent = talk.abstract;
+          det.appendChild(sum); det.appendChild(p);
+          wrap.appendChild(det);
+        }
+        return wrap;
+      }
+
+      function escapeHTML(s){ return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+      // --- Load talks from hidden <ul> ---
+      const dataItems = Array.from(document.querySelectorAll('#apde-data .talk'));
+      const talks = dataItems.map(li => {
+        const d = li.dataset || {};
+        return {
+          datetime: d.datetime,
+          durationMin: d.duration ? parseInt(d.duration,10) : (d.durationMin? parseInt(d.durationMin,10):60),
+          title: d.title || '',
+          speaker: d.speaker || '',
+          affil: d.affil || '',
+          room: d.room || '',
+          location: d.location || '',
+          join: d.join || '',
+          abstract: d.abstract || ''
+        };
+      }).filter(t => t.datetime);
+
+      // Sort by time asc
+      talks.sort((a,b) => new Date(a.datetime) - new Date(b.datetime));
+
+      const nextWrap = document.getElementById('next-talk');
+      const pastWrap = document.getElementById('past-talks');
+
+      const upcoming = talks.filter(t => new Date(t.datetime) >= now);
+      const past = talks.filter(t => new Date(t.datetime) < now).reverse(); // newest first
+
+      if (upcoming.length){
+        // highlight next one, then others
+        nextWrap.appendChild( renderCard(upcoming[0], {highlight:true}) );
+        if (upcoming.length > 1){
+          const rest = document.createElement('div'); rest.className='talks-wrap';
+          upcoming.slice(1).forEach(t => nextWrap.appendChild( renderCard(t) ));
+        }
+      } else {
+        const msg = document.createElement('div');
+        msg.className = 'muted';
+        msg.textContent = 'No upcoming talks yet. Please check back soon.';
+        nextWrap.appendChild(msg);
+      }
+
+      past.forEach(t => pastWrap.appendChild( renderCard(t) ));
     })();
   </script>
 </section>
+
 
 
 <section id="Conferences">
