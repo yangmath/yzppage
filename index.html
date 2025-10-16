@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <meta charset="utf-8">
   <title>Zhipeng Yang</title>
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
@@ -352,16 +353,46 @@
 </section>
 
     <!-- Visitors counter (busuanzi) -->
-    <div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
-      <span id="busuanzi_container_site_uv">Visitors: <span id="busuanzi_value_site_uv">—</span></span>
-      <span>｜</span>
-      <span id="busuanzi_container_site_pv">Views: <span id="busuanzi_value_site_pv">—</span></span>
-    </div>
+<div id="site-stats" class="site-stats" role="note" aria-label="Site visitors">
+  <span id="busuanzi_container_site_uv">Visitors: <span id="busuanzi_value_site_uv">—</span></span>
+  <span>｜</span>
+  <span id="busuanzi_container_site_pv">Views: <span id="busuanzi_value_site_pv">—</span></span>
+</div>
 
-  </div>
+<!-- Busuanzi + fallback(JSONP) -->
+<script>
+(function(){
+  function hasNumber(id){
+    var el = document.getElementById(id);
+    return el && /\d/.test((el.textContent||'').trim());
+  }
+  function setText(id, n){
+    var el = document.getElementById(id);
+    if (el != null && n != null) el.textContent = n;
+  }
+  // 2 秒后还没填上数字，则走 JSONP 回退
+  function fallback(){
+    if (hasNumber('busuanzi_value_site_uv') || hasNumber('busuanzi_value_site_pv')) return;
+    window.BusuanziCallback = function (res){
+      if (!res) return;
+      if (typeof res.site_uv === 'number') setText('busuanzi_value_site_uv', res.site_uv);
+      if (typeof res.site_pv === 'number') setText('busuanzi_value_site_pv', res.site_pv);
+    };
+    var s = document.createElement('script');
+    s.src = (location.protocol === 'https:' ? 'https:' : 'http:') +
+            '//busuanzi.ibruce.info/busuanzi?jsonpCallback=BusuanziCallback';
+    document.body.appendChild(s);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(fallback, 2000); });
+  } else {
+    setTimeout(fallback, 2000);
+  }
+})();
+</script>
+<!-- 官方脚本用 async（不要 defer） -->
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  <!-- Busuanzi (不蒜子) -->
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="script.js"></script>
