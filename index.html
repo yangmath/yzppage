@@ -171,35 +171,35 @@
 
       <p><strong class="label">Email:</strong> zhipengyangmath[AT]gmail.com / yangzhipeng326[AT]163.com</p>
 
-      <h3>Photos</h3>
-<div class="about-gallery">
-  <figure>
-    <a href="images/about-1.jpg" target="_blank" rel="noopener noreferrer">
-      <img src="images/about-1.jpg" alt="At Yunnan Normal University campus" loading="lazy">
-    </a>
-    <figcaption>YNNU campus</figcaption>
-  </figure>
+    <h3>Photos</h3>
+<div class="photo-frame" id="about-photo-frame">
+  <!-- 上一张/下一张 -->
+  <button class="pf-nav pf-prev" aria-label="Previous photo">‹</button>
+  <button class="pf-nav pf-next" aria-label="Next photo">›</button>
 
-  <figure>
-    <a href="images/about-2.jpg" target="_blank" rel="noopener noreferrer">
-      <img src="images/about-2.jpg" alt="At Ghent University, S8 Building" loading="lazy">
-    </a>
-    <figcaption>Ghent University</figcaption>
-  </figure>
-
-  <figure>
-    <a href="images/about-3.jpg" target="_blank" rel="noopener noreferrer">
+  <!-- 视口 -->
+  <div class="pf-viewport" id="about-gallery" tabindex="0" aria-label="About photos carousel">
+    <!-- 每一张图：一屏一张，可按需增删 -->
+    <figure class="pf-slide">
+      <img src="images/about-1.jpg" alt="YNNU campus" loading="lazy">
+      <figcaption>YNNU campus</figcaption>
+    </figure>
+    <figure class="pf-slide">
+      <img src="images/about-2.jpg" alt="Ghent University, S8 Building" loading="lazy">
+      <figcaption>Ghent University</figcaption>
+    </figure>
+    <figure class="pf-slide">
       <img src="images/about-3.jpg" alt="APDE seminar snapshot" loading="lazy">
-    </a>
-    <figcaption>APDE Seminar</figcaption>
-  </figure>
-
-  <figure>
-    <a href="images/about-4.jpg" target="_blank" rel="noopener noreferrer">
+      <figcaption>APDE Seminar</figcaption>
+    </figure>
+    <figure class="pf-slide">
       <img src="images/about-4.jpg" alt="Research group meeting" loading="lazy">
-    </a>
-    <figcaption>Group meeting</figcaption>
-  </figure>
+      <figcaption>Group meeting</figcaption>
+    </figure>
+  </div>
+
+  <!-- 指示点会由脚本自动生成 -->
+  <div class="pf-dots" id="about-dots" aria-label="Slides navigation"></div>
 </div>
 
     </section>
