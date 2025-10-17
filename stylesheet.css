@@ -150,3 +150,29 @@ h1, h2, h3 { border-bottom: 0 !important; }
 
 /* 4)（可选）只想限制在 Seminar 区域： */
 /* #apde-seminar a { text-decoration: none !important; border-bottom: 0 !important; } */
+
+/* ==== Global: relaxed line spacing site-wide ==== */
+body{
+  line-height: 1.8;                /* 全局行高 */
+}
+
+/* 主内容区：段落与列表再放松一点 */
+.main p,
+.main li{
+  line-height: 1.9;
+}
+
+/* 段落与列表的间距也稍微加大 */
+p{ margin-bottom: 1rem; }
+.main ul{ margin: 0.5rem 0 1.1rem 1.25rem; }
+.main li{ margin: 0.35rem 0; }
+
+/* 标题保持紧凑一些，避免过松 */
+.main h2,
+.main h3{
+  line-height: 1.35;
+  margin-bottom: 0.75em;
+}
+
+/* 侧边栏已有固定行高(50px)用于垂直居中，这里不改动 */
+
