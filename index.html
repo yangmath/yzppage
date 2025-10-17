@@ -846,5 +846,59 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
+    <script>
+(function(){
+  const viewport = document.getElementById('about-gallery');
+  const dotsWrap = document.getElementById('about-dots');
+  const slides = Array.from(viewport.querySelectorAll('.pf-slide'));
+  if (!viewport || !slides.length) return;
+
+  // 生成指示点
+  slides.forEach((_, i)=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Go to slide ' + (i+1));
+    b.addEventListener('click', ()=> scrollToIndex(i));
+    dotsWrap.appendChild(b);
+  });
+
+  function activeIndex(){
+    const i = Math.round(viewport.scrollLeft / viewport.clientWidth);
+    return Math.max(0, Math.min(i, slides.length-1));
+  }
+  function updateDots(){
+    const i = activeIndex();
+    dotsWrap.querySelectorAll('button').forEach((b, idx)=>{
+      b.setAttribute('aria-current', idx===i ? 'true' : 'false');
+    });
+  }
+  function scrollToIndex(i){
+    viewport.scrollTo({ left: i * viewport.clientWidth, behavior: 'smooth' });
+  }
+  function go(dir){
+    scrollToIndex(activeIndex() + dir);
+  }
+
+  // 左右按钮
+  const prev = document.querySelector('#about-photo-frame .pf-prev');
+  const next = document.querySelector('#about-photo-frame .pf-next');
+  prev.addEventListener('click', ()=> go(-1));
+  next.addEventListener('click', ()=> go(1));
+
+  // 滚动/窗口变化时同步指示点
+  viewport.addEventListener('scroll', ()=> { window.requestAnimationFrame(updateDots); });
+  window.addEventListener('resize', updateDots);
+
+  // 键盘可达：左右键切换
+  viewport.addEventListener('keydown', (e)=>{
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    if (e.key === 'ArrowRight'){ e.preventDefault(); go(1); }
+  });
+
+  // 初始高亮
+  updateDots();
+})();
+</script>
+
 </body>
 </html>
