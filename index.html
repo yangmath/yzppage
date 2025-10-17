@@ -465,13 +465,7 @@
   </script>
 </section>
 
-    <section id="Conferences">
-      <h2>Conferences</h2>
-      <p>
-        Please visit the dedicated page for conferences:
-        <a href="https://ynnumath.com/" target="_blank" rel="noopener noreferrer">https://ynnumath.com/</a>
-      </p>
-    </section>
+   
 
   <!-- 抽屉 + 单页路由脚本：移动端开关侧栏 + 根据 #hash 切换 section 与高亮 -->
   <script>
@@ -553,5 +547,32 @@
       activate(location.hash);
     })();
   </script>
+    <!-- 其他脚本... -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="script.js"></script>
+
+<!-- 导航点击代码：只拦截 # 开头的锚点，外链直接跳转 -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('nav.sidebar a.navlink').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      const href = this.getAttribute('href') || '';
+      if (!href.startsWith('#')) return;  // 外链：不拦截，直接让浏览器跳转
+
+      // 内链：拦截并切换 section
+      e.preventDefault();
+      const id = href.slice(1);
+      document.querySelectorAll('.main section').forEach(sec => sec.classList.remove('active'));
+      const target = document.getElementById(id);
+      if (target) target.classList.add('active');
+
+      // 更新选中态
+      document.querySelectorAll('nav.sidebar .selected').forEach(li => li.classList.remove('selected'));
+      const li = this.querySelector('li');
+      if (li) li.classList.add('selected');
+    });
+  });
+});
+</script>
 </body>
 </html>
