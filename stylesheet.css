@@ -314,3 +314,81 @@ p{ margin-bottom: 1rem; }
   #about .pf-slide{ aspect-ratio: 4 / 3; }
   #about .pf-nav{ width:40px; height:40px; font-size:24px; }
 }
+/* ==== About: 相框滑动相册（缩小 + 可调比例） ==== */
+#about .photo-frame{
+  position: relative;
+  background:#fff;
+  border:10px solid #fff;
+  outline:1px solid #e9e9e9;
+  border-radius:16px;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+  padding:0;
+  overflow:hidden;
+
+  /* 关键：限制整体宽度，让相框更小一些（自行调 560~780px 都可） */
+  max-width: 680px;
+  margin: 8px auto 0;
+}
+
+/* 视口保持不变 */
+#about .pf-viewport{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;
+}
+#about .pf-viewport::-webkit-scrollbar{ display:none; }
+
+/* 单张图：改为用 CSS 变量控制高宽比，默认 16:10，整体显得更“矮”一些 */
+#about .pf-slide{
+  position:relative;
+  min-width:100%;
+  aspect-ratio: var(--pf-ratio, 16 / 10);  /* 想再瘦一点可改 21/9；想高点用 4/3 */
+  scroll-snap-align:start;
+  margin:0;
+}
+#about .pf-slide img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+#about .pf-slide figcaption{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:10px 12px;
+  font-size:13px; line-height:1.5;
+  color:#fff;
+  background: linear-gradient(to top, rgba(0,0,0,.35), rgba(0,0,0,0));
+}
+
+/* 左右按钮（原样） */
+#about .pf-nav{
+  position:absolute; top:50%; transform:translateY(-50%);
+  z-index:2; width:38px; height:38px; line-height:38px;
+  border:1px solid rgba(0,0,0,.12); background:rgba(255,255,255,.85);
+  border-radius:999px; box-shadow:0 2px 8px rgba(0,0,0,.12);
+  cursor:pointer; user-select:none; font-size:22px; text-align:center;
+}
+#about .pf-prev{ left:10px; }
+#about .pf-next{ right:10px; }
+#about .pf-nav:hover{ background:#fff; }
+
+/* 指示点（原样） */
+#about .pf-dots{
+  position:absolute; left:0; right:0; bottom:8px;
+  display:flex; gap:6px; justify-content:center; align-items:center; z-index:2;
+}
+#about .pf-dots button{
+  width:8px; height:8px; border-radius:50%;
+  border:none; background:rgba(255,255,255,.55);
+  box-shadow:0 1px 3px rgba(0,0,0,.2); cursor:pointer;
+}
+#about .pf-dots button[aria-current="true"]{
+  background:#fff; transform:scale(1.15);
+}
+
+/* 小屏：降低高度比例一点点，按钮稍大 */
+@media (max-width: 520px){
+  #about .pf-slide{ aspect-ratio: var(--pf-ratio-mobile, 3 / 2); }
+  #about .pf-nav{ width:40px; height:40px; font-size:24px; }
+}
