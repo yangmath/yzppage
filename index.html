@@ -115,8 +115,8 @@
 
     <ul>
       <a href="#about" class="navlink"><li class="selected">About</li></a>
-      <a href="#cv" class="navlink"><li>Curriculum Vitae</li></a>
       <a href="#research" class="navlink"><li>Research</li></a>
+      <a href="#activities" class="navlink"><li>Activities</li></a>
       <a href="#teaching" class="navlink"><li>Teaching</li></a>
       <a href="#apde-seminar" class="navlink"><li>APDE Seminar</li></a>
       <a href="https://ynnumath.com/" class="navlink outbound" target="_blank" rel="noopener noreferrer">
@@ -168,228 +168,253 @@
       <p><strong class="label">Email:</strong> zhipengyangmath[AT]gmail.com / yangzhipeng326[AT]163.com</p>
     </section>
 
-    <section id="cv">
-      <h2>Curriculum Vitae</h2>
-      <p><a class="link" href="/~zhipeng/CV.pdf" target="_blank">PDF</a></p>
-      <p>Last updated: Fall 2025</p>
-    </section>
 
-    <section id="research">
+   <section id="research">
   <h2>Research</h2>
 
-  <!-- 简短介绍 -->
-  <p>
-    I am working in the field of research related to Analysis of Partial Differential Equations. 
-    Since my master’s studies, I have focused on Nonlinear Functional Analysis and PDEs, 
-    especially elliptic problems with nonlocal (fractional) operators.  
-    During my PhD, I studied harmonic analysis on two-step nilpotent Lie groups,
-    most notably the Heisenberg group. 
-    My current interests include stability (quantitative) 
-    properties of functional inequalities on the Heisenberg group and in CR geometry, 
-    as well as noncommutative PDEs arising in Quantum Spaces.
+  <!-- Scoped styles for Research -->
+  <style>
+    /* 更疏朗的排版与两端对齐 */
+    #research { --lh: 1.75; }
+    #research p,
+    #research li {
+      line-height: var(--lh);
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+    /* 介绍段更醒目 */
+    #research .intro {
+      font-size: 1.12em;
+      line-height: calc(var(--lh) + .05);
+      margin: .6rem 0 1.1rem;
+    }
+    /* 列表与标题的间距 */
+    #research h3 { margin: 1.2rem 0 .6rem; }
+    #research ul { margin: .2rem 0 1.2rem 1.2rem; }
+    #research li { margin: 0 0 .7rem; }
+
+    /* 移动端微调 */
+    @media (max-width: 600px) {
+      #research .intro { font-size: 1.15em; }
+      #research ul { margin-left: 1rem; }
+    }
+  </style>
+
+  <!-- 简短介绍（已加大字号） -->
+  <p class="intro">
+    I work in the analysis of partial differential equations. Since my master’s studies, I have focused on nonlinear
+    functional analysis and PDEs, especially elliptic problems with nonlocal (fractional) operators. During my PhD,
+    I studied harmonic analysis on two-step nilpotent Lie groups, most notably the Heisenberg group. My current
+    interests include quantitative stability properties of functional inequalities on the Heisenberg group and in CR
+    geometry, as well as noncommutative PDEs arising in quantum spaces.
   </p>
 
   <!-- 基金项目 -->
   <h3>Projects</h3>
   <ul>
-    <li>2026.01—2029.12，一类椭圆方程自由边界问题解的唯一性和单调性及相关问题研究，国家自然科学基金地区项目（12561020），¥280,000，PI </li>
-    <li>2024.03—2027.02，齐次群上的积分不等式及其应用，云南省应用基础研究计划面上项目（202401AU070123），¥100,000，PI </li>
+    <li>2026.01—2029.12，一类椭圆方程自由边界问题解的唯一性和单调性及相关问题研究，国家自然科学基金地区项目（12561020），¥280,000，PI</li>
+    <li>2024.03—2027.02，齐次群上的积分不等式及其应用，云南省应用基础研究计划面上项目（202401AU070123），¥100,000，PI</li>
     <li>2024.01—2028.12，兴滇英才支持计划——青年专项，¥400,000，PI</li>
-    <li>2024.01—2026.12，二步分层李群上的Hardy不等式及相关问题研究，国家自然科学基金青年项目（12301145），¥300,000，PI </li>
+    <li>2024.01—2026.12，二步分层李群上的 Hardy 不等式及相关问题研究，国家自然科学基金青年项目（12301145），¥300,000，PI</li>
     <li>2023.06—2026.06，一类非局部椭圆型方程组解的存在性和渐近行为研究，云南省应用基础研究计划青年项目（202301AU070144），¥50,000，PI</li>
-    <li>2023.03—2025.02，带有Kirchhoff项的椭圆型方程组的极小能量解，云南省教育厅科学研究项目（2023J0199），¥20,000，PI   </li>
-    <li>2023.01—2026.12，两类强不定变分问题解的存在性及相关问题研究，国家自然科学基金地区项目（12261107），¥280,000，Co-PI   </li>
-    <li>2022.06—2027.05，云南师范大学——联大学者，¥300,000，PI </li>
-    <li>2018.01—2021.12，非局部椭圆型方程（组）解的多重性及性态研究，国家自然科学基金面上项目（11771385），¥480,000，PI  </li>
+    <li>2023.03—2025.02，带有 Kirchhoff 项的椭圆型方程组的极小能量解，云南省教育厅科学研究项目（2023J0199），¥20,000，PI</li>
+    <li>2023.01—2026.12，两类强不定变分问题解的存在性及相关问题研究，国家自然科学基金地区项目（12261107），¥280,000，Co-PI</li>
+    <li>2022.06—2027.05，云南师范大学——联大学者，¥300,000，PI</li>
+    <li>2018.01—2021.12，非局部椭圆型方程（组）解的多重性及性态研究，国家自然科学基金面上项目（11771385），¥480,000，PI</li>
   </ul>
-      
+
+  <!-- 著作 -->
   <h3>Books</h3>
-<ul>
-  <li>
-    杨志鹏，<a href="https://item.jd.com/14244682.html" target="_blank" rel="noopener noreferrer">
-      二部幂零李群上的调和分析（英文版）
-    </a>，
-    中国科学技术大学出版社，2023.
-  </li>
-   <li>
-    杨志鹏、王洪杰、赵健巍,<a href="https://item.jd.com/14822248.html" target="_blank" rel="noopener noreferrer">
-      高等数学简明教程
-    </a>，
-    哈尔滨工业大学出版社，2024.
-  </li>
-</ul>
-     
+  <ul>
+    <li>
+      杨志鹏，
+      <a href="https://item.jd.com/14244682.html" target="_blank" rel="noopener noreferrer">二部幂零李群上的调和分析（英文版）</a>，
+      中国科学技术大学出版社，2023.
+    </li>
+    <li>
+      杨志鹏、王洪杰、赵健巍，
+      <a href="https://item.jd.com/14822248.html" target="_blank" rel="noopener noreferrer">高等数学简明教程</a>，
+      哈尔滨工业大学出版社，2024.
+    </li>
+  </ul>
+
+  <!-- 已完成论文（保留你的列表与链接占位） -->
   <h3>已完成论文</h3>
- <ul>
-  <!-- 2025 -->
-  <li><u>
-    Chen, Yongpeng; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Concentration of ground state solutions for critical generalized quasilinear equation with steep potential well</a>.”
-    <em>Math. Methods Appl. Sci.</em> 48 (2025), no. 1, 397–416.
-  </u></li>
-  <li><u>
-    Luo, Jiao; Yang, Zhipeng; Zeng, Anbiao; Zhu, Ling.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Fractional Schrödinger–Poisson system involving concave and convex nonlinearities</a>.”
-    <em>Z. Anal. Anwend.</em> 44 (2025), no. 1–2, 235–250.
-  </u></li>
-  <li><u>
-    Chen, Yongpeng; Yang, Zhipeng; Zhang, Jianjun.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">On the existence of multiple normalized solutions for a class of fractional Choquard equations with mixed nonlinearities</a>.”
-    <em>NoDEA Nonlinear Differential Equations Appl.</em> 32 (2025), no. 5, Paper No. 83, 26 pp.
-  </u></li>
+  <ul>
+    <!-- 示例：2025 -->
+    <li><u>
+      Chen, Yongpeng; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Concentration of ground state solutions for critical generalized quasilinear equation with steep potential well</a>.”
+      <em>Math. Methods Appl. Sci.</em> 48 (2025), no. 1, 397–416.
+    </u></li>
+    <li><u>
+      Luo, Jiao; Yang, Zhipeng; Zeng, Anbiao; Zhu, Ling.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Fractional Schrödinger–Poisson system involving concave and convex nonlinearities</a>.”
+      <em>Z. Anal. Anwend.</em> 44 (2025), no. 1–2, 235–250.
+    </u></li>
+    <li><u>
+      Chen, Yongpeng; Yang, Zhipeng; Zhang, Jianjun.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">On the existence of multiple normalized solutions for a class of fractional Choquard equations with mixed nonlinearities</a>.”
+      <em>NoDEA Nonlinear Differential Equations Appl.</em> 32 (2025), no. 5, Paper No. 83, 26 pp.
+    </u></li>
 
-  <!-- 2024 -->
-  <li><u>
-    Chen, Yongpeng; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">The existence of multiple solutions for a class of upper critical Choquard equation in a bounded domain</a>.”
-    <em>Demonstr. Math.</em> 57 (2024), no. 1, Paper No. 20230152.
-  </u></li>
-  <li><u>
-    Gu, Guangze; Mu, Changyang; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence of ground state solutions for a class of non-autonomous fractional Kirchhoff equations</a>.”
-    <em>Fractal and Fractional</em> 8 (2024), no. 2, 113.
-  </u></li>
-  <li><u>
-    Chen, Yongpeng; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence of multi-bump solutions for a nonlinear Kirchhoff equation</a>.”
-    <em>J. Nonlinear Var. Anal.</em> 8 (2024), 233–248.
-  </u></li>
-  <li><u>
-    Mu, Changyang; Yang, Zhipeng; Zhang, Wei.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and concentration of solutions for a fractional Schrödinger–Poisson system with discontinuous nonlinearity</a>.”
-    <em>Adv. Nonlinear Stud.</em> 24 (2024), no. 4, 992–1011.
-  </u></li>
-  <li><u>
-    Li, Quanqing; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence of normalized solutions for a Sobolev supercritical Schrödinger equation</a>.”
-    <em>Electron. Res. Arch.</em> 32 (2024), no. 12, 6761–6771.
-  </u></li>
+    <!-- 2024 -->
+    <li><u>
+      Chen, Yongpeng; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">The existence of multiple solutions for a class of upper critical Choquard equation in a bounded domain</a>.”
+      <em>Demonstr. Math.</em> 57 (2024), no. 1, Paper No. 20230152.
+    </u></li>
+    <li><u>
+      Gu, Guangze; Mu, Changyang; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence of ground state solutions for a class of non-autonomous fractional Kirchhoff equations</a>.”
+      <em>Fractal and Fractional</em> 8 (2024), no. 2, 113.
+    </u></li>
+    <li><u>
+      Chen, Yongpeng; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence of multi-bump solutions for a nonlinear Kirchhoff equation</a>.”
+      <em>J. Nonlinear Var. Anal.</em> 8 (2024), 233–248.
+    </u></li>
+    <li><u>
+      Mu, Changyang; Yang, Zhipeng; Zhang, Wei.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and concentration of solutions for a fractional Schrödinger–Poisson system with discontinuous nonlinearity</a>.”
+      <em>Adv. Nonlinear Stud.</em> 24 (2024), no. 4, 992–1011.
+    </u></li>
+    <li><u>
+      Li, Quanqing; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence of normalized solutions for a Sobolev supercritical Schrödinger equation</a>.”
+      <em>Electron. Res. Arch.</em> 32 (2024), no. 12, 6761–6771.
+    </u></li>
 
-  <!-- 2023 -->
-  <li><u>
-    Yang, Zhipeng; Zhai, Hao; Zhao, Fukun.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">On the fractional Kirchhoff equation with critical Sobolev exponent</a>.”
-    <em>Appl. Math. Lett.</em> 141 (2023), Paper No. 108596, 8 pp.
-  </u></li>
-  <li><u>
-    Gu, Guangze; Mu, Changyang; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and multiplicity of solutions for a fractional Schrödinger–Poisson system with subcritical or critical growth</a>.”
-    <em>Qual. Theory Dyn. Syst.</em> 22 (2023), no. 2, Paper No. 63, 39 pp.
-  </u></li>
-  <li><u>
-    Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Critical Fujita exponent and blow-up results for the Rockland heat equation</a>.”
-    <em>Acta Math. Sci. Ser. A (Chinese Ed.)</em> 43 (2023), no. 3, 795–807. (Chinese)
-  </u></li>
+    <!-- 2023 -->
+    <li><u>
+      Yang, Zhipeng; Zhai, Hao; Zhao, Fukun.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">On the fractional Kirchhoff equation with critical Sobolev exponent</a>.”
+      <em>Appl. Math. Lett.</em> 141 (2023), Paper No. 108596, 8 pp.
+    </u></li>
+    <li><u>
+      Gu, Guangze; Mu, Changyang; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and multiplicity of solutions for a fractional Schrödinger–Poisson system with subcritical or critical growth</a>.”
+      <em>Qual. Theory Dyn. Syst.</em> 22 (2023), no. 2, Paper No. 63, 39 pp.
+    </u></li>
+    <li><u>
+      Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Critical Fujita exponent and blow-up results for the Rockland heat equation</a>.”
+      <em>Acta Math. Sci. Ser. A (Chinese Ed.)</em> 43 (2023), no. 3, 795–807. (Chinese)
+    </u></li>
 
-  <!-- 2022 -->
-  <li><u>
-    Gu, Guangze; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Positive eigenfunctions of a class of fractional Schrödinger operator with a potential well</a>.”
-    <em>Differential Integral Equations</em> 35 (2022), no. 1–2, 123–150.
-  </u></li>
-  <li><u>
-    Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Non-degeneracy of positive solutions for fractional Kirchhoff problems: high dimensional cases</a>.”
-    <em>J. Geom. Anal.</em> 32 (2022), no. 4, Paper No. 139, 24 pp.
-  </u></li>
-  <li><u>
-    Gu, Guangze; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">On the singularly perturbation fractional Kirchhoff equations: critical case</a>.”
-    <em>Adv. Nonlinear Anal.</em> 11 (2022), no. 1, 1097–1116.
-  </u></li>
-  <li><u>
-    Yang, Zhipeng; Zhao, Fukun; Zhao, Shunneng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and multiplicity of normalized solutions for a class of fractional Schrödinger–Poisson equations</a>.”
-    <em>Ann. Fenn. Math.</em> 47 (2022), no. 2, 777–790.
-  </u></li>
-  <li><u>
-    Chen, Yongpeng; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and asymptotical behavior of multiple solutions for the critical Choquard equation</a>.”
-    <em>J. Geom. Anal.</em> 32 (2022), no. 9, Paper No. 238, 34 pp.
-  </u></li>
-  <li><u>
-    Gu, Guangze; Yang, Xianyong; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Infinitely many sign-changing solutions for nonlinear fractional Kirchhoff equations</a>.”
-    <em>Appl. Anal.</em> 101 (2022), no. 16, 5850–5871.
-  </u></li>
-  <li><u>
-    Yang, Zhi Peng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">A note on the heat kernel for the rescaled harmonic oscillator from two-step nilpotent Lie groups</a>.”
-    <em>Acta Math. Sin. (Engl. Ser.)</em> 38 (2022), no. 9, 1597–1611.
-  </u></li>
+    <!-- 2022 -->
+    <li><u>
+      Gu, Guangze; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Positive eigenfunctions of a class of fractional Schrödinger operator with a potential well</a>.”
+      <em>Differential Integral Equations</em> 35 (2022), no. 1–2, 123–150.
+    </u></li>
+    <li><u>
+      Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Non-degeneracy of positive solutions for fractional Kirchhoff problems: high dimensional cases</a>.”
+      <em>J. Geom. Anal.</em> 32 (2022), no. 4, Paper No. 139, 24 pp.
+    </u></li>
+    <li><u>
+      Gu, Guangze; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">On the singularly perturbation fractional Kirchhoff equations: critical case</a>.”
+      <em>Adv. Nonlinear Anal.</em> 11 (2022), no. 1, 1097–1116.
+    </u></li>
+    <li><u>
+      Yang, Zhipeng; Zhao, Fukun; Zhao, Shunneng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and multiplicity of normalized solutions for a class of fractional Schrödinger–Poisson equations</a>.”
+      <em>Ann. Fenn. Math.</em> 47 (2022), no. 2, 777–790.
+    </u></li>
+    <li><u>
+      Chen, Yongpeng; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and asymptotical behavior of multiple solutions for the critical Choquard equation</a>.”
+      <em>J. Geom. Anal.</em> 32 (2022), no. 9, Paper No. 238, 34 pp.
+    </u></li>
+    <li><u>
+      Gu, Guangze; Yang, Xianyong; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Infinitely many sign-changing solutions for nonlinear fractional Kirchhoff equations</a>.”
+      <em>Appl. Anal.</em> 101 (2022), no. 16, 5850–5871.
+    </u></li>
+    <li><u>
+      Yang, Zhi Peng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">A note on the heat kernel for the rescaled harmonic oscillator from two-step nilpotent Lie groups</a>.”
+      <em>Acta Math. Sin. (Engl. Ser.)</em> 38 (2022), no. 9, 1597–1611.
+    </u></li>
 
-  <!-- 2021 -->
-  <li><u>
-    Yang, Zhipeng; Zhao, Fukun.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Multiplicity and concentration behaviour of solutions for a fractional Choquard equation with critical growth</a>.”
-    <em>Adv. Nonlinear Anal.</em> 10 (2021), no. 1, 732–774.
-  </u></li>
-  <li><u>
-    Yang, Zhipeng; Zhang, Wei; Zhao, Fukun.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and concentration results for fractional Schrödinger–Poisson system via penalization method</a>.”
-    <em>Electron. J. Differential Equations</em> 2021, Paper No. 14, 31 pp.
-  </u></li>
-  <li><u>
-    Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Fujita exponent and nonexistence result for the Rockland heat equation</a>.”
-    <em>Appl. Math. Lett.</em> 121 (2021), Paper No. 107386, 6 pp.
-  </u></li>
-  <li><u>
-    Yang, Zhipeng; Yu, Yuanyang.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and concentration of solution for Schrödinger–Poisson system with local potential</a>.”
-    <em>Partial Differ. Equ. Appl.</em> 2 (2021), no. 4, Paper No. 47, 22 pp.
-  </u></li>
-  <li><u>
-    Chen, Yongpeng; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Multiplicity of solutions for a class of critical Schrödinger–Poisson system with two parameters</a>.”
-    <em>Acta Math. Sci. Ser. A (Chinese Ed.)</em> 41 (2021), no. 6, 1750–1767. (Chinese)
-  </u></li>
+    <!-- 2021 -->
+    <li><u>
+      Yang, Zhipeng; Zhao, Fukun.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Multiplicity and concentration behaviour of solutions for a fractional Choquard equation with critical growth</a>.”
+      <em>Adv. Nonlinear Anal.</em> 10 (2021), no. 1, 732–774.
+    </u></li>
+    <li><u>
+      Yang, Zhipeng; Zhang, Wei; Zhao, Fukun.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and concentration results for fractional Schrödinger–Poisson system via penalization method</a>.”
+      <em>Electron. J. Differential Equations</em> 2021, Paper No. 14, 31 pp.
+    </u></li>
+    <li><u>
+      Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Fujita exponent and nonexistence result for the Rockland heat equation</a>.”
+      <em>Appl. Math. Lett.</em> 121 (2021), Paper No. 107386, 6 pp.
+    </u></li>
+    <li><u>
+      Yang, Zhipeng; Yu, Yuanyang.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence and concentration of solution for Schrödinger–Poisson system with local potential</a>.”
+      <em>Partial Differ. Equ. Appl.</em> 2 (2021), no. 4, Paper No. 47, 22 pp.
+    </u></li>
+    <li><u>
+      Chen, Yongpeng; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Multiplicity of solutions for a class of critical Schrödinger–Poisson system with two parameters</a>.”
+      <em>Acta Math. Sci. Ser. A (Chinese Ed.)</em> 41 (2021), no. 6, 1750–1767. (Chinese)
+    </u></li>
 
-  <!-- 2020 -->
-  <li><u>
-    Chen, Shaoxiong; Li, Yue; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Multiplicity and concentration of nontrivial nonnegative solutions for a fractional Choquard equation with critical exponent</a>.”
-    <em>Rev. R. Acad. Cienc. Exactas Fís. Nat. Ser. A Mat. (RACSAM)</em> 114 (2020), no. 1, Paper No. 33, 35 pp.
-  </u></li>
-  <li><u>
-    Jin, Tiankun; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">The fractional Schrödinger–Poisson systems with infinitely many solutions</a>.”
-    <em>J. Korean Math. Soc.</em> 57 (2020), no. 2, 489–506.
-  </u></li>
-  <li><u>
-    Yang, Zhipeng; Yu, Yuanyang.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Geometrically distinct solutions of nonlinear elliptic systems with periodic potentials</a>.”
-    <em>Arch. Math. (Basel)</em> 115 (2020), no. 6, 703–716.
-  </u></li>
+    <!-- 2020 -->
+    <li><u>
+      Chen, Shaoxiong; Li, Yue; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Multiplicity and concentration of nontrivial nonnegative solutions for a fractional Choquard equation with critical exponent</a>.”
+      <em>Rev. R. Acad. Cienc. Exactas Fís. Nat. Ser. A Mat. (RACSAM)</em> 114 (2020), no. 1, Paper No. 33, 35 pp.
+    </u></li>
+    <li><u>
+      Jin, Tiankun; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">The fractional Schrödinger–Poisson systems with infinitely many solutions</a>.”
+      <em>J. Korean Math. Soc.</em> 57 (2020), no. 2, 489–506.
+    </u></li>
+    <li><u>
+      Yang, Zhipeng; Yu, Yuanyang.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Geometrically distinct solutions of nonlinear elliptic systems with periodic potentials</a>.”
+      <em>Arch. Math. (Basel)</em> 115 (2020), no. 6, 703–716.
+    </u></li>
 
-  <!-- 2019 -->
-  <li><u>
-    Yang, Zhipeng; Yu, Yuanyang; Zhao, Fukun.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">The concentration behavior of ground state solutions for a critical fractional Schrödinger–Poisson system</a>.”
-    <em>Math. Nachr.</em> 292 (2019), no. 8, 1837–1868.
-  </u></li>
-  <li><u>
-    Yang, Zhipeng; Yu, Yuanyang; Zhao, Fukun.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Concentration behavior of ground state solutions for a fractional Schrödinger–Poisson system involving critical exponent</a>.”
-    <em>Commun. Contemp. Math.</em> 21 (2019), no. 6, 1850027, 46 pp.
-  </u></li>
-  <li><u>
-    Yang, Xianyong; Yang, Zhipeng.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence of multiple non-trivial solutions for a nonlocal problem</a>.”
-    <em>AIMS Math.</em> 4 (2019), no. 2, 299–307.
-  </u></li>
+    <!-- 2019 -->
+    <li><u>
+      Yang, Zhipeng; Yu, Yuanyang; Zhao, Fukun.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">The concentration behavior of ground state solutions for a critical fractional Schrödinger–Poisson system</a>.”
+      <em>Math. Nachr.</em> 292 (2019), no. 8, 1837–1868.
+    </u></li>
+    <li><u>
+      Yang, Zhipeng; Yu, Yuanyang; Zhao, Fukun.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Concentration behavior of ground state solutions for a fractional Schrödinger–Poisson system involving critical exponent</a>.”
+      <em>Commun. Contemp. Math.</em> 21 (2019), no. 6, 1850027, 46 pp.
+    </u></li>
+    <li><u>
+      Yang, Xianyong; Yang, Zhipeng.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Existence of multiple non-trivial solutions for a nonlocal problem</a>.”
+      <em>AIMS Math.</em> 4 (2019), no. 2, 299–307.
+    </u></li>
 
-  <!-- 2018 -->
-  <li><u>
-    Yang, Zhipeng; Zhao, Fukun.
-    “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Three solutions for a fractional Schrödinger equation with vanishing potentials</a>.”
-    <em>Appl. Math. Lett.</em> 76 (2018), 90–95.
-  </u></li>
-</ul>
-
+    <!-- 2018 -->
+    <li><u>
+      Yang, Zhipeng; Zhao, Fukun.
+      “<a class="paper-link" href="PASTE_URL_HERE" target="_blank" rel="noopener noreferrer">Three solutions for a fractional Schrödinger equation with vanishing potentials</a>.”
+      <em>Appl. Math. Lett.</em> 76 (2018), 90–95.
+    </u></li>
+  </ul>
 </section>
 
+ <section id="cv">
+      <h2>Activities</h2>
+      <p><a class="link" href="/~zhipeng/CV.pdf" target="_blank">PDF</a></p>
+      <p>Last updated: Fall 2025</p>
+    </section>
 
     <section id="teaching">
       <h2>Teaching</h2>
