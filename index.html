@@ -182,7 +182,7 @@
     <!-- 每一张图：一屏一张，可按需增删 -->
     <figure class="pf-slide">
       <img src="P1.jpg" alt="YNNU campus" loading="lazy">
-      <figcaption>YNNU campus</figcaption>
+      <figcaption>Seasonal School 2025 at UGent</figcaption>
     </figure>
     <figure class="pf-slide">
       <img src="images/about-2.jpg" alt="Ghent University, S8 Building" loading="lazy">
@@ -846,19 +846,22 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 });
 </script>
-    <script>
+   <script>
 (function(){
+  const frame    = document.getElementById('about-photo-frame');
   const viewport = document.getElementById('about-gallery');
   const dotsWrap = document.getElementById('about-dots');
+  if (!frame || !viewport) return;
+
   const slides = Array.from(viewport.querySelectorAll('.pf-slide'));
-  if (!viewport || !slides.length) return;
+  if (!slides.length) return;
 
   // 生成指示点
   slides.forEach((_, i)=>{
     const b = document.createElement('button');
     b.type = 'button';
     b.setAttribute('aria-label', 'Go to slide ' + (i+1));
-    b.addEventListener('click', ()=> scrollToIndex(i));
+    b.addEventListener('click', ()=> { scrollToIndex(i); restartAuto(); });
     dotsWrap.appendChild(b);
   });
 
@@ -873,32 +876,64 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
   function scrollToIndex(i){
-    viewport.scrollTo({ left: i * viewport.clientWidth, behavior: 'smooth' });
+    const n = (i + slides.length) % slides.length;
+    viewport.scrollTo({ left: n * viewport.clientWidth, behavior: 'smooth' });
   }
-  function go(dir){
-    scrollToIndex(activeIndex() + dir);
-  }
+  function go(dir){ scrollToIndex(activeIndex() + dir); }
 
   // 左右按钮
-  const prev = document.querySelector('#about-photo-frame .pf-prev');
-  const next = document.querySelector('#about-photo-frame .pf-next');
-  prev.addEventListener('click', ()=> go(-1));
-  next.addEventListener('click', ()=> go(1));
+  const prev = frame.querySelector('.pf-prev');
+  const next = frame.querySelector('.pf-next');
+  prev.addEventListener('click', ()=> { go(-1); restartAuto(); });
+  next.addEventListener('click', ()=> { go(1);  restartAuto(); });
 
   // 滚动/窗口变化时同步指示点
   viewport.addEventListener('scroll', ()=> { window.requestAnimationFrame(updateDots); });
   window.addEventListener('resize', updateDots);
 
-  // 键盘可达：左右键切换
+  // 键盘左右键切换
   viewport.addEventListener('keydown', (e)=>{
-    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
-    if (e.key === 'ArrowRight'){ e.preventDefault(); go(1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); go(-1); restartAuto(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1);  restartAuto(); }
   });
 
-  // 初始高亮
+  // ===== 自动播放 =====
+  const INTERVAL = 4500; // 毫秒，想更快/慢可调整
+  let timer = null;
+
+  function startAuto(){
+    if (timer) return;
+    timer = setInterval(()=> {
+      // 若已经滚动到末尾，循环回第一张
+      scrollToIndex(activeIndex() + 1);
+    }, INTERVAL);
+  }
+  function stopAuto(){
+    if (!timer) return;
+    clearInterval(timer);
+    timer = null;
+  }
+  function restartAuto(){ stopAuto(); startAuto(); }
+
+  // 悬停/聚焦/触摸时暂停，离开后继续
+  frame.addEventListener('mouseenter', stopAuto);
+  frame.addEventListener('mouseleave', startAuto);
+  frame.addEventListener('touchstart', stopAuto, {passive:true});
+  frame.addEventListener('touchend',   startAuto, {passive:true});
+  viewport.addEventListener('focusin',  stopAuto);
+  viewport.addEventListener('focusout', startAuto);
+
+  // 切换标签页时暂停，回来继续
+  document.addEventListener('visibilitychange', ()=>{
+    if (document.hidden) stopAuto(); else startAuto();
+  });
+
+  // 初始化
   updateDots();
+  startAuto();
 })();
 </script>
+
 
 </body>
 </html>
