@@ -475,12 +475,12 @@
       </ul>
     </section>
 
-  <section id="apde-seminar">
+ <section id="apde-seminar">
   <h2>APDE Seminar</h2>
 
   <div class="seminar-intro">
     Starting in Fall 2025, <a href="https://math.ynnu.edu.cn/info/1027/2054.htm" target="_blank" rel="noopener noreferrer">Dr. Guangze Gu</a> and I start organizing a hybrid seminar on Analysis of Partial Differential Equations, we want to
-    bring together as many researchers as possible to share recent results, learn from each another, and foster new collaborations. Seminar will be held via Tencent（VooV） Meeting; if you would like to receive the link or be
+    bring together as many researchers as possible to share recent results, learn from each another, and foster new collaborations. Seminar will be held via Tencent（VooV） Meeting（<a href="https://voovmeeting.com/download-center.html?from=1002" target="_blank" rel="noopener noreferrer">Link</a>）; if you would like to receive the link or be
     added to the mailing list, please email either organizer. This seminar is supported by the National Natural Science Foundation of China (NSFC:12301145、12561020).
   </div>
 
@@ -495,8 +495,6 @@
       padding: 14px 16px;
       margin: 10px 0 18px;
       color: #26466f;
-
-      /* 两端对齐（中英文都友好） */
       text-align: justify;
       text-justify: inter-ideograph;
       -webkit-hyphens: auto;
@@ -539,7 +537,7 @@
     }
     #apde-seminar .btn:hover{background:#f1f1f1}
 
-    /* 让摘要与主讲人简介的文字也两端对齐 */
+    /* 摘要/简介也两端对齐 */
     #apde-seminar details.abstract > div,
     #apde-seminar details.speaker > div{
       text-align: justify;
@@ -577,10 +575,12 @@
       data-speaker-bio="王华阳，博士毕业于中国科学院数学与系统科学研究院，目前在北京师范大学担任励耘博士后，研究方向为非线性分析与偏微分方程，特别关注非线性Dirac方程、伪相对论方程、Hartree方程等非线性方程解的存在性、正则性、渐近行为等性质，在CVPDE、JDE、Nonlineaity、JGA等国际期刊上发表多篇学术论文。"
       data-affil="北京师范大学"
       data-room="939-7737-2516"
+      data-room-url="https://meeting.tencent.com/dm/glUHxxyAJ8sM"
       data-location="腾讯会议"
       data-join=""
       data-abstract="Dirac方程是电子运动的基本方程。非相对论极限是连接量子力学与相对论量子力学的桥梁。本次报告主要介绍关于非线性Dirac方程解的非相对论极限的若干研究进展。">
     </li>
+
     <li class="talk"
       data-datetime="2025-10-20T16:00:00+08:00"
       data-duration="90"
@@ -589,13 +589,14 @@
       data-speaker-url="https://analysis-pde.org/kai-zeng/"
       data-affil="Ghent University"
       data-room="939-7737-2516"
+      data-room-url="https://meeting.tencent.com/dm/glUHxxyAJ8sM"
       data-location="腾讯会议"
       data-join=""
       data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product. We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
     </li>
   </ul>
 
-  <!-- ===== Logic (timezone-safe + speaker bio) ===== -->
+  <!-- ===== Logic (timezone-safe + speaker bio + room link) ===== -->
   <script>
     (function(){
       const now = new Date();
@@ -647,13 +648,20 @@
 
         const meta = document.createElement('div');
         meta.className = 'talk-meta';
+
         const spkHTML = talk.speakerUrl
           ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
           : escapeHTML(talk.speaker);
 
+        const roomHTML = talk.room
+          ? (talk.roomUrl || talk.join
+              ? `<a href="${encodeURI(talk.roomUrl || talk.join)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.room)}</a>`
+              : escapeHTML(talk.room))
+          : '';
+
         meta.innerHTML =
           `<span>${fmtRange(talk.datetime, talk.durationMin)}</span>` +
-          (talk.room ? ` <span class="sep">•</span><span>${escapeHTML(talk.room)}</span>` : '') +
+          (talk.room ? ` <span class="sep">•</span><span>${roomHTML}</span>` : '') +
           (talk.speaker ? ` <span class="sep">•</span><span>${spkHTML}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
         wrap.appendChild(meta);
 
@@ -696,6 +704,7 @@
           speakerBio: d.speakerBio || d['speaker-bio'] || '',
           affil: d.affil || '',
           room: d.room || '',
+          roomUrl: d.roomUrl || d['room-url'] || '',
           location: d.location || '',
           join: d.join || '',
           abstract: d.abstract || ''
@@ -724,6 +733,7 @@
     })();
   </script>
 </section>
+
 
    
 
