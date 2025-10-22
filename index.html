@@ -22,19 +22,17 @@
       color: #555; font-size: 14px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
     }
     .site-stats .sep{ opacity: .6; }
-    /* 让小国旗更大（桌面 30px，手机稍小些） */
-.flagcounter img{
-  display:block;
-  height:100px;           /* 原来 22px */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  image-rendering: pixelated; /* 放大时尽量别糊 */
-}
-
-@media (max-width: 480px){
-  .flagcounter img{ height:26px; }
-}
-
+    /* 让小国旗更大（桌面 100px，手机稍小些） */
+    .flagcounter img{
+      display:block;
+      height:100px;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+    }
+    @media (max-width: 480px){
+      .flagcounter img{ height:26px; }
+    }
 
     /* 桌面端：保持你原布局 */
     @media (min-width: 861px){
@@ -212,9 +210,7 @@
       </ul>
 
       <h3>已完成论文</h3>
-      <!-- 你的论文列表（已带外链） -->
       <ul>
-        <!-- 只保留几条示例，其他条目省略以节约篇幅（你原文里已包含全部，逻辑不改） -->
         <li><u>
           Chen, Yongpeng; Yang, Zhipeng.
           “<a class="paper-link" href="https://doi.org/10.1002/mma.10334" target="_blank" rel="noopener noreferrer">Concentration of ground state solutions for critical generalized quasilinear equation with steep potential well</a>.”
@@ -225,7 +221,6 @@
           “<a class="paper-link" href="https://ems.press/journals/zaa/articles/14298477" target="_blank" rel="noopener noreferrer">Fractional Schrödinger–Poisson system involving concave and convex nonlinearities</a>.”
           <em>Z. Anal. Anwend.</em> 44 (2025), no. 1–2, 235–250.
         </u></li>
-        <!-- ……其余条目按你上一版保留 …… -->
       </ul>
     </section>
 
@@ -474,24 +469,24 @@
       </script>
     </section>
 
-    <!-- ======= 统计区：不蒜子 + FlagCounter ======= -->
-    <div id="site-stats" class="site-stats" role="note" aria-label="Site statistics">
-      <span id="busuanzi_container_site_uv" style="display:none">
-        Visitors: <span id="busuanzi_value_site_uv">0</span>
-      </span>
-      <span class="sep">｜</span>
-      <span id="busuanzi_container_site_pv" style="display:none">
-        Views: <span id="busuanzi_value_site_pv">0</span>
-      </span>
-      <span class="sep">｜</span>
-      <span class="flagcounter">
-        <a href="https://info.flagcounter.com/BxFX" target="_blank" rel="noopener noreferrer" title="View country stats">
-          <img id="flag-img"
-               src="https://s05.flagcounter.com/count2/BxFX/bg_FFFFFF/txt_333333/border_E5E5E5/columns_6/maxflags_16/viewers_0/labels_1/pageviews_1/flags_1/"
-               alt="Flag Counter">
-        </a>
-      </span>
-    </div>
+    <!-- ======= 统计区：不蒜子 + 新 FlagCounter ======= -->
+<div id="site-stats" class="site-stats" role="note" aria-label="Site statistics">
+  <span id="busuanzi_container_site_uv">
+    Visitors: <span id="busuanzi_value_site_uv">0</span>
+  </span>
+  <span class="sep">｜</span>
+  <span id="busuanzi_container_site_pv">
+    Views: <span id="busuanzi_value_site_pv">0</span>
+  </span>
+  <span class="sep">｜</span>
+  <span class="flagcounter">
+    <a href="https://info.flagcounter.com/Obqg" target="_blank" rel="noopener noreferrer" title="View country stats">
+      <img id="flag-img"
+           src="https://s01.flagcounter.com/countxl/Obqg/bg_FFFFFF/txt_000000/border_CCCCCC/columns_4/maxflags_20/viewers_0/labels_0/pageviews_1/flags_0/percent_0/"
+           alt="Flag Counter" />
+    </a>
+  </span>
+</div>
   </div><!-- /.main -->
 
   <!-- 抽屉 + 单页路由脚本 -->
@@ -543,6 +538,61 @@
 
   <!-- 不蒜子（PV/UV） -->
   <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  <!-- ⭐ 将不蒜子“从 0 开始显示”的基线脚本：首次部署即清零显示 -->
+  <script>
+    (function(){
+      function getInt(id){
+        var el = document.getElementById(id);
+        if(!el) return 0;
+        var n = parseInt((el.textContent||'').replace(/[^\d]/g,''),10);
+        return isNaN(n)?0:n;
+      }
+      function setText(id, val){
+        var el = document.getElementById(id);
+        if(el) el.textContent = String(val);
+      }
+      function clamp(n){ return n<0?0:n; }
+
+      function init(){
+        var host = location.hostname || 'local';
+        var pvKey = 'bz_pv_base@'+host;
+        var uvKey = 'bz_uv_base@'+host;
+
+        var pv = getInt('busuanzi_value_site_pv');
+        var uv = getInt('busuanzi_value_site_uv');
+
+        // busuanzi 可能尚未填充，稍后再试
+        if (pv===0 && uv===0) { return setTimeout(init, 300); }
+
+        // 第一次运行：把当前总量记为“基线”，之后显示差值
+        if (localStorage.getItem(pvKey)===null) localStorage.setItem(pvKey, String(pv));
+        if (localStorage.getItem(uvKey)===null) localStorage.setItem(uvKey, String(uv));
+
+        var pvBase = parseInt(localStorage.getItem(pvKey)||'0',10);
+        var uvBase = parseInt(localStorage.getItem(uvKey)||'0',10);
+
+        setText('busuanzi_value_site_pv', clamp(pv - pvBase));
+        setText('busuanzi_value_site_uv', clamp(uv - uvBase));
+
+        // 监听后续更新并继续用“差值”显示
+        var obs = new MutationObserver(function(){
+          var pvNew = getInt('busuanzi_value_site_pv');
+          var uvNew = getInt('busuanzi_value_site_uv');
+          setText('busuanzi_value_site_pv', clamp(pvNew - pvBase));
+          setText('busuanzi_value_site_uv', clamp(uvNew - uvBase));
+        });
+        ['busuanzi_value_site_pv','busuanzi_value_site_uv'].forEach(function(id){
+          var el = document.getElementById(id);
+          if(el) obs.observe(el, {childList:true, characterData:true, subtree:true});
+        });
+
+        // 如果你以后想再次清零显示，可在控制台执行：
+        // localStorage.removeItem(pvKey); localStorage.removeItem(uvKey);
+      }
+      window.addEventListener('load', function(){ setTimeout(init, 600); });
+    })();
+  </script>
 
   <!-- FlagCounter 兜底：若图片加载失败则隐藏该块，避免空白 -->
   <script>
