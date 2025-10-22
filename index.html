@@ -22,7 +22,19 @@
       color: #555; font-size: 14px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
     }
     .site-stats .sep{ opacity: .6; }
-    .flagcounter img{ display:block; height:22px; }
+    /* 让小国旗更大（桌面 30px，手机稍小些） */
+.flagcounter img{
+  display:block;
+  height:30px;           /* 原来 22px */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated; /* 放大时尽量别糊 */
+}
+
+@media (max-width: 480px){
+  .flagcounter img{ height:26px; }
+}
+
 
     /* 桌面端：保持你原布局 */
     @media (min-width: 861px){
