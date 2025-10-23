@@ -438,14 +438,9 @@
     <em>Appl. Math. Lett.</em> 76 (2018), 90–95.
   </u></li>
 </ul>
-
     </section>
 
-    <section id="cv">
-      <h2>Activities</h2>
-      <p><a class="link" href="/~zhipeng/CV.pdf" target="_blank">PDF</a></p>
-      <p>Last updated: Fall 2025</p>
-    </section>
+   
 
     <section id="teaching">
       <h2>Teaching</h2>
@@ -473,218 +468,264 @@
     </section>
 
     <section id="apde-seminar">
-      <h2>APDE Seminar</h2>
+  <h2>APDE Seminar</h2>
 
-      <div class="seminar-intro">
-        Starting in Fall 2025, <a href="https://math.ynnu.edu.cn/info/1027/2054.htm" target="_blank" rel="noopener noreferrer">Dr. Guangze Gu</a> and I start organizing a hybrid seminar on Analysis of Partial Differential Equations, we want to
-        bring together as many researchers as possible to share recent results, learn from each another, and foster new collaborations. Seminar will be held via Tencent（VooV） Meeting（<a href="https://voovmeeting.com/download-center.html?from=1002" target="_blank" rel="noopener noreferrer">Link</a>）; if you would like to receive the link or be
-        added to the mailing list, please email either organizer. This seminar is supported by the National Natural Science Foundation of China (NSFC:12301145、12561020).
-      </div>
+  <div class="seminar-intro">
+    Starting in Fall 2025, <a href="https://math.ynnu.edu.cn/info/1027/2054.htm" target="_blank" rel="noopener noreferrer">Dr. Guangze Gu</a> and I start organizing a hybrid seminar on Analysis of Partial Differential Equations, we want to
+    bring together as many researchers as possible to share recent results, learn from each another, and foster new collaborations. Seminar will be held via Tencent（VooV） Meeting（<a href="https://voovmeeting.com/download-center.html?from=1002" target="_blank" rel="noopener noreferrer">Link</a>）; if you would like to receive the link or be
+    added to the mailing list, please email either organizer. This seminar is supported by the National Natural Science Foundation of China (NSFC:12301145、12561020).
+  </div>
 
-      <!-- ===== Styles (scoped to seminar) ===== -->
-      <style>
-        #apde-seminar .seminar-intro{
-          background: linear-gradient(180deg,#f6faff 0%, #ffffff 100%);
-          border: 1px solid #dbeafe; border-left: 5px solid #3b82f6;
-          border-radius: 12px; padding: 14px 16px; margin: 10px 0 18px;
-          color: #26466f; text-align: justify; text-justify: inter-ideograph; -webkit-hyphens: auto; hyphens: auto; word-break: break-word;
+  <!-- ===== Styles (scoped to seminar) ===== -->
+  <style>
+    /* 更好看的介绍信息块 + 两端对齐 */
+    #apde-seminar .seminar-intro{
+      background: linear-gradient(180deg,#f6faff 0%, #ffffff 100%);
+      border: 1px solid #dbeafe;
+      border-left: 5px solid #3b82f6;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 10px 0 18px;
+      color: #26466f;
+      text-align: justify;
+      text-justify: inter-ideograph;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+      word-break: break-word;
+    }
+    #apde-seminar .seminar-intro a{
+      color:#1d4ed8;
+      font-weight:600;
+      text-decoration:none;
+      border-bottom: 1px dotted rgba(29,78,216,.35);
+    }
+    #apde-seminar .seminar-intro a:hover{ text-decoration:underline; }
+
+    /* 列表与卡片 */
+    #apde-seminar .talks-wrap{display:grid;grid-template-columns:1fr;gap:14px}
+    #apde-seminar .talk-card{
+      border:1px solid #e6e6e6;border-radius:10px;padding:14px 16px;background:#fff;
+      box-shadow:0 1px 2px rgba(0,0,0,.03)
+    }
+    #apde-seminar .talk-card.upcoming{border-color:#d7e8ff;background:#fbfdff}
+    #apde-seminar .talk-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
+
+    /* “Next talk” 更醒目 */
+    #apde-seminar .tag{
+      font-size:14px; line-height:1; border:1px solid #cfe0ff; background:#eef5ff; color:#1d4ed8;
+      border-radius:999px; padding:6px 10px; font-weight:700; letter-spacing:.2px;
+    }
+    #apde-seminar .talk-card.upcoming .tag{ font-size:16px; padding:7px 12px; }
+
+    #apde-seminar .talk-title{font-weight:700}
+    #apde-seminar .talk-meta{color:#555;font-size:14px;margin:6px 0 8px}
+    #apde-seminar .talk-meta .sep{opacity:.5;margin:0 6px}
+    #apde-seminar .talk-meta a{ text-decoration:none; border-bottom:none; color:#2b5fb0; }
+    #apde-seminar .talk-meta a:hover{ text-decoration:underline; }
+
+    #apde-seminar .btns{display:flex;gap:8px;flex-wrap:wrap}
+    #apde-seminar .btn{
+      font-size:13px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;padding:6px 10px;cursor:pointer;text-decoration:none;color:inherit
+    }
+    #apde-seminar .btn:hover{background:#f1f1f1}
+
+    /* 摘要/简介也两端对齐 */
+    #apde-seminar details.abstract > div,
+    #apde-seminar details.speaker > div{
+      text-align: justify;
+      text-justify: inter-ideograph;
+      -webkit-hyphens: auto;
+      hyphens: auto;
+      word-break: break-word;
+    }
+
+    #apde-seminar details.abstract, #apde-seminar details.speaker{margin-top:8px}
+    #apde-seminar details.abstract summary, #apde-seminar details.speaker summary{cursor:pointer;color:#2b5fb0}
+    #apde-seminar .muted{color:#777}
+    #apde-seminar .subsec-title{margin:18px 0 8px;font-size:18px}
+
+    @media (min-width: 860px){
+      #apde-seminar .talks-wrap{grid-template-columns:1fr 1fr}
+      #apde-seminar .talk-card.wide{grid-column:1 / -1}
+    }
+  </style>
+
+  <!-- Upcoming -->
+  <div id="next-talk" class="talks-wrap"></div>
+
+  <!-- Past list -->
+  <h3 class="subsec-title">Past talks</h3>
+  <div id="past-talks" class="talks-wrap"></div>
+
+  <!-- ===== Data (edit here to add talks) ===== -->
+  <ul id="apde-data" style="display:none">
+    <li class="talk"
+      data-datetime="2025-10-28T16:00:00+08:00"
+      data-duration="90"
+      data-title="非线性Dirac方程非相对论极限的新进展"
+      data-speaker="王华阳"
+      data-speaker-bio="王华阳，博士毕业于中国科学院数学与系统科学研究院，目前在北京师范大学担任励耘博士后，研究方向为非线性分析与偏微分方程，特别关注非线性Dirac方程、伪相对论方程、Hartree方程等非线性方程解的存在性、正则性、渐近行为等性质，在CVPDE、JDE、Nonlineaity、JGA等国际期刊上发表多篇学术论文。"
+      data-affil="北京师范大学"
+      data-room="939-7737-2516"
+      data-room-url="https://meeting.tencent.com/dm/glUHxxyAJ8sM"
+      data-location="腾讯会议"
+      data-join=""
+      data-abstract="Dirac方程是电子运动的基本方程。非相对论极限是连接量子力学与相对论量子力学的桥梁。本次报告主要介绍关于非线性Dirac方程解的非相对论极限的若干研究进展。">
+    </li>
+
+    <li class="talk"
+      data-datetime="2025-10-20T16:00:00+08:00"
+      data-duration="90"
+      data-title="Schatten properties of commutators on twisted crossed products"
+      data-speaker="Kai Zeng"
+      data-speaker-url="https://analysis-pde.org/kai-zeng/"
+      data-affil="Ghent University"
+      data-room="939-7737-2516"
+      data-room-url="https://meeting.tencent.com/dm/glUHxxyAJ8sM"
+      data-location="腾讯会议"
+      data-join=""
+      data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product. We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
+    </li>
+  </ul>
+
+  <!-- ===== Logic (timezone-safe + speaker bio + room link) ===== -->
+  <script>
+    (function(){
+      const now = new Date();
+
+      function parseISO(iso){
+        let d = new Date(iso);
+        if (!isNaN(d)) return d;
+        const fixed = String(iso).replace(' ', 'T').replace(/([+-]\d{2}):?(\d{2})$/, '$1$2');
+        return new Date(fixed);
+      }
+
+      function fmtRange(startISO, durationMin, timeZone){
+        const start = parseISO(startISO);
+        const dur = Number.isFinite(+durationMin) ? +durationMin : 90;
+        const end = new Date(start.getTime() + dur * 60000);
+
+        const dateOpts = { year:'numeric', month:'short', day:'numeric' };
+        const timeOpts = { hour:'2-digit', minute:'2-digit', hour12:false, hourCycle:'h23' };
+        if (timeZone){ dateOpts.timeZone = timeZone; timeOpts.timeZone = timeZone; }
+
+        const df = new Intl.DateTimeFormat(undefined, dateOpts);
+        const tf = new Intl.DateTimeFormat(undefined, timeOpts);
+        return df.format(start) + ' · ' + tf.format(start) + '–' + tf.format(end);
+      }
+
+      function escapeHTML(s){
+        return String(s||'').replace(/[&<>"']/g, c => (
+          {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]
+        ));
+      }
+
+      function renderCard(talk, {highlight=false}={}){
+        const wrap = document.createElement('div');
+        wrap.className = 'talk-card' + (highlight ? ' upcoming wide' : '');
+
+        const head = document.createElement('div');
+        head.className = 'talk-head';
+        if (highlight){
+          const tag = document.createElement('span');
+          tag.className = 'tag';
+          tag.textContent = 'Next talk';
+          head.appendChild(tag);
         }
-        #apde-seminar .seminar-intro a{ color:#1d4ed8; font-weight:600; text-decoration:none; border-bottom: 1px dotted rgba(29,78,216,.35); }
-        #apde-seminar .seminar-intro a:hover{ text-decoration:underline; }
+        const title = document.createElement('div');
+        title.className = 'talk-title';
+        title.textContent = talk.title;
+        head.appendChild(title);
+        wrap.appendChild(head);
 
-        #apde-seminar .talks-wrap{display:grid;grid-template-columns:1fr;gap:14px}
-        #apde-seminar .talk-card{ border:1px solid #e6e6e6;border-radius:10px;padding:14px 16px;background:#fff; box-shadow:0 1px 2px rgba(0,0,0,.03) }
-        #apde-seminar .talk-card.upcoming{border-color:#d7e8ff;background:#fbfdff}
-        #apde-seminar .talk-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:6px}
-        #apde-seminar .tag{ font-size:14px; line-height:1; border:1px solid #cfe0ff; background:#eef5ff; color:#1d4ed8; border-radius:999px; padding:6px 10px; font-weight:700; letter-spacing:.2px; }
-        #apde-seminar .talk-card.upcoming .tag{ font-size:16px; padding:7px 12px; }
-        #apde-seminar .talk-title{font-weight:700}
-        #apde-seminar .talk-meta{color:#555;font-size:14px;margin:6px 0 8px}
-        #apde-seminar .talk-meta .sep{opacity:.5;margin:0 6px}
-        #apde-seminar .talk-meta a{ text-decoration:none; border-bottom:none; color:#2b5fb0; }
-        #apde-seminar .talk-meta a:hover{ text-decoration:underline; }
-        #apde-seminar .btns{display:flex;gap:8px;flex-wrap:wrap}
-        #apde-seminar .btn{ font-size:13px;border:1px solid #ddd;border-radius:8px;background:#f8f8f8;padding:6px 10px;cursor:pointer;text-decoration:none;color:inherit }
-        #apde-seminar .btn:hover{background:#f1f1f1}
-        #apde-seminar details.abstract > div, #apde-seminar details.speaker > div{
-          text-align: justify; text-justify: inter-ideograph; -webkit-hyphens: auto; hyphens: auto; word-break: break-word;
+        const meta = document.createElement('div');
+        meta.className = 'talk-meta';
+
+        const spkHTML = talk.speakerUrl
+          ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
+          : escapeHTML(talk.speaker);
+
+        const roomHTML = talk.room
+          ? (talk.roomUrl || talk.join
+              ? `<a href="${encodeURI(talk.roomUrl || talk.join)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.room)}</a>`
+              : escapeHTML(talk.room))
+          : '';
+
+        meta.innerHTML =
+          `<span>${fmtRange(talk.datetime, talk.durationMin)}</span>` +
+          (talk.room ? ` <span class="sep">•</span><span>${roomHTML}</span>` : '') +
+          (talk.speaker ? ` <span class="sep">•</span><span>${spkHTML}${talk.affil ? ' <span class="muted">('+escapeHTML(talk.affil)+')</span>' : ''}</span>` : '');
+        wrap.appendChild(meta);
+
+        if (talk.join){
+          const btns = document.createElement('div'); btns.className = 'btns';
+          const joinBtn = document.createElement('a');
+          joinBtn.className = 'btn'; joinBtn.textContent = 'Join link';
+          joinBtn.href = talk.join; joinBtn.target = '_blank'; joinBtn.rel = 'noopener noreferrer';
+          btns.appendChild(joinBtn);
+          wrap.appendChild(btns);
         }
-        #apde-seminar details.abstract, #apde-seminar details.speaker{margin-top:8px}
-        #apde-seminar details.abstract summary, #apde-seminar details.speaker summary{cursor:pointer;color:#2b5fb0}
-        #apde-seminar .muted{color:#777}
-        #apde-seminar .subsec-title{margin:18px 0 8px;font-size:18px}
-        @media (min-width: 860px){
-          #apde-seminar .talks-wrap{grid-template-columns:1fr 1fr}
-          #apde-seminar .talk-card.wide{grid-column:1 / -1}
+
+        if (talk.speakerBio){
+          const detBio = document.createElement('details'); detBio.className = 'speaker';
+          const sumBio = document.createElement('summary'); sumBio.textContent = 'Speaker';
+          const pBio = document.createElement('div'); pBio.style.marginTop='6px'; pBio.textContent = talk.speakerBio;
+          detBio.appendChild(sumBio); detBio.appendChild(pBio);
+          wrap.appendChild(detBio);
         }
-      </style>
 
-      <div id="next-talk" class="talks-wrap"></div>
-      <h3 class="subsec-title">Past talks</h3>
-      <div id="past-talks" class="talks-wrap"></div>
+        if (talk.abstract){
+          const det = document.createElement('details'); det.className = 'abstract';
+          const sum = document.createElement('summary'); sum.textContent = 'Abstract';
+          const p = document.createElement('div'); p.style.marginTop='6px'; p.textContent = talk.abstract;
+          det.appendChild(sum); det.appendChild(p);
+          wrap.appendChild(det);
+        }
+        return wrap;
+      }
 
-      <ul id="apde-data" style="display:none">
-        <li class="talk"
-          data-datetime="2025-10-28T16:00:00+08:00"
-          data-duration="90"
-          data-title="非线性Dirac方程非相对论极限的新进展"
-          data-speaker="王华阳"
-          data-speaker-bio="王华阳，博士毕业于中国科学院数学与系统科学研究院，目前在北京师范大学担任励耘博士后，研究方向为非线性分析与偏微分方程，特别关注非线性Dirac方程、伪相对论方程、Hartree方程等非线性方程解的存在性、正则性、渐近行为等性质，在CVPDE、JDE、Nonlineaity、JGA等国际期刊上发表多篇学术论文。"
-          data-affil="北京师范大学"
-          data-room="939-7737-2516"
-          data-room-url="https://meeting.tencent.com/dm/glUHxxyAJ8sM"
-          data-location="腾讯会议"
-          data-join=""
-          data-abstract="Dirac方程是电子运动的基本方程。非相对论极限是连接量子力学与相对论量子力学的桥梁。本次报告主要介绍关于非线性Dirac方程解的非相对论极限的若干研究进展。">
-        </li>
+      const dataItems = Array.from(document.querySelectorAll('#apde-data .talk'));
+      const talks = dataItems.map(li => {
+        const d = li.dataset || {};
+        return {
+          datetime: d.datetime,
+          durationMin: d.duration ? parseInt(d.duration,10) : (d.durationMin? parseInt(d.durationMin,10):60),
+          title: d.title || '',
+          speaker: d.speaker || '',
+          speakerUrl: d.speakerUrl || d['speaker-url'] || '',
+          speakerBio: d.speakerBio || d['speaker-bio'] || '',
+          affil: d.affil || '',
+          room: d.room || '',
+          roomUrl: d.roomUrl || d['room-url'] || '',
+          location: d.location || '',
+          join: d.join || '',
+          abstract: d.abstract || ''
+        };
+      }).filter(t => t.datetime);
 
-        <li class="talk"
-          data-datetime="2025-10-20T16:00:00+08:00"
-          data-duration="90"
-          data-title="Schatten properties of commutators on twisted crossed products"
-          data-speaker="Kai Zeng"
-          data-speaker-url="https://analysis-pde.org/kai-zeng/"
-          data-affil="Ghent University"
-          data-room="939-7737-2516"
-          data-room-url="https://meeting.tencent.com/dm/glUHxxyAJ8sM"
-          data-location="腾讯会议"
-          data-join=""
-          data-abstract="In this talk, we study Fourier multiplier commutators on a twisted crossed product. We will characterise their Schatten p-class membership by that of their symbols in the associated Besov space. In addition, we show a formula on the Dixmier trace, which also gives us a characterization of the weak Schatten p-class membership of these commutators by a Sobolev space. As an example, our results applied to noncommutative Euclidean Space.">
-        </li>
-      </ul>
+      talks.sort((a,b) => parseISO(a.datetime) - parseISO(b.datetime));
 
-      <script>
-        (function(){
-          const now = new Date();
+      const nextWrap = document.getElementById('next-talk');
+      const pastWrap = document.getElementById('past-talks');
 
-          function parseISO(iso){
-            let d = new Date(iso);
-            if (!isNaN(d)) return d;
-            const fixed = String(iso).replace(' ', 'T').replace(/([+-]\d{2}):?(\d{2})$/, '$1$2');
-            return new Date(fixed);
-          }
+      const upcoming = talks.filter(t => parseISO(t.datetime) >= now);
+      const past = talks.filter(t => parseISO(t.datetime) < now).reverse();
 
-          function fmtRange(startISO, durationMin, timeZone){
-            const start = parseISO(startISO);
-            const dur = Number.isFinite(+durationMin) ? +durationMin : 90;
-            const end = new Date(start.getTime() + dur * 60000);
-            const dateOpts = { year:'numeric', month:'short', day:'numeric' };
-            const timeOpts = { hour:'2-digit', minute:'2-digit', hour12:false, hourCycle:'h23' };
-            if (timeZone){ dateOpts.timeZone = timeZone; timeOpts.timeZone = timeZone; }
-            const df = new Intl.DateTimeFormat(undefined, dateOpts);
-            const tf = new Intl.DateTimeFormat(undefined, timeOpts);
-            return df.format(start) + ' · ' + tf.format(start) + '–' + tf.format(end);
-          }
+      if (upcoming.length){
+        nextWrap.appendChild( renderCard(upcoming[0], {highlight:true}) );
+        upcoming.slice(1).forEach(t => nextWrap.appendChild( renderCard(t) ));
+      } else {
+        const msg = document.createElement('div');
+        msg.className = 'muted';
+        msg.textContent = 'No upcoming talks yet. Please check back soon.';
+        nextWrap.appendChild(msg);
+      }
 
-          function escapeHTML(s){
-            return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-          }
+      past.forEach(t => pastWrap.appendChild( renderCard(t) ));
+    })();
+  </script>
+</section>
 
-          function renderCard(talk, {highlight=false}={}){
-            const wrap = document.createElement('div');
-            wrap.className = 'talk-card' + (highlight ? ' upcoming wide' : '');
-
-            const head = document.createElement('div');
-            head.className = 'talk-head';
-            if (highlight){
-              const tag = document.createElement('span');
-              tag.className = 'tag';
-              tag.textContent = 'Next talk';
-              head.appendChild(tag);
-            }
-            const title = document.createElement('div');
-            title.className = 'talk-title';
-            title.textContent = talk.title;
-            head.appendChild(title);
-            wrap.appendChild(head);
-
-            const meta = document.createElement('div');
-            meta.className = 'talk-meta';
-
-            const spkHTML = talk.speakerUrl
-              ? `<a href="${encodeURI(talk.speakerUrl)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.speaker)}</a>`
-              : escapeHTML(talk.speaker);
-
-            const roomHTML = talk.room
-              ? (talk.roomUrl || talk.join
-                  ? `<a href="${encodeURI(talk.roomUrl || talk.join)}" target="_blank" rel="noopener noreferrer">${escapeHTML(talk.room)}</a>`
-                  : escapeHTML(talk.room))
-              : '';
-
-            meta.innerHTML =
-              `<span>${fmtRange(talk.datetime, talk.durationMin)}</span>` +
-              (talk.room ? ` <span class="sep">•</span><span>${roomHTML}</span>` : '') +
-              (talk.speaker ? ` <span class="sep">•</span><span>${spkHTML}${talk.affil ? ' <span class="muted">(${escapeHTML(talk.affil)})</span>' : ''}</span>` : '');
-            wrap.appendChild(meta);
-
-            if (talk.join){
-              const btns = document.createElement('div'); btns.className = 'btns';
-              const joinBtn = document.createElement('a');
-              joinBtn.className = 'btn'; joinBtn.textContent = 'Join link';
-              joinBtn.href = talk.join; joinBtn.target = '_blank'; joinBtn.rel = 'noopener noreferrer';
-              btns.appendChild(joinBtn);
-              wrap.appendChild(btns);
-            }
-
-            if (talk.speakerBio){
-              const detBio = document.createElement('details'); detBio.className = 'speaker';
-              const sumBio = document.createElement('summary'); sumBio.textContent = 'Speaker';
-              const pBio = document.createElement('div'); pBio.style.marginTop='6px'; pBio.textContent = talk.speakerBio;
-              detBio.appendChild(sumBio); detBio.appendChild(pBio);
-              wrap.appendChild(detBio);
-            }
-
-            if (talk.abstract){
-              const det = document.createElement('details'); det.className = 'abstract';
-              const sum = document.createElement('summary'); sum.textContent = 'Abstract';
-              const p = document.createElement('div'); p.style.marginTop='6px'; p.textContent = talk.abstract;
-              det.appendChild(sum); det.appendChild(p);
-              wrap.appendChild(det);
-            }
-            return wrap;
-          }
-
-          const dataItems = Array.from(document.querySelectorAll('#apde-data .talk'));
-          const talks = dataItems.map(li => {
-            const d = li.dataset || {};
-            return {
-              datetime: d.datetime,
-              durationMin: d.duration ? parseInt(d.duration,10) : (d.durationMin? parseInt(d.durationMin,10):60),
-              title: d.title || '',
-              speaker: d.speaker || '',
-              speakerUrl: d.speakerUrl || d['speaker-url'] || '',
-              speakerBio: d.speakerBio || d['speaker-bio'] || '',
-              affil: d.affil || '',
-              room: d.room || '',
-              roomUrl: d.roomUrl || d['room-url'] || '',
-              location: d.location || '',
-              join: d.join || '',
-              abstract: d.abstract || ''
-            };
-          }).filter(t => t.datetime);
-
-          talks.sort((a,b) => parseISO(a.datetime) - parseISO(b.datetime));
-
-          const nextWrap = document.getElementById('next-talk');
-          const pastWrap = document.getElementById('past-talks');
-
-          const upcoming = talks.filter(t => parseISO(t.datetime) >= now);
-          const past = talks.filter(t => parseISO(t.datetime) < now).reverse();
-
-          if (upcoming.length){
-            nextWrap.appendChild( renderCard(upcoming[0], {highlight:true}) );
-            upcoming.slice(1).forEach(t => nextWrap.appendChild( renderCard(t) ));
-          } else {
-            const msg = document.createElement('div');
-            msg.className = 'muted';
-            msg.textContent = 'No upcoming talks yet. Please check back soon.';
-            nextWrap.appendChild(msg);
-          }
-
-          past.forEach(t => pastWrap.appendChild( renderCard(t) ));
-        })();
-      </script>
-    </section>
 
     <!-- ======= 统计区：仅保留 FlagCounter ======= -->
     <div id="site-stats" class="site-stats" role="note" aria-label="Site statistics">
