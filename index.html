@@ -483,25 +483,74 @@
     <!-- ↑ 将以上占位替换为真实内容即可；不需要的条目直接删除 -->
   </ul>
   
-  <!-- Scientific and Administrative Responsibilities -->
-  <h3>Scientific and Administrative Responsibilities</h3>
-  <ul>
-    <!-- 示例格式：起止时间 — 职务 / 角色，单位或组织 -->
-    <li>YYYY.MM–YYYY.MM — Role/Title, Department or Center, Institution.</li>
-    <li>YYYY.MM–present — Role/Title, Committee/Program, Institution.</li>
-  </ul>
+  <!-- Scientific and Administrative Responsibilities (two-tier) -->
+<h3>Scientific and Administrative Responsibilities</h3>
 
-  <!-- Talks -->
-  <h3>Talks</h3>
+<style>
+  /* 仅作用于 Activities 区域 */
+  #activities .resp-block{ margin: .8rem 0 1.0rem; }
+  #activities .resp-block h4{
+    margin: .2rem 0 .4rem;
+    font-size: 1.02em;
+    font-weight: 700;
+  }
+  #activities .resp-block ul{ margin-left: 1.1rem; }
+  #activities .resp-block li{ margin-bottom: .4rem; }
+  #activities .subcat{ font-weight: 600; }
+</style>
+
+<div class="resp-block">
+  <h4>Professional Service</h4>
   <ul>
-    <!-- 示例格式：报告题目 — 会议/讲座系列，地点/主办单位，日期 -->
     <li>
-      “Talk title” — Seminar/Conference name, Host/Location, YYYY.MM.DD.
+      <span class="subcat">Editorial & Board Service</span>
+      <ul>
+        <li>YYYY–present — Associate Editor, <em>Journal / Series</em>.</li>
+        <li>YYYY–YYYY — Editorial Board Member, <em>Journal / Series</em>.</li>
+      </ul>
     </li>
     <li>
-      “Talk title” — Seminar/Conference name, Host/Location, YYYY.MM.DD.
+      <span class="subcat">Refereeing</span>
+      <ul>
+        <li><em>J. Differential Equations</em>, <em>J. Geom. Anal.</em>, <em>Nonlinearity</em>, <em>Appl. Math. Lett.</em>, …</li>
+      </ul>
+    </li>
+    <li>
+      <span class="subcat">Conference & Program Committees</span>
+      <ul>
+        <li>YYYY — Scientific Committee, Conference on XXX, Host/City.</li>
+        <li>YYYY — Session Organizer, Workshop on YYY, Host/City.</li>
+      </ul>
     </li>
   </ul>
+</div>
+
+<div class="resp-block">
+  <h4>Institutional / Administrative Service</h4>
+  <ul>
+    <li>
+      <span class="subcat">Department / School</span>
+      <ul>
+        <li>YYYY.MM–present — Role/Title, School of Mathematics, Yunnan Normal University.</li>
+        <li>YYYY.MM–YYYY.MM — Role/Title, Department of Mathematics: Analysis, Logic and Discrete Mathematics, Ghent University.</li>
+      </ul>
+    </li>
+    <li>
+      <span class="subcat">Graduate & Undergraduate Affairs</span>
+      <ul>
+        <li>YYYY–present — Member, Graduate Admissions/Teaching Committee.</li>
+        <li>YYYY–YYYY — Coordinator, Undergraduate Course (Calculus / PDE).</li>
+      </ul>
+    </li>
+    <li>
+      <span class="subcat">Outreach & Visibility</span>
+      <ul>
+        <li>YYYY — Co-organizer, APDE Seminar (hybrid).</li>
+        <li>YYYY — Public lecture / student seminar organization, …</li>
+      </ul>
+    </li>
+  </ul>
+</div>
 
   <!-- Conference Attended -->
   <h3>Conference Attended</h3>
