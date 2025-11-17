@@ -82,7 +82,19 @@
     <div class="header">
       <h1>Zhipeng Yang</h1>
       <p>Associate Professor</p>
-      <div id="mugshot"><img src="yang.jpeg" alt="mugshot" /></div>
+     <div id="mugshot" role="img" aria-label="Portrait">
+  <picture>
+      <img
+      src="yang.jpeg?v=1"
+      alt="mugshot"
+      loading="eager"
+      width="200"
+      height="200"
+      onerror="this.onerror=null; this.src='photo.png?v=1';"
+    />
+  </picture>
+</div>
+
     </div>
 
     <ul>
