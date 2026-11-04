@@ -61,7 +61,10 @@ Preprints 的 [PDF] 链接直接指向 arXiv，无需在本目录上传对应文
 | Concentration behavior of ground state solutions for a fractional Schrödinger–Poisson system involving critical exponent | `fractional-schrodinger-poisson-critical-exponent.pdf` |
 | Existence of multiple non-trivial solutions for a nonlocal problem | `nonlocal-problem-multiple-nontrivial-solutions.pdf` |
 | Three solutions for a fractional Schrödinger equation with vanishing potentials | `fractional-schrodinger-vanishing-potentials.pdf` |
+| Ground state uniqueness and quantitative stability for the mass-critical Hartree equation | [arXiv PDF](https://arxiv.org/pdf/2611.01013) |
+| Symmetry and Monotonicity for Subcritical Fractional Hartree Equations with Singular Sets of Zero Capacity | [arXiv PDF](https://arxiv.org/pdf/2610.24684) |
+| Sharp stability for mixed bubbles on hyperbolic space | [arXiv PDF](https://arxiv.org/pdf/2610.15920) |
 | A sharp spectral multiplier theorem on the Engel group | [arXiv PDF](https://arxiv.org/pdf/2610.08976) |
-| Sub-Laplacians on Compact Lie Groups: Heat Kernels, Distance, and Zeta Determinants | [arXiv PDF](https://arxiv.org/pdf/2608.31070) |
 | Extremals and stability for the Folland-Stein inequality on H-type groups | [arXiv PDF](https://arxiv.org/pdf/2609.30531) |
+| Sub-Laplacians on Compact Lie Groups: Heat Kernels, Distance, and Zeta Determinants | [arXiv PDF](https://arxiv.org/pdf/2608.31070) |
 | Topological Effects on Bubbling in the Critical Dirichlet Problem on Hyperbolic Domains: 3 ≤ N ≤ 5 | [arXiv PDF](https://arxiv.org/pdf/2608.19356) |

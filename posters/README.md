@@ -59,7 +59,10 @@
 | Concentration behavior of ground state solutions for a fractional Schrödinger–Poisson system involving critical exponent | `fractional-schrodinger-poisson-critical-exponent.png` |
 | Existence of multiple non-trivial solutions for a nonlocal problem | `nonlocal-problem-multiple-nontrivial-solutions.png` |
 | Three solutions for a fractional Schrödinger equation with vanishing potentials | `fractional-schrodinger-vanishing-potentials.png` |
+| Ground state uniqueness and quantitative stability for the mass-critical Hartree equation | `mass-critical-hartree-uniqueness-stability.png` |
+| Symmetry and Monotonicity for Subcritical Fractional Hartree Equations with Singular Sets of Zero Capacity | `subcritical-fractional-hartree-zero-capacity.png` |
+| Sharp stability for mixed bubbles on hyperbolic space | `hyperbolic-mixed-bubbles-sharp-stability.png` |
 | A sharp spectral multiplier theorem on the Engel group | `engel-spectral-multiplier.png` |
-| Sub-Laplacians on Compact Lie Groups: Heat Kernels, Distance, and Zeta Determinants | `compact-lie-groups-heat-kernels-zeta.png` |
 | Extremals and stability for the Folland-Stein inequality on H-type groups | `h-type-folland-stein-extremals-stability.png` |
+| Sub-Laplacians on Compact Lie Groups: Heat Kernels, Distance, and Zeta Determinants | `compact-lie-groups-heat-kernels-zeta.png` |
 | Topological Effects on Bubbling in the Critical Dirichlet Problem on Hyperbolic Domains: 3 ≤ N ≤ 5 | `hyperbolic-domains-topological-bubbling.png` |
