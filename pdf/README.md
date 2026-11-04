@@ -68,3 +68,18 @@ Preprints 的 [PDF] 链接直接指向 arXiv，无需在本目录上传对应文
 | Extremals and stability for the Folland-Stein inequality on H-type groups | [arXiv PDF](https://arxiv.org/pdf/2609.30531) |
 | Sub-Laplacians on Compact Lie Groups: Heat Kernels, Distance, and Zeta Determinants | [arXiv PDF](https://arxiv.org/pdf/2608.31070) |
 | Topological Effects on Bubbling in the Critical Dirichlet Problem on Hyperbolic Domains: 3 ≤ N ≤ 5 | [arXiv PDF](https://arxiv.org/pdf/2608.19356) |
+| A positive ground state for a planar Choquard equation with mixed diffusion and critical exponential growth | [arXiv PDF](https://arxiv.org/pdf/2606.30522) |
+| Infinitely many sign-changing solutions for logarithmic Schrödinger equations via an L^p-perturbation approach | [arXiv PDF](https://arxiv.org/pdf/2606.14444) |
+| Higher-Order Heat Estimates and Semilinear Heat Equations on the Noncommutative Torus | [arXiv PDF](https://arxiv.org/pdf/2605.25513) |
+| Fractional Sobolev-type embedding on CR sphere and Heisenberg group | [arXiv PDF](https://arxiv.org/pdf/2604.18102) |
+| Normalized solutions for a class of fractional Choquard equations with the HLS lower critical term and a nonlocal perturbation | [arXiv PDF](https://arxiv.org/pdf/2604.12774) |
+| Existence and Concentration of Multiple Positive Solutions for a Logarithmic Fractional Schrödinger–Poisson System | [arXiv PDF](https://arxiv.org/pdf/2604.04148) |
+| Improved Sobolev Inequalities on the Quaternionic Sphere | [arXiv PDF](https://arxiv.org/pdf/2603.28469) |
+| Improved Fractional Sobolev Embeddings on Closed Riemannian Manifolds under Isometric Group Actions | [arXiv PDF](https://arxiv.org/pdf/2603.28451) |
+| Spectral properties and bound states of the Dirac equation on periodic quantum graphs | [arXiv PDF](https://arxiv.org/pdf/2601.22603) |
+| On a class of logarithmic Schrödinger equations via perturbation method | [arXiv PDF](https://arxiv.org/pdf/2601.12732) |
+| Existence and concentration of ground state solutions for an exponentially critical Choquard equation involving mixed local-nonlocal operators | [arXiv PDF](https://arxiv.org/pdf/2601.03060) |
+| Normalized Solutions and Semiclassical Concentration for Upper-Critical Fractional Choquard Equations | [arXiv PDF](https://arxiv.org/pdf/2512.00922) |
+| Multiplicity of bound states for a class of nonlinear Dirac equations on generalized star graphs with potentials | [arXiv PDF](https://arxiv.org/pdf/2511.09285) |
+| Nonrelativistic limit of nonlinear Dirac ground states on noncompact quantum graphs | [arXiv PDF](https://arxiv.org/pdf/2510.20658) |
+| Bound states of nonlinear Dirac equations on periodic quantum graphs | [arXiv PDF](https://arxiv.org/pdf/2505.02036) |

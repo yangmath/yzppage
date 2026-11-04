@@ -66,3 +66,18 @@
 | Extremals and stability for the Folland-Stein inequality on H-type groups | `h-type-folland-stein-extremals-stability.png` |
 | Sub-Laplacians on Compact Lie Groups: Heat Kernels, Distance, and Zeta Determinants | `compact-lie-groups-heat-kernels-zeta.png` |
 | Topological Effects on Bubbling in the Critical Dirichlet Problem on Hyperbolic Domains: 3 ≤ N ≤ 5 | `hyperbolic-domains-topological-bubbling.png` |
+| A positive ground state for a planar Choquard equation with mixed diffusion and critical exponential growth | `planar-choquard-mixed-diffusion-ground-state.png` |
+| Infinitely many sign-changing solutions for logarithmic Schrödinger equations via an L^p-perturbation approach | `logarithmic-schrodinger-sign-changing-solutions.png` |
+| Higher-Order Heat Estimates and Semilinear Heat Equations on the Noncommutative Torus | `noncommutative-torus-higher-order-heat.png` |
+| Fractional Sobolev-type embedding on CR sphere and Heisenberg group | `cr-sphere-heisenberg-fractional-sobolev.png` |
+| Normalized solutions for a class of fractional Choquard equations with the HLS lower critical term and a nonlocal perturbation | `fractional-choquard-hls-nonlocal-perturbation.png` |
+| Existence and Concentration of Multiple Positive Solutions for a Logarithmic Fractional Schrödinger–Poisson System | `logarithmic-fractional-schrodinger-poisson-positive-solutions.png` |
+| Improved Sobolev Inequalities on the Quaternionic Sphere | `quaternionic-sphere-sobolev.png` |
+| Improved Fractional Sobolev Embeddings on Closed Riemannian Manifolds under Isometric Group Actions | `fractional-sobolev-isometric-group-actions.png` |
+| Spectral properties and bound states of the Dirac equation on periodic quantum graphs | `periodic-quantum-graphs-dirac-spectral-properties.png` |
+| On a class of logarithmic Schrödinger equations via perturbation method | `logarithmic-schrodinger-perturbation.png` |
+| Existence and concentration of ground state solutions for an exponentially critical Choquard equation involving mixed local-nonlocal operators | `mixed-local-nonlocal-choquard-concentration.png` |
+| Normalized Solutions and Semiclassical Concentration for Upper-Critical Fractional Choquard Equations | `upper-critical-choquard-normalized-semiclassical.png` |
+| Multiplicity of bound states for a class of nonlinear Dirac equations on generalized star graphs with potentials | `dirac-generalized-star-potentials-bound-states.png` |
+| Nonrelativistic limit of nonlinear Dirac ground states on noncompact quantum graphs | `dirac-noncompact-graphs-nonrelativistic-limit.png` |
+| Bound states of nonlinear Dirac equations on periodic quantum graphs | `periodic-quantum-graphs-dirac-bound-states.png` |
