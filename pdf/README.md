@@ -1,14 +1,16 @@
 # 论文 PDF上传目录
 
-将文件上传到本目录（`pdf/`），文件名使用下面对照表中对应的名称。上传至 `main` 分支并等待网站部署完成后，Research 栏目的 [PDF] 链接即可使用，无需修改网页。
+Published Papers 的 PDF 文件上传到本目录（`pdf/`），文件名使用下面对照表中对应的名称。上传至 `main` 分支并等待网站部署完成后，Research 栏目的 [PDF] 链接即可使用，无需修改网页。
+
+Preprints 的 [PDF] 链接直接指向 arXiv，无需在本目录上传对应文件；具体地址见下表。
 
 - 文件名区分大小写，请保留全部小写、连字符及扩展名。
 - 文件名与论文列表的编号无关，排序或发表状态变化后无需改名。
 - 替换已有文件时保持同名，链接即可保持不变。
 - 这里存放 PDF 文件。
-- 文件尚未上传时，相应链接会返回 404；无需上传空白文件作为占位。
+- 本目录中对应文件尚未上传时，相应链接会返回 404；无需上传空白文件作为占位。
 
-| 文章 | 文件名 |
+| 文章 | 文件名或外部链接 |
 | --- | --- |
 | Existence and concentration of multiple solutions for the fractional logarithmic Schrödinger-Poisson system via the penalization method | `fractional-logarithmic-schrodinger-poisson.pdf` |
 | Isolated Singularities for Fractional Hartree Equations | `isolated-singularities-fractional-hartree.pdf` |
@@ -59,7 +61,7 @@
 | Concentration behavior of ground state solutions for a fractional Schrödinger–Poisson system involving critical exponent | `fractional-schrodinger-poisson-critical-exponent.pdf` |
 | Existence of multiple non-trivial solutions for a nonlocal problem | `nonlocal-problem-multiple-nontrivial-solutions.pdf` |
 | Three solutions for a fractional Schrödinger equation with vanishing potentials | `fractional-schrodinger-vanishing-potentials.pdf` |
-| A sharp spectral multiplier theorem on the Engel group | `engel-spectral-multiplier.pdf` |
-| Sub-Laplacians on Compact Lie Groups: Heat Kernels, Distance, and Zeta Determinants | `compact-lie-groups-heat-kernels-zeta.pdf` |
-| Extremals and stability for the Folland-Stein inequality on H-type groups | `h-type-folland-stein-extremals-stability.pdf` |
-| Topological Effects on Bubbling in the Critical Dirichlet Problem on Hyperbolic Domains: 3 ≤ N ≤ 5 | `hyperbolic-domains-topological-bubbling.pdf` |
+| A sharp spectral multiplier theorem on the Engel group | [arXiv PDF](https://arxiv.org/pdf/2610.08976) |
+| Sub-Laplacians on Compact Lie Groups: Heat Kernels, Distance, and Zeta Determinants | [arXiv PDF](https://arxiv.org/pdf/2608.31070) |
+| Extremals and stability for the Folland-Stein inequality on H-type groups | [arXiv PDF](https://arxiv.org/pdf/2609.30531) |
+| Topological Effects on Bubbling in the Critical Dirichlet Problem on Hyperbolic Domains: 3 ≤ N ≤ 5 | [arXiv PDF](https://arxiv.org/pdf/2608.19356) |
